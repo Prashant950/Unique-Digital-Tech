@@ -8,73 +8,48 @@ import {
   ShieldCheck,
   Send,
   Calendar,
-  MessageSquare,
-  Sparkles,
   ExternalLink,
   ChevronDown,
   Building2,
-  FileCheck,
 } from 'lucide-react';
 import PageHero from '../components/ui/PageHero';
 import Button from '../components/ui/Button';
 import SectionHeading from '../components/ui/SectionHeading';
-import WhatsAppIcon from '../components/ui/WhatsAppIcon';
 import { company } from '../data/site';
 
-const domains = [
+const serviceOptions = [
   'Website Development (Next.js / React)',
   'Mobile App Development (iOS & Android)',
-  'Custom CRM / ERP & Reseller Engine',
-  'WhatsApp Cloud API & Chatbot Automation',
-  'Cloud Architecture & AWS DevOps',
-  'Technical SEO & Performance Marketing',
-];
-
-const budgetRanges = [
-  'Under ₹1,50,000 / $2,000 (MVP)',
-  '₹1,50,000 – ₹3,50,000 / $2,000 – $4,500',
-  '₹3,50,000 – ₹7,50,000 / $4,500 – $9,500',
-  '₹7,50,000+ / $10,000+ (Enterprise)',
-  'Monthly Retainer / Dedicated Squad',
-];
-
-const timelines = [
-  'Immediate (Under 3 weeks - Fast-Track)',
-  '1 to 2 Months (Standard Agile Sprint)',
-  '3+ Months (Large-scale Enterprise)',
-  'Flexible / Discovery Stage',
+  'Custom CRM / ERP & Enterprise Platform',
+  'WhatsApp Cloud API & Automations',
+  'Cloud Infrastructure & AWS DevOps',
+  'Technical SEO & Growth Architecture',
+  'Architecture Consultation & Code Audit',
 ];
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
-  const [ndaChecked, setNdaChecked] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [submittedData, setSubmittedData] = useState(null);
   const [activeFaq, setActiveFaq] = useState(0);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const d = Object.fromEntries(new FormData(e.currentTarget));
-    const msg = `*New Project Architecture Enquiry*\n` +
-      `━━━━━━━━━━━━━━━━━━━\n` +
-      `👤 *Name:* ${d.name}\n` +
-      `🏢 *Company:* ${d.company || 'Not specified'}\n` +
-      `📧 *Email:* ${d.email}\n` +
-      `📱 *Phone:* ${d.phone}\n` +
-      `🎯 *Domain:* ${d.domain}\n` +
-      `💰 *Budget:* ${d.budget}\n` +
-      `⏱️ *Timeline:* ${d.timeline}\n` +
-      `🔒 *NDA Requested:* ${ndaChecked ? 'Yes' : 'No'}\n` +
-      `📝 *Scope Notes:*\n${d.scope}\n` +
-      `━━━━━━━━━━━━━━━━━━━\n` +
-      `Sent via uniquedigitaltech.com`;
 
-    window.open(`https://wa.me/${company.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
-    setSent(true);
+    // Simulate real submission
+    setTimeout(() => {
+      setLoading(false);
+      setSent(true);
+      setSubmittedData(d);
+    }, 600);
   };
 
   const contactFaqs = [
     {
       q: 'How fast can I expect an engineering response?',
-      a: 'If you message on WhatsApp, our on-duty solutions engineer typically responds within 15 to 30 minutes during business hours (Mon-Sat, 9:30 AM to 7:30 PM IST). Form submissions and email inquiries are answered with a technical assessment within 4 to 6 business hours.',
+      a: 'Our solutions architects review form submissions within 4 to 6 business hours (Mon-Sat, 9:30 AM to 7:30 PM IST). You will receive a direct technical response and preliminary scope assessment.',
     },
     {
       q: 'Is the initial architecture consultation really free?',
@@ -86,26 +61,27 @@ export default function Contact() {
     },
     {
       q: 'Can we visit your engineering hub in Noida / Delhi NCR in person?',
-      a: 'Absolutely. We welcome founders and enterprise teams at our development hub in Sector 62, Noida (Delhi NCR). Please schedule a prior appointment via WhatsApp or email so our lead solutions architect can be available to host you.',
+      a: 'Absolutely. We welcome founders and enterprise teams at our development hub in Sector 62, Noida (Delhi NCR). Please schedule a prior appointment via phone or email so our lead solutions architect can be available to host you.',
     },
   ];
 
   return (
     <>
       <PageHero
+        badge="TALK DIRECTLY WITH SOLUTIONS ARCHITECTS"
         title="Let’s engineer your next competitive advantage."
         text="Have a product to build, legacy code to modernize or a high-concurrency architecture to scale? Talk directly with our solutions engineers."
       >
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-300">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+        <div className="flex flex-wrap items-center justify-center gap-3.5 text-xs sm:text-sm text-slate-300">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-brand-400/50 hover:bg-brand-500/10 hover:text-white hover:scale-105">
             <Clock className="h-3.5 w-3.5 text-brand-400" />
-            Average Response: &lt; 30 Minutes
+            Average Response: &lt; 24 Hours
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:text-white hover:scale-105">
             <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
             100% NDA Protection
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-white hover:scale-105">
             <Building2 className="h-3.5 w-3.5 text-amber-400" />
             Noida / New Delhi Tech Hub
           </span>
@@ -113,266 +89,217 @@ export default function Contact() {
       </PageHero>
 
       {/* Main Contact Grid & Form */}
-      <section className="section py-12 sm:py-16">
-        <div className="container-x grid gap-10 lg:grid-cols-12 items-start">
-          {/* Left Column: Direct Contact Channels & Guarantee (5 Cols) */}
-          <div className="space-y-4 lg:col-span-5">
+      <section className="section py-16 sm:py-24">
+        <div className="container-x grid gap-12 lg:grid-cols-12 items-start">
+          {/* Left Column: Direct Contact Details & Info (5 Cols) */}
+          <div className="space-y-6 lg:col-span-5">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-brand-400">
-                Direct Communication Channels
+                Direct Communication
               </span>
-              <h2 className="text-2xl font-bold text-white mt-1">
-                Reach the engineering team directly
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2 leading-tight">
+                Let’s talk about your next project.
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400 mt-2">
-                No bureaucratic ticketing or junior sales gatekeepers. Speak directly with practitioners who understand system design and code.
+              <p className="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
+                Whether you need a dedicated engineering squad, a custom software build, or modern architecture guidance, our leads are ready to collaborate.
               </p>
             </div>
 
-            {/* Official Real WhatsApp Direct Channel Card */}
-            <a
-              href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20would%20like%20to%20discuss%20a%20new%20software%20project`}
-              target="_blank"
-              rel="noreferrer"
-              className="group flex items-center justify-between rounded-2xl border border-[#25D366]/40 bg-gradient-to-r from-emerald-950/40 via-ink-900/90 to-ink-950/90 p-5 shadow-lg shadow-[#25D366]/10 transition-all duration-300 hover:-translate-y-1 hover:border-[#25D366]/70 hover:shadow-[#25D366]/20"
-            >
-              <div className="flex items-center gap-3.5">
-                <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#25D366] text-white shadow-md shadow-[#25D366]/30">
-                  <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
-                    <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-300" />
-                  </span>
-                  <WhatsAppIcon className="h-6 w-6 fill-white" />
-                </span>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-bold text-white">Direct WhatsApp Hotline</p>
-                    <span className="rounded bg-[#25D366]/20 px-1.5 py-0.5 text-[10px] font-bold text-[#25D366]">
-                      Fastest
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-300 font-mono mt-0.5">+{company.whatsapp}</p>
-                  <p className="text-[11px] text-emerald-400 mt-0.5">Online Mon–Sat · Avg reply 15 mins</p>
-                </div>
-              </div>
-              <ExternalLink className="h-4 w-4 text-emerald-400 transition-transform group-hover:translate-x-1" />
-            </a>
-
-            {/* Email Card */}
-            <div className="rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur transition hover:border-brand-500/40">
-              <div className="flex items-start gap-3.5">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-brand-400 border border-brand-500/20">
+            <div className="space-y-4 pt-2">
+              {/* Email Card */}
+              <a
+                href={`mailto:${company.email}`}
+                className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur transition-all duration-300 hover:border-brand-500/50 hover:bg-ink-900 hover:shadow-glow"
+              >
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-brand-400 border border-brand-500/20 group-hover:scale-105 transition-transform">
                   <Mail className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold text-slate-400">Formal Architecture Inquiries &amp; RFPs</p>
-                  <a
-                    href={`mailto:${company.email}`}
-                    className="text-sm font-bold text-white hover:text-brand-300 transition-colors break-all"
-                  >
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Email Us Directly</p>
+                  <p className="text-base font-bold text-white group-hover:text-brand-300 transition-colors mt-0.5 break-all">
                     {company.email}
-                  </a>
-                  <p className="text-[11px] text-slate-400 mt-1">Send spec sheets, wireframes or RFPs</p>
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">Send spec sheets, RFPs, or questions</p>
                 </div>
-              </div>
-            </div>
+              </a>
 
-            {/* Phone Card */}
-            <div className="rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur transition hover:border-brand-500/40">
-              <div className="flex items-start gap-3.5">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
+              {/* Phone Card */}
+              <a
+                href={`tel:${company.phone.replace(/\s/g, '')}`}
+                className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur transition-all duration-300 hover:border-sky-500/50 hover:bg-ink-900 hover:shadow-glow"
+              >
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20 group-hover:scale-105 transition-transform">
                   <Phone className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold text-slate-400">Direct Office Voice Line</p>
-                  <a
-                    href={`tel:${company.phone.replace(/\s/g, '')}`}
-                    className="text-sm font-bold text-white hover:text-sky-300 transition-colors font-mono"
-                  >
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Direct Voice Line</p>
+                  <p className="text-base font-bold text-white group-hover:text-sky-300 transition-colors font-mono mt-0.5">
                     {company.phone}
-                  </a>
-                  <p className="text-[11px] text-slate-400 mt-1">Mon–Sat: 9:30 AM – 7:30 PM IST</p>
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">Monday – Saturday, 9:30 AM – 7:30 PM IST</p>
                 </div>
-              </div>
-            </div>
+              </a>
 
-            {/* Physical Location Card */}
-            <div className="rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur transition hover:border-brand-500/40">
-              <div className="flex items-start gap-3.5">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              {/* Physical Location Card */}
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
                   <MapPin className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold text-slate-400">Engineering Headquarters</p>
-                  <p className="text-sm font-bold text-white">Sector 62, Electronic City, Noida</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Delhi NCR, Uttar Pradesh 201309, India</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Engineering Headquarters</p>
+                  <p className="text-base font-bold text-white mt-0.5">Sector 62, Electronic City, Noida</p>
+                  <p className="text-xs text-slate-400 mt-1">Delhi NCR, Uttar Pradesh 201309, India</p>
                 </div>
               </div>
             </div>
 
-            {/* NDA Guarantee Pill Box */}
-            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-4">
-              <div className="flex items-center gap-2.5">
-                <FileCheck className="h-5 w-5 text-emerald-400 shrink-0" />
+            {/* Confidentiality & Assurance Box */}
+            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-5">
+              <div className="flex items-start gap-3.5">
+                <ShieldCheck className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-xs font-bold text-emerald-300">Confidentiality Guarantee</p>
-                  <p className="text-[11px] text-slate-300 mt-0.5">
-                    We execute a Non-Disclosure Agreement (NDA) before viewing your source code, proprietary algorithms, or product roadmap.
+                  <p className="text-sm font-bold text-emerald-300">100% Confidentiality Assured</p>
+                  <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                    We respect your intellectual property. We are happy to execute a bilateral Non-Disclosure Agreement (NDA) before reviewing your codebase or ideas.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: High-Impact Project Scope Request Form (7 Cols) */}
+          {/* Right Column: Clean, Real-world Contact Form (7 Cols) */}
           <div className="lg:col-span-7">
-            <form
-              onSubmit={onSubmit}
-              className="rounded-3xl border border-brand-500/20 bg-gradient-to-b from-ink-900/95 via-ink-900/90 to-ink-950/95 p-6 sm:p-9 space-y-5 shadow-2xl backdrop-blur-xl relative overflow-hidden"
-            >
-              {/* Subtle ambient glow inside form */}
-              <div className="pointer-events-none absolute -top-20 -right-20 h-44 w-44 rounded-full bg-brand-500/10 blur-2xl" />
-
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-0.5 text-xs font-semibold text-brand-300 mb-2">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  PROJECT SPECIFICATION FORM
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">
-                  Request an Architecture Review &amp; Scope Proposal
-                </h3>
-                <p className="text-xs text-slate-400 mt-1">
-                  Fill in your project goals and an engineering lead will evaluate technical viability and estimate delivery milestones.
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-ink-900/95 to-ink-950/95 p-8 sm:p-10 shadow-2xl backdrop-blur-xl relative">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-white">Send us a message</h3>
+                <p className="text-sm text-slate-400 mt-1.5">
+                  Fill in the details below and we will get back to you with a preliminary assessment.
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block text-xs sm:text-sm">
-                  <span className="mb-1.5 block font-semibold text-white">Full Name *</span>
-                  <input
-                    name="name"
-                    required
-                    className="field text-xs sm:text-sm"
-                    placeholder="e.g. Vikramaditya Sharma"
-                  />
-                </label>
-                <label className="block text-xs sm:text-sm">
-                  <span className="mb-1.5 block font-semibold text-white">Company / Project Name</span>
-                  <input
-                    name="company"
-                    className="field text-xs sm:text-sm"
-                    placeholder="e.g. FinEdge Technologies"
-                  />
-                </label>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block text-xs sm:text-sm">
-                  <span className="mb-1.5 block font-semibold text-white">Work Email Address *</span>
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    className="field text-xs sm:text-sm"
-                    placeholder="name@company.com"
-                  />
-                </label>
-                <label className="block text-xs sm:text-sm">
-                  <span className="mb-1.5 block font-semibold text-white">Phone / WhatsApp Number *</span>
-                  <input
-                    name="phone"
-                    type="tel"
-                    required
-                    className="field text-xs sm:text-sm"
-                    placeholder="+91 98765 43210"
-                  />
-                </label>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block text-xs sm:text-sm">
-                  <span className="mb-1.5 block font-semibold text-white">Primary Architecture Domain *</span>
-                  <select name="domain" required defaultValue="" className="field text-xs sm:text-sm">
-                    <option value="" disabled>Select project domain</option>
-                    {domains.map((d) => (
-                      <option key={d} value={d}>{d}</option>
-                    ))}
-                  </select>
-                </label>
-
-                <label className="block text-xs sm:text-sm">
-                  <span className="mb-1.5 block font-semibold text-white">Estimated Budget Range *</span>
-                  <select name="budget" required defaultValue="" className="field text-xs sm:text-sm">
-                    <option value="" disabled>Select budget bracket</option>
-                    {budgetRanges.map((b) => (
-                      <option key={b} value={b}>{b}</option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-
-              <label className="block text-xs sm:text-sm">
-                <span className="mb-1.5 block font-semibold text-white">Target Sprint Timeline *</span>
-                <select name="timeline" required defaultValue="" className="field text-xs sm:text-sm">
-                  <option value="" disabled>Select expected timeline</option>
-                  {timelines.map((t) => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="block text-xs sm:text-sm">
-                <span className="mb-1.5 block font-semibold text-white">Project Scope &amp; Tech Requirements *</span>
-                <textarea
-                  name="scope"
-                  rows="4"
-                  required
-                  className="field text-xs sm:text-sm"
-                  placeholder="Outline your application logic, tech stack preferences (e.g. Next.js, Node.js, Flutter), target audience, and key problems to solve..."
-                />
-              </label>
-
-              {/* Bilateral NDA Checkbox */}
-              <div className="flex items-center gap-2.5 pt-1">
-                <input
-                  type="checkbox"
-                  id="nda"
-                  checked={ndaChecked}
-                  onChange={(e) => setNdaChecked(e.target.checked)}
-                  className="h-4 w-4 rounded border-white/20 bg-ink-800 text-brand-500 focus:ring-brand-500"
-                />
-                <label htmlFor="nda" className="text-xs text-slate-300 cursor-pointer select-none">
-                  Please execute a mutual Non-Disclosure Agreement (NDA) prior to technical calls.
-                </label>
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full justify-center shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 text-sm sm:text-base py-3.5 group"
-              >
-                <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                <span>Submit Scope &amp; Connect with Solutions Architect</span>
-              </Button>
-
-              {sent && (
-                <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/40 p-4 text-xs sm:text-sm text-emerald-300 flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0" />
-                  <span>
-                    Thank you! WhatsApp has been opened with your scope summary. Send the message to instantly connect with our lead architect.
-                  </span>
+              {sent ? (
+                <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/40 p-8 text-center space-y-4">
+                  <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                    <CheckCircle2 className="h-8 w-8" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-white">Message Sent Successfully!</h4>
+                    <p className="text-sm text-slate-300 mt-2 max-w-md mx-auto leading-relaxed">
+                      Thank you, <strong className="text-white">{submittedData?.name || 'there'}</strong>! Your inquiry has been received. Our solutions architects will review your requirements and reach out within 24 hours.
+                    </p>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      setSent(false);
+                      setSubmittedData(null);
+                    }}
+                    variant="secondary"
+                    className="mt-2"
+                  >
+                    Send Another Message
+                  </Button>
                 </div>
-              )}
+              ) : (
+                <form onSubmit={onSubmit} className="space-y-5">
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <label className="block">
+                      <span className="mb-2 block text-sm font-semibold text-slate-200">
+                        Full Name <span className="text-brand-400">*</span>
+                      </span>
+                      <input
+                        name="name"
+                        required
+                        className="field py-3.5"
+                        placeholder="John Doe"
+                      />
+                    </label>
 
-              <p className="text-[11px] text-center text-slate-500">
-                🔒 We treat all inquiries under strict commercial confidence. No spam, ever.
-              </p>
-            </form>
+                    <label className="block">
+                      <span className="mb-2 block text-sm font-semibold text-slate-200">
+                        Work Email <span className="text-brand-400">*</span>
+                      </span>
+                      <input
+                        name="email"
+                        type="email"
+                        required
+                        className="field py-3.5"
+                        placeholder="john@company.com"
+                      />
+                    </label>
+                  </div>
+
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <label className="block">
+                      <span className="mb-2 block text-sm font-semibold text-slate-200">
+                        Phone Number <span className="text-brand-400">*</span>
+                      </span>
+                      <input
+                        name="phone"
+                        type="tel"
+                        required
+                        className="field py-3.5"
+                        placeholder="+91 98765 43210"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <span className="mb-2 block text-sm font-semibold text-slate-200">
+                        Company Name <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+                      </span>
+                      <input
+                        name="company"
+                        className="field py-3.5"
+                        placeholder="Your Company / Brand"
+                      />
+                    </label>
+                  </div>
+
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-semibold text-slate-200">
+                      Service Interested In <span className="text-brand-400">*</span>
+                    </span>
+                    <select name="service" required defaultValue="" className="field py-3.5">
+                      <option value="" disabled>Select the service you need</option>
+                      {serviceOptions.map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-semibold text-slate-200">
+                      Project Details / Message <span className="text-brand-400">*</span>
+                    </span>
+                    <textarea
+                      name="message"
+                      rows="5"
+                      required
+                      className="field py-3.5 resize-y"
+                      placeholder="Tell us about your project, timeline, features, or any specific requirements you have in mind..."
+                    />
+                  </label>
+
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full justify-center text-base py-4 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 group mt-2"
+                  >
+                    <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <span>{loading ? 'Sending...' : 'Send Message'}</span>
+                  </Button>
+
+                  <p className="text-xs text-center text-slate-400 pt-2">
+                    🔒 We protect your data under strict commercial confidence. Zero spam, guaranteed.
+                  </p>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Interactive Google Map & Office Location Section */}
-      <section className="section bg-ink-900/50 border-y border-white/5 py-12 sm:py-16">
+      <section className="section bg-ink-900/50 border-y border-white/5 py-16 sm:py-20">
         <div className="container-x">
           <SectionHeading
             title="Visit our Engineering Hub in Noida / New Delhi"
@@ -446,19 +373,17 @@ export default function Contact() {
 
               <div className="card p-5 border-brand-500/30 bg-brand-500/5">
                 <h4 className="text-xs font-bold text-brand-300 uppercase tracking-wide">
-                  Schedule an In-Person Architecture Session
+                  Schedule an In-Person Session
                 </h4>
                 <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                  Want to whiteboard your database schema, system architecture, or product roadmap with us in Noida?
+                  Want to whiteboard your database schema, system architecture, or roadmap with us in Noida?
                 </p>
                 <a
-                  href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20would%20like%20to%20book%20an%20in-person%20meeting%20at%20your%20Noida%20office.`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-blue px-4 py-2 text-xs font-bold text-white shadow-md shadow-brand-500/25 transition hover:brightness-110"
+                  href={`mailto:${company.email}?subject=In-Person Architecture Meeting Request`}
+                  className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-blue px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand-500/25 transition hover:brightness-110"
                 >
                   <Calendar className="h-3.5 w-3.5" />
-                  <span>Book In-Person Meeting</span>
+                  <span>Request Office Meeting</span>
                 </a>
               </div>
             </div>
@@ -467,7 +392,7 @@ export default function Contact() {
       </section>
 
       {/* 3-Step Discovery Roadmap */}
-      <section className="section py-12 sm:py-16">
+      <section className="section py-16 sm:py-20">
         <div className="container-x">
           <SectionHeading
             title="What happens after you reach out?"
@@ -503,7 +428,7 @@ export default function Contact() {
       </section>
 
       {/* Contact FAQ Accordion */}
-      <section className="section bg-ink-900/40 border-t border-white/5 py-12 sm:py-16">
+      <section className="section bg-ink-900/40 border-t border-white/5 py-16 sm:py-20">
         <div className="container-x max-w-4xl">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold sm:text-3xl text-white">

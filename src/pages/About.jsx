@@ -76,19 +76,20 @@ export default function About() {
   return (
     <>
       <PageHero
+        badge="ENGINEERING FIRST · NOIDA & DELHI NCR"
         title="We engineer digital systems that let businesses scale with certainty."
         text="Unique Digital Tech is a specialized software engineering firm based in Noida / Delhi NCR, architecting high-performance web platforms, mobile apps, and automated workflows for organizations worldwide."
       >
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-300">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+        <div className="flex flex-wrap items-center justify-center gap-3.5 text-xs sm:text-sm text-slate-300">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-brand-400/50 hover:bg-brand-500/10 hover:text-white hover:scale-105">
             <CheckCircle2 className="h-3.5 w-3.5 text-brand-400" />
             150+ Full-Stack Solutions Shipped
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:text-white hover:scale-105">
             <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
             100% Source Code Ownership
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-white hover:scale-105">
             <Award className="h-3.5 w-3.5 text-amber-400" />
             5+ Years of Modern Engineering
           </span>

@@ -95,19 +95,20 @@ export default function Services() {
   return (
     <>
       <PageHero
+        badge="PRODUCTION-GRADE SOFTWARE SERVICES"
         title="Full-lifecycle engineering built for commercial scale."
         text="Custom Next.js platforms, cross-platform mobile apps, official WhatsApp Cloud API integrations, and multi-region cloud architectures — delivered by one accountable engineering team."
       >
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-300">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+        <div className="flex flex-wrap items-center justify-center gap-3.5 text-xs sm:text-sm text-slate-300">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-brand-400/50 hover:bg-brand-500/10 hover:text-white hover:scale-105">
             <CheckCircle2 className="h-3.5 w-3.5 text-brand-400" />
             8 Core Technical Domains
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-white hover:scale-105">
             <Zap className="h-3.5 w-3.5 text-amber-400" />
             99.9% Production Uptime SLA
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:text-white hover:scale-105">
             <Lock className="h-3.5 w-3.5 text-emerald-400" />
             100% Source Code Ownership
           </span>

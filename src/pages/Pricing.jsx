@@ -29,7 +29,7 @@ export default function Pricing() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-hero-glow relative overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20 border-b border-white/10">
+      <section className="bg-hero-glow relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-44 lg:pb-36 min-h-[78vh] sm:min-h-[84vh] lg:min-h-[90vh] flex flex-col justify-center border-b border-white/10">
         {/* Glow Spheres */}
         <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-96 w-[40rem] rounded-full bg-brand-500/15 blur-3xl" aria-hidden="true" />
         <div className="pointer-events-none absolute top-1/3 -right-20 h-72 w-72 rounded-full bg-brand-blue/10 blur-3xl" aria-hidden="true" />

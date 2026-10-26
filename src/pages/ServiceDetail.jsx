@@ -18,7 +18,11 @@ export default function ServiceDetail() {
 
   return (
     <>
-      <PageHero title={service.title} text={service.short}>
+      <PageHero
+        badge="SPECIALIZED ENGINEERING PRACTICE"
+        title={service.title}
+        text={service.short}
+      >
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Button to="/contact" className="shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40">
             Discuss this project
