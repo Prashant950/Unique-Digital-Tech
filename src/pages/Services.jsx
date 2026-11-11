@@ -27,10 +27,56 @@ import Button from '../components/ui/Button';
 import Icon from '../components/ui/Icon';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
 import SpotlightCard from '../components/ui/SpotlightCard';
+import SEO from '../components/ui/SEO';
 import { services, company } from '../data/site';
 
 export default function Services() {
   const [selectedFilter, setSelectedFilter] = useState('All');
+
+  const servicesSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': 'https://uniquedigitaltech.com/services#webpage',
+    url: 'https://uniquedigitaltech.com/services',
+    name: 'Software Engineering Services & Cloud Architecture | Unique Digital Tech',
+    description:
+      'Explore our 8 specialized engineering practices: Full-Stack Web, Mobile Apps, Custom ERP/CRM, WhatsApp Automation, Cloud DevOps, SEO, and Performance Marketing.',
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://uniquedigitaltech.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Services',
+          item: 'https://uniquedigitaltech.com/services',
+        },
+      ],
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: services.map((s, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        item: {
+          '@type': 'Service',
+          name: s.title,
+          url: `https://uniquedigitaltech.com/services/${s.slug}`,
+          description: s.short,
+          provider: {
+            '@type': 'Organization',
+            name: 'Unique Digital Tech',
+            url: 'https://uniquedigitaltech.com',
+          },
+        },
+      })),
+    },
+  };
 
   const filterTabs = ['All', 'Web & SaaS', 'Mobile Apps', 'Automation & CRM', 'Cloud & Marketing'];
 
@@ -95,6 +141,13 @@ export default function Services() {
 
   return (
     <>
+      <SEO
+        title="Software Engineering Services & Cloud Architecture"
+        description="Explore our 8 specialized engineering practices: full-stack web platforms, mobile apps, CRM/ERP, WhatsApp API automation, cloud DevOps, SEO, and paid performance marketing."
+        keywords="full-stack web development, mobile app development, custom CRM, ERP solutions, WhatsApp Cloud API, cloud DevOps, AWS ECS, technical SEO, digital marketing"
+        schema={servicesSchema}
+      />
+
       <PageHero
         badge="PRODUCTION-GRADE SOFTWARE SERVICES"
         title="Full-lifecycle engineering built for commercial scale."

@@ -25,6 +25,7 @@ import SectionHeading from '../components/ui/SectionHeading';
 import BorderBeam from '../components/ui/BorderBeam';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
 import CyberBackground from '../components/ui/CyberBackground';
+import SEO from '../components/ui/SEO';
 import { services, company } from '../data/site';
 
 export default function ServiceDetail() {
@@ -36,8 +37,95 @@ export default function ServiceDetail() {
 
   const otherServices = services.filter((s) => s.slug !== slug);
 
+  // Dynamic Service Schema + Breadcrumb + FAQPage Schema for Google Rich Snippets
+  const serviceDetailSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Service',
+        '@id': `https://uniquedigitaltech.com/services/${service.slug}#service`,
+        name: service.title,
+        serviceType: service.title,
+        description: service.description,
+        provider: {
+          '@type': 'Organization',
+          name: 'Unique Digital Tech',
+          url: 'https://uniquedigitaltech.com',
+          logo: 'https://uniquedigitaltech.com/logo-exact.png',
+        },
+        areaServed: [
+          'India',
+          'United States',
+          'United Kingdom',
+          'United Arab Emirates',
+          'Australia',
+          'Singapore',
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: `${service.title} Capabilities`,
+          itemListElement: (service.capabilities || []).map((cap, i) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: cap,
+            },
+            position: i + 1,
+          })),
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `https://uniquedigitaltech.com/services/${service.slug}#breadcrumbs`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://uniquedigitaltech.com',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Services',
+            item: 'https://uniquedigitaltech.com/services',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: service.title,
+            item: `https://uniquedigitaltech.com/services/${service.slug}`,
+          },
+        ],
+      },
+      ...(service.faqs && service.faqs.length > 0
+        ? [
+            {
+              '@type': 'FAQPage',
+              '@id': `https://uniquedigitaltech.com/services/${service.slug}#faq`,
+              mainEntity: service.faqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
+          ]
+        : []),
+    ],
+  };
+
   return (
     <>
+      <SEO
+        title={`${service.title} | Enterprise Engineering Practice`}
+        description={`${service.tagline || service.short}. Sub-second performance, 99.9% uptime SLA, and 100% IP code ownership.`}
+        keywords={`${service.title.toLowerCase()}, ${service.title.toLowerCase()} company Noida, hire ${service.title.toLowerCase()} developers, enterprise ${service.slug}`}
+        schema={serviceDetailSchema}
+      />
+
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-44 lg:pb-32 flex flex-col justify-center border-b border-white/10">
         <CyberBackground />

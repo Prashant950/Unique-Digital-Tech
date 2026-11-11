@@ -20,6 +20,7 @@ import Button from '../components/ui/Button';
 import SectionHeading from '../components/ui/SectionHeading';
 import BorderBeam from '../components/ui/BorderBeam';
 import confetti from 'canvas-confetti';
+import SEO from '../components/ui/SEO';
 import { company } from '../data/site';
 import { useToast } from '../components/ui/Toast';
 
@@ -276,8 +277,56 @@ export default function Contact() {
     },
   ];
 
+  const contactSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': 'https://uniquedigitaltech.com/contact#webpage',
+    url: 'https://uniquedigitaltech.com/contact',
+    name: 'Contact Our Engineering Team | Unique Digital Tech',
+    description:
+      'Directly connect with senior full-stack engineers and solutions architects at Unique Digital Tech. Request technical consultation, NDA-backed scoping, or emergency SLA support.',
+    mainEntity: {
+      '@type': 'ProfessionalService',
+      name: 'Unique Digital Tech',
+      telephone: '+91-75035-09216',
+      email: 'info@uniquedigitaltech.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Sector 62, Electronic City',
+        addressLocality: 'Noida',
+        addressRegion: 'Uttar Pradesh',
+        postalCode: '201309',
+        addressCountry: 'IN',
+      },
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://uniquedigitaltech.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Contact Us',
+          item: 'https://uniquedigitaltech.com/contact',
+        },
+      ],
+    },
+  };
+
   return (
     <>
+      <SEO
+        title="Contact Our Engineering Team | Start Your Project"
+        description="Directly connect with senior full-stack engineers and solutions architects at Unique Digital Tech. Request technical consultation, NDA-backed scoping, or emergency SLA support."
+        keywords="contact Unique Digital Tech, hire software engineers, software consultation Noida, web development quote Delhi NCR, enterprise scoping"
+        schema={contactSchema}
+      />
+
       <PageHero
         badge="TALK DIRECTLY WITH SOLUTIONS ARCHITECTS"
         title="Let’s engineer your next competitive advantage."

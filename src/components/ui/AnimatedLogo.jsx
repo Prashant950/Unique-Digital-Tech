@@ -4,7 +4,11 @@ export default function AnimatedLogo({ className = 'h-14 w-auto' }) {
       {/* 1. The 100% Exact User Logo Base Image */}
       <img
         src="/logo-exact.png"
-        alt="Unique Digital Tech Logo"
+        alt="Unique Digital Tech — Software & Cloud Engineering Agency Logo"
+        width="552"
+        height="561"
+        loading="eager"
+        decoding="async"
         className="h-full w-auto object-contain drop-shadow-[0_4px_20px_rgba(56,189,248,0.35)]"
       />
 

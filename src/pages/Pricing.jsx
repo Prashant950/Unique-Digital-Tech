@@ -21,6 +21,7 @@ import SectionHeading from '../components/ui/SectionHeading';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
 import BorderBeam from '../components/ui/BorderBeam';
 import CyberBackground from '../components/ui/CyberBackground';
+import SEO from '../components/ui/SEO';
 import {
   company,
   pricingPlans,
@@ -32,6 +33,45 @@ import {
 export default function Pricing() {
   const [billingModel, setBillingModel] = useState('project'); // 'project' or 'retainer'
   const [openFaq, setOpenFaq] = useState(0);
+
+  // Pricing & Scoping Schema with Breadcrumbs and FAQPage
+  const pricingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://uniquedigitaltech.com/pricing#webpage',
+    url: 'https://uniquedigitaltech.com/pricing',
+    name: 'Transparent Milestones & Custom Scoping | Unique Digital Tech',
+    description:
+      'Predictable milestone-based engineering with zero cost overruns. Custom scope estimation for web platforms, mobile apps, SaaS, and cloud infrastructure.',
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://uniquedigitaltech.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Pricing & Scoping',
+          item: 'https://uniquedigitaltech.com/pricing',
+        },
+      ],
+    },
+    mainEntity: {
+      '@type': 'FAQPage',
+      mainEntity: pricingFaqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.a,
+        },
+      })),
+    },
+  };
 
   // Interactive Scope Estimator State
   const [calcService, setCalcService] = useState('Web Platform & SaaS');
@@ -59,6 +99,13 @@ export default function Pricing() {
 
   return (
     <>
+      <SEO
+        title="Predictable Milestones & Custom Scoping"
+        description="Predictable milestone-based engineering with zero cost overruns. Custom scope estimation for web platforms, mobile apps, SaaS, and cloud infrastructure."
+        keywords="software development pricing, milestone scoping, web app cost, dedicated developer retainer, custom software development cost"
+        schema={pricingSchema}
+      />
+
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-44 lg:pb-32 flex flex-col justify-center border-b border-white/10">
         <CyberBackground />

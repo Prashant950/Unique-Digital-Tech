@@ -1,0 +1,28 @@
+# Unique Digital Tech - Robots.txt
+# https://uniquedigitaltech.com
+
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /services
+Allow: /services/*
+Allow: /pricing
+Allow: /contact
+Allow: /favicon.svg
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
+Allow: /*.css
+Allow: /*.js
+
+# Disallow internal backend APIs and local persistence stores
+Disallow: /api/
+Disallow: /db.json
+Disallow: /*.json$
+
+# Polite indexing
+Crawl-delay: 1
+
+# Canonical XML Sitemap
+Sitemap: https://uniquedigitaltech.com/sitemap.xml
+

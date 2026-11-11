@@ -21,8 +21,36 @@ import TechStack from '../components/sections/TechStack';
 import CtaBanner from '../components/sections/CtaBanner';
 import Button from '../components/ui/Button';
 import SpotlightCard from '../components/ui/SpotlightCard';
+import SEO from '../components/ui/SEO';
 
 export default function About() {
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://uniquedigitaltech.com/about#webpage',
+    url: 'https://uniquedigitaltech.com/about',
+    name: 'About Unique Digital Tech | Engineering Philosophy & Team',
+    description:
+      'Learn about Unique Digital Tech, our senior engineering team, zero vendor lock-in commitment, and enterprise architecture standards.',
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://uniquedigitaltech.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'About Us',
+          item: 'https://uniquedigitaltech.com/about',
+        },
+      ],
+    },
+  };
+
   const principles = [
     {
       icon: Lock,
@@ -76,6 +104,13 @@ export default function About() {
 
   return (
     <>
+      <SEO
+        title="About Us | Engineering Philosophy & Team"
+        description="Learn about Unique Digital Tech's engineering culture, senior full-stack developers, zero-lock-in philosophy, and enterprise track record in Delhi NCR & worldwide."
+        keywords="about Unique Digital Tech, software engineering firm Noida, full-stack developers Delhi NCR, enterprise web architects, zero vendor lock in"
+        schema={aboutSchema}
+      />
+
       <PageHero
         badge="ENGINEERING FIRST · NOIDA & DELHI NCR"
         title="We engineer digital systems that let businesses scale with certainty."

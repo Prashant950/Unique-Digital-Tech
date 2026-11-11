@@ -11,11 +11,51 @@ import HomeFaq from '../components/sections/HomeFaq';
 import CtaBanner from '../components/sections/CtaBanner';
 import CyberBackground from '../components/ui/CyberBackground';
 import SectionReveal from '../components/ui/SectionReveal';
-import { valueCards, whyUs } from '../data/site';
+import SEO from '../components/ui/SEO';
+import { valueCards, whyUs, homeFaqs } from '../data/site';
 
 export default function Home() {
+  const homeSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://uniquedigitaltech.com/#webpage',
+    url: 'https://uniquedigitaltech.com',
+    name: 'Unique Digital Tech | Enterprise Software Engineering & Cloud Agency',
+    description:
+      'We architect, build and scale resilient web platforms, mission-critical mobile applications and scalable cloud architecture with 100% IP ownership.',
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://uniquedigitaltech.com',
+        },
+      ],
+    },
+    mainEntity: {
+      '@type': 'FAQPage',
+      mainEntity: homeFaqs.slice(0, 6).map((faq) => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.a,
+        },
+      })),
+    },
+  };
+
   return (
     <>
+      <SEO
+        title="Enterprise Software Engineering & Cloud Architecture"
+        description="Unique Digital Tech is a premium digital engineering agency architecting high-concurrency web platforms, mobile applications, custom ERPs, and cloud architecture with 100% IP ownership."
+        keywords="software engineering agency, web development Noida, React Next.js developers, mobile app development India, cloud DevOps AWS, custom CRM ERP software, Unique Digital Tech"
+        schema={homeSchema}
+      />
+
       {/* Hero Section with Originkit-caliber Cyber Ambient Atmosphere & Live Showcase */}
       <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
         {/* Ambient Cyber Grid & Glowing Aurora Blobs */}

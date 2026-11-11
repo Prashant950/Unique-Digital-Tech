@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Core Landing Page -->
+  <url>
+    <loc>https://uniquedigitaltech.com/</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Engineering Services Directory -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Service 1: Website Development -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services/website-development</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Service 2: Mobile App Development -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services/mobile-app-development</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Service 3: Custom CRM & ERP Development -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services/crm-erp-development</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Service 4: WhatsApp API Automation -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services/whatsapp-api-automation</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Service 5: Cloud Infrastructure & DevOps -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services/cloud-devops</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Service 6: SEO & Core Web Vitals -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services/seo-services</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Service 7: Digital Marketing & Funnels -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services/digital-marketing</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Service 8: Meta & Google Ads Engineering -->
+  <url>
+    <loc>https://uniquedigitaltech.com/services/meta-ads</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Custom Scope & Pricing -->
+  <url>
+    <loc>https://uniquedigitaltech.com/pricing</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- About Agency -->
+  <url>
+    <loc>https://uniquedigitaltech.com/about</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Technical Contact & Scoping -->
+  <url>
+    <loc>https://uniquedigitaltech.com/contact</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
