@@ -36,12 +36,12 @@ export default function Home() {
             Software Engineering &amp; Scalable Cloud Architecture
           </p>
 
-          <h1 className="rise-2 mx-auto mt-4 max-w-5xl text-4xl font-extrabold leading-[1.08] sm:text-6xl lg:text-7xl">
+          <h1 className="rise-2 mx-auto mt-4 max-w-4xl text-3xl font-extrabold leading-[1.15] sm:text-4xl md:text-5xl lg:text-[3.25rem]">
             Engineering Digital Products <br className="hidden sm:block" />
             <span className="shimmer-text">That Drive Enterprise Scale.</span>
           </h1>
 
-          <p className="rise-3 mx-auto mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg sm:leading-relaxed">
+          <p className="rise-3 mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base sm:leading-relaxed">
             We architect, build and scale resilient web platforms, mission-critical mobile applications and high-ROI digital acquisition channels for high-growth businesses and enterprise teams worldwide.
           </p>
 

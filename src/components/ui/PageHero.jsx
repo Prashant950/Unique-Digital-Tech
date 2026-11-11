@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 export default function PageHero({ badge, title, text, children, className = '' }) {
   return (
     <section className={`relative overflow-hidden border-b border-white/10 pt-36 pb-24 sm:pt-44 sm:pb-32 min-h-[60vh] sm:min-h-[68vh] flex flex-col justify-center ${className}`}>
-      {/* Cyber ambient dot grid and glowing aurora orbs */}
-      <CyberBackground variant="dots" />
+      {/* Ambient glowing aurora orbs (dot grid pattern removed) */}
+      <CyberBackground variant="clean" />
 
       <div className="container-x relative max-w-4xl text-center z-10">
         {badge && (

@@ -13,8 +13,7 @@ export default function CtaBanner({
           {/* Animated Border Beam */}
           <BorderBeam duration={8} color="#38bdf8" rx={24} />
 
-          {/* Background Ambient Glows & Dot Grid */}
-          <div className="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none" />
+          {/* Background Ambient Glows */}
           <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-72 w-96 rounded-full bg-brand-500/20 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-20 right-10 h-60 w-60 rounded-full bg-brand-blue/15 blur-3xl" />
 

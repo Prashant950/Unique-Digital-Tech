@@ -73,7 +73,7 @@ export default function Services() {
       desc: 'Ideal for ground-up MVPs, SaaS platforms, and enterprise rewrites with defined milestones (30% / 40% / 30%).',
       features: ['Fixed budget & locked delivery date', 'Figma design system to production launch', '30–90 days post-launch warranty'],
       link: '/pricing',
-      cta: 'View Fixed Packages',
+      cta: 'View Milestone Scopes',
     },
     {
       tag: 'Velocity & Scaling',
@@ -152,7 +152,7 @@ export default function Services() {
               <SpotlightCard
                 key={s.slug}
                 tilt={true}
-                className="flex flex-col justify-between"
+                className="flex flex-col justify-between p-6 sm:p-7 rounded-3xl border border-white/10 bg-gradient-to-b from-ink-900/90 to-ink-950/90"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -160,29 +160,41 @@ export default function Services() {
                       <Icon name={s.icon} className="h-6 w-6" />
                     </span>
 
-                    <span className="text-[11px] font-mono text-slate-500 uppercase tracking-widest">
-                      Production-Grade
-                    </span>
+                    {s.metrics && s.metrics[0] ? (
+                      <span className="rounded-full bg-brand-500/10 border border-brand-500/20 px-2.5 py-0.5 text-[10px] font-bold text-brand-300">
+                        {s.metrics[0].value} {s.metrics[0].label.split(' ')[0]}
+                      </span>
+                    ) : (
+                      <span className="text-[11px] font-mono text-slate-500 uppercase tracking-widest">
+                        Production-Grade
+                      </span>
+                    )}
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mt-4 group-hover:text-brand-300 transition-colors">
+                  <h3 className="text-xl font-bold text-white mt-4 group-hover:text-brand-300 transition-colors">
                     {s.title}
                   </h3>
 
-                  <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                    {s.short}
+                  {s.tagline && (
+                    <p className="mt-1 text-xs font-semibold text-brand-300/90 line-clamp-1">
+                      {s.tagline}
+                    </p>
+                  )}
+
+                  <p className="mt-2 text-xs leading-relaxed text-slate-400 line-clamp-3">
+                    {s.description || s.short}
                   </p>
 
                   {/* Key Capabilities */}
                   <div className="mt-4 border-t border-white/5 pt-4 space-y-2">
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                      Key Deliverables:
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                      Included Deliverables:
                     </p>
                     <ul className="space-y-1.5 text-xs text-slate-300">
-                      {s.capabilities.map((cap, idx) => (
+                      {s.capabilities.slice(0, 3).map((cap, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-brand-400 shrink-0 mt-0.5" />
-                          <span>{cap}</span>
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                          <span className="line-clamp-2 leading-tight">{cap}</span>
                         </li>
                       ))}
                     </ul>
@@ -190,7 +202,7 @@ export default function Services() {
 
                   {/* Tech stack pills */}
                   <div className="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-white/5">
-                    {s.tools.map((t) => (
+                    {s.tools.slice(0, 5).map((t) => (
                       <span
                         key={t}
                         className="rounded-md border border-white/10 bg-ink-800/80 px-2 py-0.5 text-[10px] font-medium text-slate-300"
@@ -201,22 +213,36 @@ export default function Services() {
                   </div>
                 </div>
 
-                {/* Card Footer Link */}
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+                {/* Card Footer Actions */}
+                <div className="mt-6 pt-4 border-t border-white/5 space-y-2.5">
                   <Link
                     to={`/services/${s.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-400 group-hover:text-brand-300 transition"
+                    className="flex w-full items-center justify-between rounded-xl bg-white/5 border border-white/10 px-3.5 py-2.5 text-xs font-bold text-brand-300 hover:bg-brand-500/15 hover:border-brand-500/30 transition group/btn"
                   >
-                    <span>View Architecture Details</span>
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    <span>View Architecture Blueprint</span>
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
                   </Link>
 
-                  <Link
-                    to="/pricing"
-                    className="text-[11px] font-medium text-slate-400 hover:text-white transition"
-                  >
-                    View Pricing
-                  </Link>
+                  <div className="flex items-center justify-between text-xs pt-1">
+                    <Link
+                      to={`/contact?service=${encodeURIComponent(s.title)}`}
+                      className="text-slate-400 hover:text-white transition font-medium"
+                    >
+                      Request Scope →
+                    </Link>
+
+                    <a
+                      href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20am%20interested%20in%20your%20${encodeURIComponent(
+                        s.title
+                      )}%20services.`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#25D366] hover:brightness-110 transition"
+                    >
+                      <WhatsAppIcon className="h-3 w-3 fill-[#25D366]" />
+                      <span>Chat on WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
               </SpotlightCard>
             ))}

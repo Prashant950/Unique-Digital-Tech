@@ -23,60 +23,674 @@ export const metrics = [
 
 export const services = [
   {
-    slug: 'website-development', icon: 'globe', title: 'Website Development',
-    short: 'Fast, secure Next.js and React platforms, built for high traffic and clean role-based access.',
-    description: 'Custom web applications on React, Next.js and modular Node.js/PostgreSQL backends — designed for low latency, strict access control and high user concurrency.',
-    capabilities: ['Scalable SPA and server-side rendered systems', 'Multi-tenant SaaS dashboards and admin portals', 'Headless e-commerce with sub-second checkout'],
-    tools: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
+    slug: 'website-development',
+    icon: 'globe',
+    title: 'Website Development',
+    tagline: 'High-Performance Next.js & React Web Platforms Built for Enterprise Scale',
+    short: 'Fast, secure Next.js and React platforms, built for high traffic, sub-second loads and clean role-based access.',
+    description: 'We architect and build modern full-stack web applications using React, Next.js 14, Node.js, and PostgreSQL. From multi-tenant SaaS dashboards to high-concurrency client portals and headless e-commerce, our architectures achieve 95+ Core Web Vitals, sub-30ms global edge latency, and zero technical debt.',
+    metrics: [
+      { value: '< 30ms', label: 'Global Edge Response Time' },
+      { value: '99.99%', label: 'Production Uptime SLA' },
+      { value: '100%', label: 'Git & Code IP Handover' },
+    ],
+    capabilities: [
+      'Scalable Next.js 14 App Router with Server-Side Rendering (SSR) & Static Generation (SSG)',
+      'Multi-tenant SaaS dashboards, customer portals, and RBAC admin panels',
+      'Modular RESTful & WebSocket API architecture on Node.js / Express',
+      'Relational PostgreSQL / Supabase schema design with optimized indexes and caching',
+      'Automated CI/CD deployment pipelines on Vercel, AWS ECS, or private VPS with SSL',
+      'Enterprise payment gateway integration (Stripe, Razorpay, PayPal) with idempotent webhooks',
+    ],
+    modules: [
+      {
+        title: 'Modern Frontend & Design System',
+        desc: 'Pixel-perfect, accessible UI components built in Tailwind CSS and React, backed by Figma tokens and interactive micro-animations.',
+      },
+      {
+        title: 'High-Concurrency Backend APIs',
+        desc: 'Modular Express / Next.js backend with input sanitization, rate-limiting, JWT authentication, and structured error handling.',
+      },
+      {
+        title: 'PostgreSQL & Redis Cache Layer',
+        desc: 'Optimized database schemas, transaction isolation, connection pooling via Prisma / Supabase, and Redis in-memory cache for fast lookups.',
+      },
+      {
+        title: 'DevOps & Automated CI/CD Pipeline',
+        desc: 'Zero-downtime automated deployment via GitHub Actions, Docker containerization, health checks, and automatic SSL provisioning.',
+      },
+    ],
+    deliverables: [
+      'Complete interactive Figma UI/UX Design System with responsive mobile-first layouts',
+      'Full-stack Next.js / React source code repository with clean Git commit history',
+      'Production-ready PostgreSQL database schemas, migrations, and seed scripts',
+      'Secure authentication flow (OAuth, email magic links, or 2FA session management)',
+      'Payment gateway integration with automated invoice generation and webhooks',
+      'Docker container setup and GitHub Actions automated deployment workflow',
+      'Lighthouse 95+ performance optimization and structured SEO metadata',
+      '30 to 90 days complimentary post-launch bug warranty and SLA monitoring',
+    ],
+    advantages: [
+      {
+        aspect: 'Architecture Quality',
+        legacy: 'Bloated WordPress templates, slow PHP monoliths, or spaghetti JavaScript with high vulnerability risks.',
+        unique: 'Modern Next.js 14 SSR/SSG, modular TypeScript, zero code bloat, and enterprise security hardening.',
+      },
+      {
+        aspect: 'IP & Code Ownership',
+        legacy: 'Agencies hold code hostage behind recurring proprietary license fees or cryptic locked CMS platforms.',
+        unique: '100% full source code, Git commit history, and deployment keys transferred directly to you from day one.',
+      },
+      {
+        aspect: 'Load Times & Conversion',
+        legacy: 'Heavy 4-7 second page load times causing 60%+ bounce rates on mobile and poor Core Web Vitals rankings.',
+        unique: 'Sub-second rendering, edge CDN caching, image optimization, and 95+ Lighthouse scores for top conversions.',
+      },
+    ],
+    timelineSteps: [
+      { step: 'Phase 1', duration: 'Days 1–7', title: 'Architecture Blueprint & Wireframes', desc: 'Requirements audit, database schema modeling, Figma design system signoff, and Git repo creation.' },
+      { step: 'Phase 2', duration: 'Days 8–24', title: 'Interactive Staging Demo Build', desc: 'Core feature development, REST APIs, database queries, and private staging deployment for client review.' },
+      { step: 'Phase 3', duration: 'Days 25–35', title: 'Hardened Release & IP Handover', desc: 'Stress testing, security audit, production DNS release on AWS/Vercel, and full transfer of code and keys.' },
+    ],
+    tools: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Redis', 'Docker', 'Vercel'],
+    faqs: [
+      {
+        q: 'Do you build custom code or rely on pre-made WordPress templates?',
+        a: 'We build 100% bespoke, production-grade web applications from scratch using React, Next.js, and Node.js. No bloated WordPress themes, no third-party plugin vulnerabilities, and zero arbitrary vendor lock-in.',
+      },
+      {
+        q: 'Can our in-house developers easily take over the codebase after launch?',
+        a: 'Yes, absolutely. Our code follows industry-standard TypeScript/ES6 conventions, strict linting rules, and clean folder structures. We provide complete architectural documentation and a walkthrough session upon final handover.',
+      },
+      {
+        q: 'What happens if we encounter bugs after the website is launched?',
+        a: 'Every website we deliver includes complimentary 30 to 90 days of dedicated post-launch SLA bug warranty. Our solutions architects monitor performance and fix any defects with high urgency at zero extra charge.',
+      },
+    ],
   },
   {
-    slug: 'mobile-app-development', icon: 'phone', title: 'Mobile App Development',
-    short: 'iOS and Android apps with offline-first data, real-time events and fluid performance.',
-    description: 'Cross-platform apps built with React Native and Flutter, with offline-first persistence, real-time push events and a native-feeling interface.',
-    capabilities: ['Native-grade performance on iOS and Android', 'Secure payment gateways and biometric login', 'Real-time messaging and location tracking'],
-    tools: ['React Native', 'Flutter', 'Firebase', 'REST / WebSockets'],
+    slug: 'mobile-app-development',
+    icon: 'phone',
+    title: 'Mobile App Development',
+    tagline: 'Cross-Platform iOS & Android Applications with 60fps Native Performance',
+    short: 'iOS and Android apps with offline-first data, real-time push events, biometric security and fluid 60fps UX.',
+    description: 'We develop high-performance cross-platform mobile applications using React Native and Flutter. Designed for mission-critical reliability, our apps feature offline-first synchronization, secure biometric authentication, instant push notification pipelines, and seamless App Store & Google Play Store release management.',
+    metrics: [
+      { value: '60 FPS', label: 'Smooth Fluid Rendering' },
+      { value: 'iOS & Android', label: 'Single Unified Codebase' },
+      { value: '100%', label: 'Store Approval Guarantee' },
+    ],
+    capabilities: [
+      'Native-grade 60fps performance on both Apple iOS and Google Android',
+      'Offline-first data persistence with automated background synchronization',
+      'Biometric authentication (FaceID, Fingerprint) and secure keychain storage',
+      'Real-time WebSocket notifications, live in-app chat, and location tracking',
+      'Payment gateway SDK integrations (Apple Pay, Google Pay, Razorpay, Stripe)',
+      'End-to-end App Store and Google Play compliance review and deployment',
+    ],
+    modules: [
+      {
+        title: 'Native UX & UI Components',
+        desc: 'Fluid micro-interactions, gesture navigation, dark/light theme support, and responsive scaling across smartphones and tablets.',
+      },
+      {
+        title: 'Offline-First SQLite / WatermelonDB',
+        desc: 'Local database caching ensuring the app operates seamlessly with zero connectivity and syncs when reconnected.',
+      },
+      {
+        title: 'Push Notification Pipelines',
+        desc: 'Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNs) integration for targeted real-time alerts.',
+      },
+      {
+        title: 'Security & App Store Hardening',
+        desc: 'ProGuard code obfuscation, SSL pinning, jailbreak/root detection, and end-to-end encryption for sensitive user records.',
+      },
+    ],
+    deliverables: [
+      'Complete React Native / Flutter cross-platform source code repository',
+      'Interactive Figma mobile UI kit following Apple HIG and Google Material guidelines',
+      'Backend REST / GraphQL API endpoints with real-time WebSocket listeners',
+      'Firebase Cloud Messaging push notification setup and campaign triggers',
+      'Full App Store Connect & Google Play Console submission and metadata preparation',
+      'Automated Fastlane build scripts for instant iOS TestFlight and Android APK builds',
+      '60-Day Post-Launch SLA Warranty covering store updates and OS version patches',
+    ],
+    advantages: [
+      {
+        aspect: 'Platform Delivery',
+        legacy: 'Hiring separate iOS and Android teams leading to doubled costs, delayed timelines, and mismatched features.',
+        unique: 'Single unified React Native / Flutter codebase delivering identical 60fps native feel on both platforms at half the cost.',
+      },
+      {
+        aspect: 'Offline Reliability',
+        legacy: 'Apps crash or show blank screens the moment the user enters an elevator, airplane, or low-coverage zone.',
+        unique: 'Offline-first local storage with optimistic UI updates and silent background sync upon reconnection.',
+      },
+      {
+        aspect: 'Store Approval',
+        legacy: 'Repeated App Store rejections due to non-compliant privacy policies, guideline violations, or broken auth.',
+        unique: '100% store submission guarantee. Our architects handle all Apple and Google review guidelines until approved.',
+      },
+    ],
+    timelineSteps: [
+      { step: 'Phase 1', duration: 'Days 1–10', title: 'Mobile UI/UX & API Contract', desc: 'Figma interactive prototypes, user journey mapping, and mobile backend API contracts specification.' },
+      { step: 'Phase 2', duration: 'Days 11–30', title: 'Core App Build & Staging TestFlight', desc: 'Screen engineering, state management, local database, and staging deployment to TestFlight / Internal Testing.' },
+      { step: 'Phase 3', duration: 'Days 31–45', title: 'Store Release & Handover', desc: 'Biometric security hardening, App Store & Play Store review approval, and 100% source code repository transfer.' },
+    ],
+    tools: ['React Native', 'Flutter', 'Firebase', 'Redux', 'SQLite', 'Fastlane', 'Node.js', 'PostgreSQL'],
+    faqs: [
+      {
+        q: 'Will the app feel like a native app or a sluggish web wrapper?',
+        a: 'We build with React Native and Flutter, which compile down to true native UI controls on iOS and Android. Users experience fluid 60fps scrolling, native gestures, and instantaneous responsiveness.',
+      },
+      {
+        q: 'Do you manage the Apple App Store and Google Play Store launch process?',
+        a: 'Yes. We configure your developer accounts, generate required certificates, create app store screenshots, prepare privacy disclosures, and resolve any questions from Apple and Google review teams.',
+      },
+      {
+        q: 'Can the mobile app share the same database and backend as our web app?',
+        a: 'Absolutely. We design unified REST and WebSocket APIs so your web portal and mobile app share the exact same user accounts, database records, and real-time events.',
+      },
+    ],
   },
   {
-    slug: 'digital-marketing', icon: 'megaphone', title: 'Digital Marketing',
-    short: 'Data-engineered acquisition funnels that turn ad spend into a predictable pipeline.',
-    description: 'We replace ad-hoc campaigns with systematic funnels — tracked end to end, tuned weekly and tied to revenue, not vanity metrics.',
-    capabilities: ['Search and social paid acquisition', 'Full-funnel attribution analytics', 'Conversion rate optimization (CRO)'],
-    tools: ['Google Ads', 'LinkedIn Ads', 'GA4', 'Tag Manager'],
+    slug: 'crm-erp-development',
+    icon: 'database',
+    title: 'Custom CRM & ERP Architecture',
+    tagline: 'Tailored Business Operations Engines, Reseller Panels & Workflow Automations',
+    short: 'Custom CRM, ERP, reseller and portal architectures that unify your operational data and eliminate manual bottlenecks.',
+    description: 'We architect and engineer bespoke enterprise CRM, ERP, and operations management software designed around your specific business model. We specialize in complex business logic, automated multi-tier approval workflows, wholesale reseller/agent panels, inventory tracking, and high-volume billing engines handling millions in transaction volume.',
+    metrics: [
+      { value: '10,000+', label: 'Concurrent Ops Handled' },
+      { value: '75%', label: 'Reduction in Manual Work' },
+      { value: 'Zero', label: 'Recurring User Seat Fees' },
+    ],
+    capabilities: [
+      'Bespoke CRM / ERP workflows eliminating monthly per-seat licensing fees (Salesforce/HubSpot alternative)',
+      'Multi-tier role hierarchies: Super Admin, Branch Managers, Sales Agents, and Customers',
+      'Automated invoicing, payment reconciliation, GST billing, and ledger reporting',
+      'Wholesale reseller panels, SMM provider engine integrations, and automated order fulfillment',
+      'Webhook-driven external integrations with banking APIs, WhatsApp Cloud API, and logistics partners',
+      'High-concurrency PostgreSQL relational schemas with field-level data encryption and audit logs',
+    ],
+    modules: [
+      {
+        title: 'Granular Role-Based Access Control',
+        desc: 'Role permissions down to individual database attributes, preventing unauthorized data exfiltration.',
+      },
+      {
+        title: 'Automated Operations Pipelines',
+        desc: 'Event-driven job queues (BullMQ/Redis) for automated invoices, order dispatch, and alert notifications.',
+      },
+      {
+        title: 'Interactive Financial Analytics',
+        desc: 'Real-time profit & loss charts, agent commission reconciliations, and custom CSV/PDF report generators.',
+      },
+      {
+        title: 'Reseller & Partner API Gateway',
+        desc: 'Secure tokenized API gateway enabling external resellers and affiliates to submit automated bulk orders.',
+      },
+    ],
+    deliverables: [
+      'Complete custom CRM/ERP web application source code with zero user-seat restrictions',
+      'Granular administrative control portal with audit logs and activity histories',
+      'Automated background worker queue system for emails, WhatsApp alerts, and payment webhooks',
+      'Custom database schema with relational foreign keys, indexes, and automated daily backups',
+      'Exportable financial reports (PDF invoices, GST summaries, and Excel reconciliations)',
+      'Interactive Figma UI system for executive dashboards and operations screens',
+      '60 to 90 days enterprise post-launch hypercare SLA support and staff training sessions',
+    ],
+    advantages: [
+      {
+        aspect: 'Cost Structure',
+        legacy: 'Paying $150 to $300 per user every month to SaaS vendors like Salesforce or SAP as your headcount grows.',
+        unique: 'One-time custom milestone investment. You own the software forever with zero recurring user license fees.',
+      },
+      {
+        aspect: 'Workflow Fit',
+        legacy: 'Forcing your business processes to fit into rigid, generic SaaS tools that lack industry-specific logic.',
+        unique: 'Custom-built around your exact operational workflows, commission structures, and business rules.',
+      },
+      {
+        aspect: 'Data Privacy & Security',
+        legacy: 'Your proprietary customer lists and trade financial secrets stored on shared third-party multi-tenant servers.',
+        unique: 'Self-hosted on your own private AWS or GCP cloud with field-level encryption and full data sovereignty.',
+      },
+    ],
+    timelineSteps: [
+      { step: 'Phase 1', duration: 'Days 1–12', title: 'Business Logic Audit & Data Modeling', desc: 'Mapping operational workflows, role permissions, approval chains, and database relational schemas.' },
+      { step: 'Phase 2', duration: 'Days 13–35', title: 'Core System & Queue Engine Build', desc: 'Developing modules, automated queues, payment reconciliation, and staging environment verification.' },
+      { step: 'Phase 3', duration: 'Days 36–50', title: 'Security Audit, Staff Training & Handover', desc: 'Data migration, vulnerability assessments, staff onboarding walkthrough, and 100% source code transfer.' },
+    ],
+    tools: ['Node.js', 'PostgreSQL', 'Redis', 'BullMQ', 'Next.js', 'Docker', 'AWS', 'Prisma ORM'],
+    faqs: [
+      {
+        q: 'Why should we build a custom CRM/ERP instead of using Salesforce or Zoho?',
+        a: 'Commercial SaaS platforms charge steep recurring fees per user per month ($50–$300/user/mo), making them exorbitantly expensive as your team expands. A custom system has zero per-seat license costs, matches your exact workflows, and keeps your customer data 100% private.',
+      },
+      {
+        q: 'Can this custom ERP integrate with our existing accounting or payment gateways?',
+        a: 'Yes. We build custom API connectors for Razorpay, Stripe, Tally, Zoho Books, WhatsApp Business API, and your existing banking interfaces for automated settlement.',
+      },
+      {
+        q: 'How secure is our financial data in the custom system?',
+        a: 'We implement bank-grade security: AES-256 field-level encryption for sensitive data, bcrypt password hashing, IP whitelisting for admin portals, and complete audit logging for every record change.',
+      },
+    ],
   },
   {
-    slug: 'seo-services', icon: 'search', title: 'SEO Services',
-    short: 'Technical SEO and Core Web Vitals work that wins high-intent search traffic.',
-    description: 'Technical SEO, site-architecture optimization and Core Web Vitals engineering that help the right buyers find you first.',
-    capabilities: ['Enterprise technical SEO audits', 'Core Web Vitals and speed optimization', 'Content architecture and schema markup'],
-    tools: ['Search Console', 'Lighthouse', 'Schema.org', 'Screaming Frog'],
+    slug: 'whatsapp-api-automation',
+    icon: 'message',
+    title: 'WhatsApp Cloud API & Automations',
+    tagline: 'Official Meta WhatsApp Business Cloud API Solutions & Event-Driven Bots',
+    short: 'Official WhatsApp Cloud API integrations: automated notifications, interactive chat flows, lead routing and CRM sync.',
+    description: 'We design and deploy enterprise automated messaging pipelines using the official Meta WhatsApp Business Cloud API. From instant lead capture and multi-agent customer support dashboards to automated payment receipts, delivery notifications, and conversational AI chatbots, we turn WhatsApp into your highest-converting channel.',
+    metrics: [
+      { value: '98%', label: 'Average Open Rate' },
+      { value: '< 2 Sec', label: 'Automated Bot Latency' },
+      { value: '100% Official', label: 'Meta Cloud API Verified' },
+    ],
+    capabilities: [
+      'Official Meta WhatsApp Business Cloud API registration and Green Tick verification assistance',
+      'Automated multi-step chatbot flows for qualification, order placement, and FAQ answering',
+      'Two-way CRM integration: automatically create leads, trigger status alerts, and log conversation histories',
+      'High-throughput notification broadcasts for marketing campaigns and transactional OTPs',
+      'Multi-agent shared team inbox with live agent routing, canned responses, and conversation tags',
+      'Automated payment links and receipt dispatch via Razorpay / Stripe integrations',
+    ],
+    modules: [
+      {
+        title: 'Meta Cloud Webhook Gateway',
+        desc: 'Resilient Node.js webhook engine that receives message payloads, sanitizes inputs, and routes events in milliseconds.',
+      },
+      {
+        title: 'Visual Flow & State Machine',
+        desc: 'Stateful conversation logic that guides users through questionnaires, collects documents, and executes actions.',
+      },
+      {
+        title: 'Multi-Agent Support Dashboard',
+        desc: 'Centralized customer support web dashboard where human agents can take over bot chats in real time.',
+      },
+      {
+        title: 'CRM & ERP Synchronization',
+        desc: 'Bidirectional sync that updates leads in your database and triggers WhatsApp alerts on specific CRM milestones.',
+      },
+    ],
+    deliverables: [
+      'Fully verified Meta WhatsApp Cloud API credentials and webhook integration',
+      'Conversational chatbot workflows tailored to your sales and support funnels',
+      'Multi-agent live chat web portal for customer support representatives',
+      'Pre-approved Meta utility and marketing message templates for broadcasts',
+      'Automated event triggers for order confirmations, reminders, and payment receipts',
+      'Comprehensive webhook error-recovery queue with retry logic (BullMQ / Redis)',
+      'Complete Git source code repository and API documentation',
+    ],
+    advantages: [
+      {
+        aspect: 'API Authenticity',
+        legacy: 'Using unofficial, pirated third-party QR-code scrapers that get your business phone number permanently banned by Meta.',
+        unique: '100% official Meta WhatsApp Cloud API with zero risk of number bans, direct server-to-server security, and green tick eligibility.',
+      },
+      {
+        aspect: 'Engagement & Open Rates',
+        legacy: 'Traditional emails with 12-18% open rates that end up in the spam folder, or SMS messages ignored by customers.',
+        unique: 'WhatsApp achieves an astonishing 98% open rate and 45%+ response rate, delivering instant engagement on users’ primary messaging app.',
+      },
+      {
+        aspect: 'System Integration',
+        legacy: 'Siloed standalone WhatsApp tools that do not connect to your central database, requiring manual copy-pasting of leads.',
+        unique: 'Direct bidirectional sync with your website, custom CRM, and database for zero manual administrative work.',
+      },
+    ],
+    timelineSteps: [
+      { step: 'Phase 1', duration: 'Days 1–3', title: 'Meta Verification & Template Setup', desc: 'Meta Business Manager registration, Cloud API verification, and template approvals.' },
+      { step: 'Phase 2', duration: 'Days 4–10', title: 'Bot Flow & Webhook Engine Build', desc: 'Chatbot state machine, CRM webhook integration, and multi-agent portal setup.' },
+      { step: 'Phase 3', duration: 'Days 11–15', title: 'Live Testing & Handover', desc: 'End-to-end load testing, staff onboarding on the live-chat portal, and code delivery.' },
+    ],
+    tools: ['Meta Cloud API', 'Node.js', 'Express', 'Redis', 'Webhooks', 'React', 'PostgreSQL'],
+    faqs: [
+      {
+        q: 'Is this the official Meta API or a third-party gateway that can get banned?',
+        a: 'We build exclusively on the official Meta WhatsApp Cloud API. Your phone number is registered directly with Meta, guaranteeing zero risk of account bans and providing high-speed message throughput.',
+      },
+      {
+        q: 'Can multiple customer service agents chat from the same WhatsApp number?',
+        a: 'Yes. We deliver a multi-agent team inbox where your sales and support representatives can reply to customers simultaneously from individual logins using the single official business WhatsApp number.',
+      },
+      {
+        q: 'Can we send automated reminders when a user abandons checkout on our website?',
+        a: 'Yes. We connect webhooks to your checkout workflow. When a cart is left incomplete for a set time (e.g. 15 minutes), our engine automatically triggers a personalized WhatsApp recovery message.',
+      },
+    ],
   },
   {
-    slug: 'meta-ads', icon: 'target', title: 'Meta Ads & Social Growth',
-    short: 'Precision Facebook and Instagram campaigns with creative testing and clean tracking.',
-    description: 'Meta advertising built on proper pixel and Conversions API setup, structured creative testing and audience strategy that scales profitably.',
-    capabilities: ['Facebook and Instagram lead and sales campaigns', 'Pixel and Conversions API implementation', 'Click-to-WhatsApp ad funnels'],
-    tools: ['Meta Ads Manager', 'Conversions API', 'WhatsApp Business'],
+    slug: 'cloud-devops',
+    icon: 'cloud',
+    title: 'Cloud Architecture & AWS DevOps',
+    tagline: 'Resilient Cloud Infrastructure, Docker Pipelines & Zero-Downtime Releases',
+    short: 'Hardened cloud servers, Docker containers, automated CI/CD pipelines and 24/7 high-availability architecture.',
+    description: 'We design, provision, and maintain production cloud infrastructure on AWS, Google Cloud Platform (GCP), DigitalOcean, and dedicated VPS. We transform fragile, manual server setups into self-healing, auto-scaling containerized environments with automated CI/CD pipelines, DDoS mitigation, and sub-minute disaster recovery.',
+    metrics: [
+      { value: '99.99%', label: 'Cloud Availability Target' },
+      { value: 'Zero', label: 'Deployment Downtime' },
+      { value: '40%+', label: 'Infra Cost Optimization' },
+    ],
+    capabilities: [
+      'AWS cloud architecture: ECS, EC2, RDS PostgreSQL, S3, CloudFront CDN, and Route 53',
+      'Docker containerization and multi-stage production image optimization',
+      'Automated Git-based CI/CD deployment pipelines (GitHub Actions, GitLab CI)',
+      'High-performance Nginx reverse proxy configuration with HTTP/2 and automated Let’s Encrypt SSL',
+      'Automated daily database backups with offsite S3 retention and point-in-time recovery',
+      'Server security hardening: UFW firewall, fail2ban brute-force defense, and SSH key enforcement',
+    ],
+    modules: [
+      {
+        title: 'Infrastructure as Code (IaC)',
+        desc: 'Reproducible, version-controlled cloud environments created via Terraform and Docker Compose.',
+      },
+      {
+        title: 'Continuous Deployment (CI/CD)',
+        desc: 'Push code to your main Git branch, and automated workflows test, build, and deploy with zero downtime.',
+      },
+      {
+        title: 'Security Hardening & Shield',
+        desc: 'Strict firewall rules, rate-limiting, SSL A+ grade configuration, and Cloudflare DDoS shielding.',
+      },
+      {
+        title: 'Monitoring & Alerting Hub',
+        desc: 'Real-time CPU/RAM metrics, uptime pingers, and instant Telegram/Slack alerts for system anomalies.',
+      },
+    ],
+    deliverables: [
+      'Complete Docker Compose / ECS configuration files and deployment scripts',
+      'Automated GitHub Actions CI/CD pipeline for automated staging and production releases',
+      'Hardened Linux server configuration with Nginx reverse proxy and SSL certificates',
+      'Managed PostgreSQL / MySQL database setup with automated daily offsite snapshots',
+      'Comprehensive Cloudflare / CDN configuration for caching and DDoS mitigation',
+      'Full architecture specification document and credentials master vault handover',
+      '30 to 90 days complimentary DevOps support and infrastructure SLA monitoring',
+    ],
+    advantages: [
+      {
+        aspect: 'Release Velocity',
+        legacy: 'Manual FTP file uploads, fragile SSH copy-pasting, and terrifying midnight releases that take sites down for hours.',
+        unique: 'Automated CI/CD pipelines that test and deploy changes within 90 seconds with zero downtime for active users.',
+      },
+      {
+        aspect: 'Server Reliability',
+        legacy: 'Unmonitored shared hosting that crashes under minor traffic spikes with no automated recovery or alert triggers.',
+        unique: 'Self-healing containerized architecture with PM2 / Docker auto-restart and instant Slack incident notifications.',
+      },
+      {
+        aspect: 'Disaster Recovery',
+        legacy: 'No verified database backups. A single hardware failure or cyber incident results in catastrophic data loss.',
+        unique: 'Encrypted, automated daily snapshots stored in geographically redundant AWS S3 buckets with tested 1-click restore.',
+      },
+    ],
+    timelineSteps: [
+      { step: 'Phase 1', duration: 'Days 1–4', title: 'Infrastructure Audit & Dockerization', desc: 'Evaluating server loads, containerizing applications, and architecting the target cloud blueprint.' },
+      { step: 'Phase 2', duration: 'Days 5–10', title: 'Cloud Provisioning & CI/CD Setup', desc: 'Configuring servers, Nginx, automated SSL, GitHub Actions pipelines, and database replication.' },
+      { step: 'Phase 3', duration: 'Days 11–14', title: 'Zero-Downtime Migration & Handover', desc: 'Traffic cutover, load testing, monitoring verification, and full handover of server keys.' },
+    ],
+    tools: ['AWS', 'Docker', 'Nginx', 'GitHub Actions', 'Linux / Ubuntu', 'Cloudflare', 'Redis', 'PM2'],
+    faqs: [
+      {
+        q: 'Can you migrate our live platform to AWS without any downtime for our customers?',
+        a: 'Yes. We use a blue/green or staged DNS cutover approach. We replicate your database and verify the staging cloud before switching traffic, resulting in zero downtime and zero lost customer transactions.',
+      },
+      {
+        q: 'Do you help optimize our monthly AWS or cloud hosting bill?',
+        a: 'Absolutely. We regularly audit enterprise AWS setups to eliminate idle instances, implement proper CDN caching, optimize database tier sizing, and switch to reserved/spot instances, saving clients 30% to 50% on monthly bills.',
+      },
+      {
+        q: 'Who owns the cloud accounts and infrastructure credentials?',
+        a: 'You do, 100%. We provision everything inside your own AWS, GCP, or DigitalOcean account. You retain root ownership from day one, and we provide a documented master vault upon project completion.',
+      },
+    ],
   },
   {
-    slug: 'crm-erp-development', icon: 'database', title: 'Custom CRM & ERP',
-    short: 'Tailored business systems, reseller portals and workflows that fit how you operate.',
-    description: 'Custom CRM, ERP, reseller and portal architectures that unify your data and remove manual work across sales, operations and support.',
-    capabilities: ['Custom CRM and ERP platforms', 'Reseller and wholesale portal architecture', 'SMM panel wholesale engine integration'],
-    tools: ['Node.js', 'PostgreSQL', 'Redis', 'REST APIs'],
+    slug: 'seo-services',
+    icon: 'search',
+    title: 'Technical SEO & Web Vitals',
+    tagline: 'Technical Search Architecture & Core Web Vitals Optimization for Top Rankings',
+    short: 'Technical SEO, site-architecture optimization and Core Web Vitals engineering that help high-intent buyers find you first.',
+    description: 'We deliver developer-grade technical SEO and Core Web Vitals optimization designed to dominate organic search rankings. Rather than empty keyword promises, our software engineers re-architect your site structure, fix crawl budget bloat, implement rich schema markup, and achieve green 95+ scores on Google Lighthouse.',
+    metrics: [
+      { value: '95+', label: 'Target Lighthouse Score' },
+      { value: 'Sub-Second', label: 'First Contentful Paint' },
+      { value: '100% Green', label: 'Core Web Vitals Pass' },
+    ],
+    capabilities: [
+      'Comprehensive technical SEO architecture audit and deep crawl budget optimization',
+      'Core Web Vitals optimization: Largest Contentful Paint (LCP), INP, and Cumulative Layout Shift (CLS)',
+      'Structured JSON-LD schema markup implementation (Organization, Product, FAQ, Article, LocalBusiness)',
+      'Canonicalization, robots.txt, XML sitemaps, and server-side redirect routing',
+      'JavaScript rendering & server-side rendering (SSR) optimization for Googlebot indexability',
+      'Competitor keyword gap analysis and high-intent commercial landing page architecture',
+    ],
+    modules: [
+      {
+        title: 'Core Web Vitals Engineering',
+        desc: 'Eliminating render-blocking resources, tuning server response times, and optimizing image delivery via WebP/AVIF.',
+      },
+      {
+        title: 'JSON-LD Semantic Schemas',
+        desc: 'Injecting structured rich data so Google surfaces rich snippet stars, prices, and FAQ accordions directly in SERPs.',
+      },
+      {
+        title: 'Crawl Architecture & Indexing',
+        desc: 'Streamlining site hierarchy, eliminating pagination loops, and directing bot authority to revenue-driving URLs.',
+      },
+      {
+        title: 'International & Local SEO',
+        desc: 'Configuring hreflang multi-lingual tags and Google Business Profile optimization for regional dominance.',
+      },
+    ],
+    deliverables: [
+      'Full technical SEO audit report identifying all indexing, speed, and architecture defects',
+      'Direct code-level fixes applied to your React, Next.js, or HTML/CSS codebase',
+      'Lighthouse 95+ speed benchmark report showing before-and-after performance metrics',
+      'Implemented JSON-LD structured data validated with Google Rich Results test',
+      'Configured Google Search Console, Bing Webmaster, and automated sitemap sync',
+      'Keyword mapping roadmap prioritizing high-intent commercial transactional terms',
+    ],
+    advantages: [
+      {
+        aspect: 'SEO Methodology',
+        legacy: 'Non-technical marketers who write generic blog posts while your underlying website code is slow, bloated, and unindexable.',
+        unique: 'Software engineers who fix server bottlenecks, JavaScript hydration issues, and schema markup directly inside your code.',
+      },
+      {
+        aspect: 'Speed & Rankings',
+        legacy: 'Sluggish 5-second mobile load times that trigger Google’s page experience penalty and tank your positions.',
+        unique: 'Sub-second first contentful paint and 100% green Core Web Vitals that give your site a distinct ranking edge.',
+      },
+      {
+        aspect: 'Traffic Quality',
+        legacy: 'Vanity traffic from irrelevant informational keywords that generates zero qualified business leads or sales.',
+        unique: 'Targeting commercial-intent keywords searched by ready-to-buy decision-makers for maximum conversion.',
+      },
+    ],
+    timelineSteps: [
+      { step: 'Phase 1', duration: 'Days 1–5', title: 'Deep Technical Crawl & Speed Audit', desc: 'Full Screaming Frog crawl, Google Search Console indexing review, and Lighthouse profiling.' },
+      { step: 'Phase 2', duration: 'Days 6–14', title: 'Code-Level Fixes & Schema Injection', desc: 'Refactoring render-blocking assets, CDN optimization, and injecting rich JSON-LD data.' },
+      { step: 'Phase 3', duration: 'Days 15–20', title: 'Verification & Search Console Re-index', desc: 'Submitting updated sitemaps to Google, verifying zero error status, and delivery report.' },
+    ],
+    tools: ['Google Search Console', 'Lighthouse', 'Screaming Frog', 'Schema.org', 'PageSpeed Insights', 'Ahrefs'],
+    faqs: [
+      {
+        q: 'Why is technical SEO more important than just publishing blog posts?',
+        a: 'If Googlebot cannot crawl your JavaScript, or if your Core Web Vitals are failing, Google will demote your pages regardless of your content quality. Technical SEO ensures your foundation is flawless so every page can rank.',
+      },
+      {
+        q: 'Do your engineers actually write the code fixes or just give us a PDF checklist?',
+        a: 'Unlike traditional SEO agencies that hand you a 40-page checklist of problems, our engineers directly open your Git repository and implement the technical code fixes ourselves.',
+      },
+      {
+        q: 'How quickly do we see organic search improvements after technical fixes?',
+        a: 'Once technical errors, slow server response times, and broken schemas are resolved, Google typically re-indexes pages within 2 to 4 weeks, with measurable keyword position gains following shortly.',
+      },
+    ],
   },
   {
-    slug: 'whatsapp-api-automation', icon: 'message', title: 'WhatsApp API & Automation',
-    short: 'Meta WhatsApp Cloud API integrations for automated, two-way customer communication.',
-    description: 'Official WhatsApp Cloud API integrations: automated notifications, chat flows, lead capture and CRM sync — built to be reliable at volume.',
-    capabilities: ['WhatsApp Cloud API integration', 'Automated customer communications', 'Event-driven webhooks and workflow automation'],
-    tools: ['Meta Cloud API', 'Webhooks', 'Node.js', 'Third-party gateways'],
+    slug: 'digital-marketing',
+    icon: 'megaphone',
+    title: 'Digital Marketing & Growth Architecture',
+    tagline: 'Data-Engineered Acquisition Funnels Converting Ad Spend into Predictable Revenue',
+    short: 'We replace ad-hoc marketing campaigns with systematic acquisition funnels tracked end-to-end and tied to revenue.',
+    description: 'We engineer high-ROI digital acquisition channels and full-funnel growth architecture. We blend paid search, precision display, conversion rate optimization (CRO), and advanced attribution analytics into a predictable customer acquisition machine that maximizes your customer lifetime value (LTV).',
+    metrics: [
+      { value: '3.8x', label: 'Average Client ROAS' },
+      { value: '100%', label: 'Attribution Tracking' },
+      { value: '< 24hr', label: 'Real-Time ROI Reporting' },
+    ],
+    capabilities: [
+      'High-intent Google Search, Performance Max, and YouTube paid acquisition campaigns',
+      'Advanced server-side tracking (Google Tag Manager Server Container, GA4, Meta CAPI)',
+      'Conversion Rate Optimization (CRO) and landing page A/B testing architecture',
+      'B2B LinkedIn lead generation funnels targeting enterprise decision-makers and CTOs',
+      'Multi-touch attribution modeling to eliminate wasted ad spend across channels',
+      'Automated email nurture sequences and retargeting workflows that recover lost prospects',
+    ],
+    modules: [
+      {
+        title: 'Full-Funnel Acquisition Strategy',
+        desc: 'Structured campaigns matching customer intent across Top-of-Funnel (awareness) to Bottom-of-Funnel (checkout).',
+      },
+      {
+        title: 'Server-Side Analytics & CAPI',
+        desc: 'Bypassing ad-blockers and iOS privacy restrictions with server-to-server tracking for 100% accurate attribution.',
+      },
+      {
+        title: 'High-Converting Landing Pages',
+        desc: 'Fast, responsive Next.js landing pages with persuasive copywriting, social proof, and seamless lead capture.',
+      },
+      {
+        title: 'Automated Retention & Email',
+        desc: 'Automated email flows that re-engage past buyers, drive repeat sales, and maximize overall customer LTV.',
+      },
+    ],
+    deliverables: [
+      'Comprehensive digital growth strategy roadmap and competitor acquisition audit',
+      'High-performance Next.js custom landing page built for maximum conversion',
+      'Google Tag Manager and GA4 server-side analytics setup with verified conversion goals',
+      'Google Ads & paid media campaign creation with ad copy, negative keyword lists, and bids',
+      'Real-time automated Looker Studio performance dashboard tracking real revenue ROI',
+      'Bi-weekly strategy reviews and campaign tuning sessions with senior growth leads',
+    ],
+    advantages: [
+      {
+        aspect: 'Accountability Metric',
+        legacy: 'Focusing on vanity metrics like "impressions", "clicks", and "likes" while your bank account remains unchanged.',
+        unique: 'Strictly evaluated on verified Cost Per Acquisition (CPA), Return on Ad Spend (ROAS), and actual cash revenue.',
+      },
+      {
+        aspect: 'Tracking Accuracy',
+        legacy: 'Client-side pixels losing 30-40% of conversion data due to Apple iOS updates and browser ad-blockers.',
+        unique: 'Server-side Google Tag Manager and Conversions API ensuring 100% accurate attribution and lower ad costs.',
+      },
+      {
+        aspect: 'Landing Page Execution',
+        legacy: 'Sending paid traffic to a slow, generic homepage where users get confused and leave without converting.',
+        unique: 'Dedicated, ultra-fast landing pages with persuasive value propositions and friction-free lead capture forms.',
+      },
+    ],
+    timelineSteps: [
+      { step: 'Phase 1', duration: 'Week 1', title: 'Attribution Setup & Competitor Audit', desc: 'Deploying server-side tracking, GTM container, GA4 conversion events, and creative testing strategy.' },
+      { step: 'Phase 2', duration: 'Week 2', title: 'Landing Page Build & Campaign Launch', desc: 'Designing high-converting landing pages, writing ad copy, and launching structured ad campaigns.' },
+      { step: 'Phase 3', duration: 'Ongoing', title: 'Attribution Tuning & Scaling', desc: 'Weekly negative keyword audits, creative A/B testing, and scaling budget into winning ad groups.' },
+    ],
+    tools: ['Google Ads', 'GA4', 'Tag Manager', 'Meta Ads', 'Looker Studio', 'LinkedIn Ads'],
+    faqs: [
+      {
+        q: 'How do you measure success on our digital marketing campaigns?',
+        a: 'We tie every dollar of spend directly to verified customer inquiries, pipeline value, and closed revenue. You receive an automated real-time Looker Studio dashboard showing exact CPA, ROAS, and conversions.',
+      },
+      {
+        q: 'Do you design the landing pages as well or just run the ads?',
+        a: 'We engineer the complete funnel. That includes building custom, sub-second landing pages with persuasive copywriting, clear CTAs, and frictionless lead capture forms to maximize your conversion rate.',
+      },
+    ],
   },
   {
-    slug: 'cloud-devops', icon: 'cloud', title: 'Cloud & DevOps',
-    short: 'Hardened servers, Docker pipelines and zero-downtime deployments.',
-    description: 'Secure infrastructure, containerization and CI/CD automation so every release ships safely and your platform stays online.',
-    capabilities: ['VPS hardening and Nginx configuration', 'Dockerization and CI/CD automation', 'Monitoring with post-launch SLA support'],
-    tools: ['AWS', 'Docker', 'Nginx', 'PM2', 'Git CI/CD'],
+    slug: 'meta-ads',
+    icon: 'target',
+    title: 'Meta Ads & Paid Social Growth',
+    tagline: 'Precision Facebook & Instagram Advertising Funnels Backed by Conversions API',
+    short: 'High-converting Facebook and Instagram ad campaigns built on proper Conversions API tracking and systematic creative testing.',
+    description: 'We architect and manage scalable Meta (Facebook & Instagram) advertising campaigns. Leveraging server-side Meta Conversions API (CAPI), structured creative testing frameworks, dynamic retargeting, and click-to-WhatsApp funnels, we help direct-to-consumer (D2C) brands and B2B companies scale profitably.',
+    metrics: [
+      { value: '4.2x', label: 'Average Meta ROAS' },
+      { value: '100% CAPI', label: 'Server-Side Event Match' },
+      { value: '50% Lower', label: 'Lead Acquisition Cost' },
+    ],
+    capabilities: [
+      'Full-funnel Meta advertising architecture: Cold Prospecting, Retargeting, and Retention',
+      'Meta Conversions API (CAPI) server-side deployment for high event quality match scores',
+      'Click-to-WhatsApp ad funnels that direct high-intent prospects straight into conversational bots',
+      'Dynamic product catalog ads (DPA) for e-commerce stores with automated cross-selling',
+      'High-velocity creative testing frameworks (Hooks, Visuals, Angles, and CTAs)',
+      'Custom audience creation from CRM databases, email lists, and high-value customer lookalikes',
+    ],
+    modules: [
+      {
+        title: 'Server-Side Meta CAPI Pipeline',
+        desc: 'Ensures 100% data passback to Meta’s algorithm, drastically improving AI bidding efficiency.',
+      },
+      {
+        title: 'Creative Angle Lab',
+        desc: 'Rapid testing of video reels, static carousels, and founder story angles to find profitable winners.',
+      },
+      {
+        title: 'Click-to-WhatsApp Ad Funnels',
+        desc: 'Bypassing clunky web forms by opening instant WhatsApp chats with pre-filled inquiries.',
+      },
+      {
+        title: 'Audience & Lookalike Architecture',
+        desc: 'Targeting high-net-worth buyers and existing customer lookalikes with segmented messaging.',
+      },
+    ],
+    deliverables: [
+      'Complete Meta Ads account structure with cold, warm, and hot campaign segmentation',
+      'Server-side Meta Conversions API setup via Cloud / GTM for 9.0+ Event Quality Match',
+      'High-converting static and motion ad creatives designed in Figma and After Effects',
+      'Direct Click-to-WhatsApp campaign integration with automated greeting webhooks',
+      'Custom Looker Studio reporting dashboard updated with daily ROAS and lead metrics',
+      'Bi-weekly creative optimization cycles and scale strategies',
+    ],
+    advantages: [
+      {
+        aspect: 'Data Match Quality',
+        legacy: 'Relying solely on outdated browser pixels that miss 35%+ of purchases due to iOS privacy restrictions.',
+        unique: 'Direct server-to-server Conversions API passing encrypted phone, email, and IP for 9.0+ Meta match rates.',
+      },
+      {
+        aspect: 'Creative Strategy',
+        legacy: 'Running 1 or 2 static images for months until ad fatigue sets in and acquisition costs skyrocket.',
+        unique: 'Continuous weekly creative testing testing different hooks, pain-points, and formats to sustain high ROAS.',
+      },
+      {
+        aspect: 'Lead Conversion',
+        legacy: 'Sending mobile users to slow web forms that take 30 seconds to fill out, losing 80% of prospects.',
+        unique: 'Click-to-WhatsApp ad funnels opening immediate conversational chats that convert 3x higher.',
+      },
+    ],
+    timelineSteps: [
+      { step: 'Phase 1', duration: 'Week 1', title: 'CAPI Audit & Creative Sprint', desc: 'Implementing server-side CAPI, testing event triggers, and designing initial creative angles.' },
+      { step: 'Phase 2', duration: 'Week 2', title: 'Campaign Launch & Hook Testing', desc: 'Deploying cold prospecting and Click-to-WhatsApp campaigns to identify winning ad creatives.' },
+      { step: 'Phase 3', duration: 'Ongoing', title: 'Budget Scaling & Retargeting', desc: 'Scaling spend on verified winning ad sets and optimizing dynamic catalog retargeting.' },
+    ],
+    tools: ['Meta Ads Manager', 'Conversions API', 'Meta Pixel', 'WhatsApp Business', 'Figma', 'Looker Studio'],
+    faqs: [
+      {
+        q: 'Why do we need Meta Conversions API (CAPI) in addition to the standard Pixel?',
+        a: 'Browser-based pixels lose up to 40% of conversion data due to iOS restrictions, private browsers, and ad-blockers. Meta CAPI sends conversion events directly from your server to Meta, allowing Meta’s algorithm to optimize effectively.',
+      },
+      {
+        q: 'How do Click-to-WhatsApp ads help our sales team?',
+        a: 'When a customer taps your Facebook or Instagram ad, it immediately opens a WhatsApp conversation with your verified business number with a pre-filled message, allowing instant engagement and 3x higher close rates.',
+      },
+    ],
   },
 ];
 
@@ -238,10 +852,8 @@ export const pricingPlans = [
     popular: false,
     tagline: 'Ideal for early-stage founders & prototypes seeking rapid market validation with clean, unbloated code.',
     timeline: '3 to 4 Weeks Delivery',
-    inrPrice: '₹1,49,999',
-    inrSub: 'Fixed milestone fee · No surprises',
-    usdPrice: '$1,999',
-    usdSub: 'Fixed milestone fee · No surprises',
+    scopeBadge: 'Tailored MVP Milestone',
+    scopeDetail: 'Custom estimate based on feature requirements',
     features: [
       'Interactive Figma UI/UX Design System (5-8 core pages)',
       'High-performance Next.js / React Web Application',
@@ -254,7 +866,7 @@ export const pricingPlans = [
       '100% Source Code Ownership & Git Repository Transfer',
     ],
     highlight: 'Production-ready MVP shipped in 4 weeks',
-    cta: 'Book MVP Discovery Call',
+    cta: 'Discuss MVP Scope & Quote',
   },
   {
     id: 'growth',
@@ -263,10 +875,8 @@ export const pricingPlans = [
     popular: true,
     tagline: 'Full-stack software platform engineered for high concurrency, automated workflows, and commercial scale.',
     timeline: '6 to 8 Weeks Delivery',
-    inrPrice: '₹3,49,999',
-    inrSub: 'Milestone billing (30% / 40% / 30%)',
-    usdPrice: '$4,499',
-    usdSub: 'Milestone billing (30% / 40% / 30%)',
+    scopeBadge: 'Custom Architecture Scope',
+    scopeDetail: 'Phased 30/40/30 milestone billing & verified deliverables',
     features: [
       'Everything in Startup MVP, plus:',
       'Cross-Platform iOS & Android Mobile App OR Complex SaaS Web Portal',
@@ -280,7 +890,7 @@ export const pricingPlans = [
       'Direct Private Slack / WhatsApp Engineering Channel',
     ],
     highlight: 'Full-stack scale with WhatsApp API & Mobile App',
-    cta: 'Start Growth Project',
+    cta: 'Discuss Growth Scope & Quote',
   },
   {
     id: 'enterprise',
@@ -289,10 +899,8 @@ export const pricingPlans = [
     popular: false,
     tagline: 'Custom ERP, CRM, high-volume reseller engines, and cloud microservices built for demanding enterprise workloads.',
     timeline: 'Custom Milestone Roadmap',
-    inrPrice: '₹7,99,999+',
-    inrSub: 'Custom scope & tailored phased sprints',
-    usdPrice: '$9,999+',
-    usdSub: 'Custom scope & tailored phased sprints',
+    scopeBadge: 'Dedicated Architecture Scope',
+    scopeDetail: 'Tailored enterprise specifications & strict 99.9% SLA',
     features: [
       'Tailored Modular Monolith or Microservices Architecture',
       'High-concurrency infrastructure handling 10,000+ active connections',
@@ -316,10 +924,8 @@ export const retainerPlans = [
     name: 'Maintenance & Security Retainer',
     hours: '40 Hours / Month',
     popular: false,
-    inrPrice: '₹49,999',
-    inrPeriod: '/ month',
-    usdPrice: '$699',
-    usdPeriod: '/ month',
+    scopeBadge: 'Active Maintenance Scope',
+    scopeDetail: 'Monthly engineering coverage · Cancel anytime',
     desc: 'Continuous uptime monitoring, dependency patching, bug resolution, and steady minor feature rollouts.',
     deliverables: [
       'Security patch audits and zero-day dependency updates',
@@ -334,10 +940,8 @@ export const retainerPlans = [
     name: 'Dedicated Senior Full-Stack Engineer',
     hours: '160 Hours / Month (Full-Time)',
     popular: true,
-    inrPrice: '₹1,29,999',
-    inrPeriod: '/ month',
-    usdPrice: '$1,799',
-    usdPeriod: '/ month',
+    scopeBadge: 'Dedicated Senior Talent',
+    scopeDetail: 'Embedded engineer in your team & sprint rituals',
     desc: 'An experienced senior software engineer fully embedded into your product roadmap, daily standups, and codebase.',
     deliverables: [
       'Full-time 40 hours/week dedicated engineering focus',
@@ -352,10 +956,8 @@ export const retainerPlans = [
     name: 'Dedicated Engineering Squad',
     hours: 'Full Dedicated Team (Squad)',
     popular: false,
-    inrPrice: '₹3,49,999',
-    inrPeriod: '/ month',
-    usdPrice: '$4,499',
-    usdPeriod: '/ month',
+    scopeBadge: 'Complete Engineering Squad',
+    scopeDetail: 'Autonomous cross-functional delivery team',
     desc: 'A complete autonomous engineering team: Lead Architect, 2 Senior Full-Stack Developers, QA Engineer & DevOps.',
     deliverables: [
       'Full cross-functional squad for rapid product iterations',
@@ -371,29 +973,25 @@ export const pricingAddons = [
   {
     title: 'Meta WhatsApp Cloud API Automation',
     tag: 'Quick 5-Day Integration',
-    inr: '₹29,999',
-    usd: '$399',
+    scopeBadge: 'Custom Add-On Sprint',
     desc: 'Official WhatsApp Business Cloud API setup, template message verification, webhook handlers, and automated lead capture workflows.',
   },
   {
     title: 'Core Web Vitals & Technical SEO Overhaul',
     tag: 'Performance Sprint',
-    inr: '₹24,999',
-    usd: '$349',
+    scopeBadge: 'Custom Add-On Sprint',
     desc: 'Full Lighthouse 95+ score optimization, server-side caching, image CDN optimization, and structured schema markup for top search ranks.',
   },
   {
     title: 'AWS Cloud DevOps & Security Hardening',
     tag: 'Infrastructure',
-    inr: '₹39,999',
-    usd: '$549',
+    scopeBadge: 'Custom Add-On Sprint',
     desc: 'Docker container setup, Nginx reverse proxy, SSL, automated CI/CD pipeline, DDoS mitigation, and scheduled database backups.',
   },
   {
     title: 'Cross-Platform Mobile App Extension',
     tag: 'Mobile Add-on',
-    inr: '₹99,999',
-    usd: '$1,299',
+    scopeBadge: 'Custom Add-On Sprint',
     desc: 'Extend your existing web platform with React Native iOS and Android apps, push notifications, and App Store submission support.',
   },
 ];
@@ -450,8 +1048,8 @@ export const pricingFaqs = [
     a: 'We work in agile 1-2 week sprints. If you want to introduce new features, we assess the scope, provide transparent estimation, and adjust the backlog collaboratively without halting progress.',
   },
   {
-    q: 'Can we pay in Indian Rupees (INR) or US Dollars (USD)?',
-    a: 'Yes. For Indian businesses, we issue GST-compliant invoices with bank transfer (NEFT/RTGS/IMPS) and UPI. For international clients, we accept wire transfers (SWIFT/ACH), Stripe, and Wise.',
+    q: 'Why do you provide custom milestone quotes instead of arbitrary fixed prices?',
+    a: 'Every digital product is unique in its architecture, integration complexity, and concurrency requirements. Arbitrary flat prices either lead to low-quality outsourced code or inflated costs. We audit your exact specifications to give you a transparent, custom milestone proposal with zero hidden fees.',
   },
 ];
 

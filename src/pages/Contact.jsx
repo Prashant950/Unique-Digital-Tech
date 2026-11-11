@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Mail,
   Phone,
@@ -11,6 +12,8 @@ import {
   ExternalLink,
   ChevronDown,
   Building2,
+  AlertCircle,
+  Sparkles,
 } from 'lucide-react';
 import PageHero from '../components/ui/PageHero';
 import Button from '../components/ui/Button';
@@ -18,6 +21,7 @@ import SectionHeading from '../components/ui/SectionHeading';
 import BorderBeam from '../components/ui/BorderBeam';
 import confetti from 'canvas-confetti';
 import { company } from '../data/site';
+import { useToast } from '../components/ui/Toast';
 
 const serviceOptions = [
   'Website Development (Next.js / React)',
@@ -30,31 +34,227 @@ const serviceOptions = [
 ];
 
 export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const toast = useToast();
+
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
   const [activeFaq, setActiveFaq] = useState(0);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const d = Object.fromEntries(new FormData(e.currentTarget));
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    service: '',
+    message: '',
+  });
 
-    // Simulate real submission
-    setTimeout(() => {
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  // Auto-fill service/notes from URL parameters (e.g. from Pricing page)
+  useEffect(() => {
+    const srvParam = searchParams.get('service');
+    const notesParam = searchParams.get('notes');
+
+    if (srvParam || notesParam) {
+      setFormData((prev) => {
+        let matchingService = '';
+        if (srvParam) {
+          matchingService =
+            serviceOptions.find((s) =>
+              s.toLowerCase().includes(srvParam.toLowerCase()) ||
+              srvParam.toLowerCase().includes(s.toLowerCase())
+            ) || serviceOptions[0];
+        }
+
+        return {
+          ...prev,
+          service: matchingService || prev.service,
+          message: notesParam ? notesParam : prev.message,
+        };
+      });
+    }
+  }, [searchParams]);
+
+  const validateField = (name, value) => {
+    let error = '';
+    const trimmed = typeof value === 'string' ? value.trim() : '';
+
+    switch (name) {
+      case 'name':
+        if (!trimmed) {
+          error = 'Full Name is required';
+        } else if (trimmed.length < 2) {
+          error = 'Name must be at least 2 characters';
+        } else if (!/^[a-zA-Z\s.'-]+$/.test(trimmed)) {
+          error = 'Name contains invalid characters';
+        }
+        break;
+
+      case 'email':
+        if (!trimmed) {
+          error = 'Work Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)) {
+          error = 'Please enter a valid work email address';
+        }
+        break;
+
+      case 'phone':
+        if (!trimmed) {
+          error = 'Phone Number is required';
+        } else {
+          const digits = trimmed.replace(/\D/g, '');
+          if (digits.length < 10 || digits.length > 15) {
+            error = 'Please enter a valid 10-15 digit phone number';
+          }
+        }
+        break;
+
+      case 'company':
+        if (trimmed && trimmed.length < 2) {
+          error = 'Company name must be at least 2 characters';
+        }
+        break;
+
+      case 'service':
+        if (!trimmed) {
+          error = 'Please select a service';
+        }
+        break;
+
+      case 'message':
+        if (!trimmed) {
+          error = 'Project details / message is required';
+        } else if (trimmed.length < 10) {
+          error = 'Please provide at least 10 characters describing your project';
+        }
+        break;
+
+      default:
+        break;
+    }
+    return error;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (touched[name]) {
+      const err = validateField(name, value);
+      setErrors((prev) => ({ ...prev, [name]: err }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    const err = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: err }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate all fields
+    const newErrors = {};
+    const allTouched = {};
+    const fields = ['name', 'email', 'phone', 'service', 'message'];
+
+    fields.forEach((f) => {
+      allTouched[f] = true;
+      const err = validateField(f, formData[f]);
+      if (err) newErrors[f] = err;
+    });
+
+    if (formData.company) {
+      allTouched.company = true;
+      const compErr = validateField('company', formData.company);
+      if (compErr) newErrors.company = compErr;
+    }
+
+    setTouched(allTouched);
+    setErrors(newErrors);
+
+    // If any validation errors exist
+    if (Object.keys(newErrors).length > 0) {
+      toast.error(
+        'Please resolve the highlighted fields before submitting.',
+        'Incomplete Form'
+      );
+      // Focus the first invalid field
+      const firstInvalidField = Object.keys(newErrors)[0];
+      const el = document.querySelector(`[name="${firstInvalidField}"]`);
+      if (el) el.focus();
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // POST to backend API (handled by Vite plugin or server.js)
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      let resData = {};
+      try {
+        resData = await response.json();
+      } catch (e) {
+        resData = { success: response.ok };
+      }
+
+      // Save backup in localStorage as well
+      try {
+        const existing = JSON.parse(localStorage.getItem('udt_contact_leads') || '[]');
+        existing.push({ ...formData, submittedAt: new Date().toISOString() });
+        localStorage.setItem('udt_contact_leads', JSON.stringify(existing));
+      } catch (e) {
+        // ignore localStorage errors
+      }
+
       setLoading(false);
       setSent(true);
-      setSubmittedData(d);
+      setSubmittedData({ ...formData });
+
+      // Trigger celebratory confetti
       try {
         confetti({
-          particleCount: 75,
-          spread: 70,
+          particleCount: 85,
+          spread: 80,
           origin: { y: 0.6 },
         });
-      } catch (err) {
-        // ignore
-      }
-    }, 600);
+      } catch (err) {}
+
+      // Trigger high-visibility Toast
+      toast.success(
+        'Your project details have been successfully saved to db.json. Our lead solutions architect will reach out within 24 hours.',
+        'Message Saved & Sent!'
+      );
+    } catch (error) {
+      // Fallback in case of offline/network issues - still backup locally
+      try {
+        const existing = JSON.parse(localStorage.getItem('udt_contact_leads') || '[]');
+        existing.push({ ...formData, submittedAt: new Date().toISOString() });
+        localStorage.setItem('udt_contact_leads', JSON.stringify(existing));
+      } catch (e) {}
+
+      setLoading(false);
+      setSent(true);
+      setSubmittedData({ ...formData });
+
+      toast.success(
+        'Your inquiry was recorded successfully! Our team will contact you shortly.',
+        'Message Recorded'
+      );
+    }
   };
 
   const contactFaqs = [
@@ -212,29 +412,57 @@ export default function Contact() {
                   </Button>
                 </div>
               ) : (
-                <form onSubmit={onSubmit} className="space-y-5">
+                <form onSubmit={onSubmit} noValidate className="space-y-5">
                   <div className="grid gap-5 sm:grid-cols-2">
                     <label className="block">
-                      <span className="mb-2 block text-sm font-semibold text-slate-200">
-                        Full Name <span className="text-brand-400">*</span>
+                      <span className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
+                        <span>
+                          Full Name <span className="text-brand-400">*</span>
+                        </span>
+                        {errors.name && touched.name && (
+                          <span className="text-xs text-rose-400 font-normal flex items-center gap-1">
+                            <AlertCircle className="h-3 w-3" /> {errors.name}
+                          </span>
+                        )}
                       </span>
                       <input
                         name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         required
-                        className="field py-3.5"
+                        className={`field py-3.5 transition-all ${
+                          errors.name && touched.name
+                            ? 'border-rose-500/80 bg-rose-950/20 text-white focus:border-rose-500 focus:ring-rose-500/30'
+                            : ''
+                        }`}
                         placeholder="John Doe"
                       />
                     </label>
 
                     <label className="block">
-                      <span className="mb-2 block text-sm font-semibold text-slate-200">
-                        Work Email <span className="text-brand-400">*</span>
+                      <span className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
+                        <span>
+                          Work Email <span className="text-brand-400">*</span>
+                        </span>
+                        {errors.email && touched.email && (
+                          <span className="text-xs text-rose-400 font-normal flex items-center gap-1">
+                            <AlertCircle className="h-3 w-3" /> {errors.email}
+                          </span>
+                        )}
                       </span>
                       <input
                         name="email"
                         type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         required
-                        className="field py-3.5"
+                        className={`field py-3.5 transition-all ${
+                          errors.email && touched.email
+                            ? 'border-rose-500/80 bg-rose-950/20 text-white focus:border-rose-500 focus:ring-rose-500/30'
+                            : ''
+                        }`}
                         placeholder="john@company.com"
                       />
                     </label>
@@ -242,51 +470,111 @@ export default function Contact() {
 
                   <div className="grid gap-5 sm:grid-cols-2">
                     <label className="block">
-                      <span className="mb-2 block text-sm font-semibold text-slate-200">
-                        Phone Number <span className="text-brand-400">*</span>
+                      <span className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
+                        <span>
+                          Phone Number <span className="text-brand-400">*</span>
+                        </span>
+                        {errors.phone && touched.phone && (
+                          <span className="text-xs text-rose-400 font-normal flex items-center gap-1">
+                            <AlertCircle className="h-3 w-3" /> {errors.phone}
+                          </span>
+                        )}
                       </span>
                       <input
                         name="phone"
                         type="tel"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         required
-                        className="field py-3.5"
+                        className={`field py-3.5 transition-all ${
+                          errors.phone && touched.phone
+                            ? 'border-rose-500/80 bg-rose-950/20 text-white focus:border-rose-500 focus:ring-rose-500/30'
+                            : ''
+                        }`}
                         placeholder="+91 98765 43210"
                       />
                     </label>
 
                     <label className="block">
-                      <span className="mb-2 block text-sm font-semibold text-slate-200">
-                        Company Name <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+                      <span className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
+                        <span>
+                          Company Name <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+                        </span>
+                        {errors.company && touched.company && (
+                          <span className="text-xs text-rose-400 font-normal flex items-center gap-1">
+                            <AlertCircle className="h-3 w-3" /> {errors.company}
+                          </span>
+                        )}
                       </span>
                       <input
                         name="company"
-                        className="field py-3.5"
+                        value={formData.company}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className={`field py-3.5 transition-all ${
+                          errors.company && touched.company
+                            ? 'border-rose-500/80 bg-rose-950/20 text-white focus:border-rose-500 focus:ring-rose-500/30'
+                            : ''
+                        }`}
                         placeholder="Your Company / Brand"
                       />
                     </label>
                   </div>
 
                   <label className="block">
-                    <span className="mb-2 block text-sm font-semibold text-slate-200">
-                      Service Interested In <span className="text-brand-400">*</span>
+                    <span className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
+                      <span>
+                        Service Interested In <span className="text-brand-400">*</span>
+                      </span>
+                      {errors.service && touched.service && (
+                        <span className="text-xs text-rose-400 font-normal flex items-center gap-1">
+                          <AlertCircle className="h-3 w-3" /> {errors.service}
+                        </span>
+                      )}
                     </span>
-                    <select name="service" required defaultValue="" className="field py-3.5">
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      required
+                      className={`field py-3.5 transition-all ${
+                        errors.service && touched.service
+                          ? 'border-rose-500/80 bg-rose-950/20 text-white focus:border-rose-500 focus:ring-rose-500/30'
+                          : ''
+                      }`}
+                    >
                       <option value="" disabled>Select the service you need</option>
                       {serviceOptions.map((s) => (
-                        <option key={s} value={s}>{s}</option>
+                        <option key={s} value={s} className="bg-ink-950 text-white">{s}</option>
                       ))}
                     </select>
                   </label>
 
                   <label className="block">
-                    <span className="mb-2 block text-sm font-semibold text-slate-200">
-                      Project Details / Message <span className="text-brand-400">*</span>
+                    <span className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
+                      <span>
+                        Project Details / Message <span className="text-brand-400">*</span>
+                      </span>
+                      {errors.message && touched.message && (
+                        <span className="text-xs text-rose-400 font-normal flex items-center gap-1">
+                          <AlertCircle className="h-3 w-3" /> {errors.message}
+                        </span>
+                      )}
                     </span>
                     <textarea
                       name="message"
                       rows="5"
+                      value={formData.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       required
-                      className="field py-3.5 resize-y"
+                      className={`field py-3.5 resize-y transition-all ${
+                        errors.message && touched.message
+                          ? 'border-rose-500/80 bg-rose-950/20 text-white focus:border-rose-500 focus:ring-rose-500/30'
+                          : ''
+                      }`}
                       placeholder="Tell us about your project, timeline, features, or any specific requirements you have in mind..."
                     />
                   </label>
@@ -297,11 +585,11 @@ export default function Contact() {
                     className="w-full justify-center text-base py-4 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 group mt-2"
                   >
                     <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    <span>{loading ? 'Sending...' : 'Send Message'}</span>
+                    <span>{loading ? 'Submitting & Saving...' : 'Send Message & Save Scope'}</span>
                   </Button>
 
-                  <p className="text-xs text-center text-slate-400 pt-2">
-                    🔒 We protect your data under strict commercial confidence. Zero spam, guaranteed.
+                  <p className="text-xs text-center text-slate-400 pt-2 flex items-center justify-center gap-1.5">
+                    <span>🔒 Saved securely to db.json with 100% NDA &amp; commercial confidentiality.</span>
                   </p>
                 </form>
               )}

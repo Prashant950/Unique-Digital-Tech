@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Check,
   Rocket,
@@ -9,6 +10,11 @@ import {
   Zap,
   Clock,
   ChevronDown,
+  Layers,
+  Code2,
+  FileCheck,
+  Calculator,
+  MessageSquare,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import SectionHeading from '../components/ui/SectionHeading';
@@ -24,112 +30,119 @@ import {
 } from '../data/site';
 
 export default function Pricing() {
-  const [currency, setCurrency] = useState('INR'); // 'INR' or 'USD'
   const [billingModel, setBillingModel] = useState('project'); // 'project' or 'retainer'
   const [openFaq, setOpenFaq] = useState(0);
+
+  // Interactive Scope Estimator State
+  const [calcService, setCalcService] = useState('Web Platform & SaaS');
+  const [calcStage, setCalcStage] = useState('Greenfield MVP (0 to 1)');
+  const [calcSpeed, setCalcSpeed] = useState('Standard Sprint (4-6 Wks)');
+
+  const estimatorServices = [
+    { id: 'web', name: 'Web Platform & SaaS', icon: 'Code2', desc: 'Next.js, React, Node.js, PostgreSQL' },
+    { id: 'mobile', name: 'iOS & Android Mobile App', icon: 'Layers', desc: 'React Native, Offline sync, Push alerts' },
+    { id: 'cloud', name: 'Cloud & DevOps Architecture', icon: 'Zap', desc: 'AWS ECS, Docker, CI/CD, Microservices' },
+    { id: 'crm', name: 'Custom ERP / CRM System', icon: 'FileCheck', desc: 'High concurrency, automated pipelines' },
+  ];
+
+  const estimatorStages = [
+    { id: 'mvp', name: 'Greenfield MVP (0 to 1)', tag: 'Fast-Track Launch' },
+    { id: 'scale', name: 'Scaling Existing Product', tag: 'High Velocity' },
+    { id: 'modernize', name: 'Legacy System Modernization', tag: 'Enterprise Refactor' },
+  ];
+
+  const estimatorVelocities = [
+    { id: 'fast', name: 'Accelerated Sprint', period: '3–4 Weeks' },
+    { id: 'standard', name: 'Production Sprint', period: '6–8 Weeks' },
+    { id: 'enterprise', name: 'Enterprise Roadmap', period: 'Phased Milestones' },
+  ];
 
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-44 lg:pb-36 min-h-[70vh] flex flex-col justify-center border-b border-white/10">
+      <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-44 lg:pb-32 flex flex-col justify-center border-b border-white/10">
         <CyberBackground />
 
-        <div className="container-x relative text-center max-w-4xl">
-          <div className="rise inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold text-brand-300 mb-5 shadow-sm backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-brand-400" />
-            <span>TRANSPARENT SOFTWARE ENGINEERING PRICING</span>
-          </div>
-
-          <h1 className="rise-2 text-4xl font-extrabold leading-[1.15] sm:text-6xl text-white">
-            Predictable Investment. Zero Hidden Costs. <br className="hidden sm:block" />
-            <span className="text-gradient">Production-Grade Code.</span>
+        <div className="container-x relative text-center max-w-4xl z-10">
+          {/* Availability Pill */}
+          <h1 className="rise-2 text-2xl font-extrabold leading-[1.18] sm:text-4xl lg:text-[2.75rem] text-white">
+            Predictable Milestones. Zero Hidden Costs. <br className="hidden sm:block" />
+            <span className="text-gradient">Production-Grade Architecture.</span>
           </h1>
 
-          <p className="rise-3 mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            Choose between fixed-price milestone delivery for turnkey projects or dedicated engineering squads for continuous velocity. 100% source code ownership from day one.
+          <p className="rise-3 mx-auto mt-4 max-w-2xl text-xs leading-relaxed text-slate-300 sm:text-sm md:text-base">
+            Every digital product has unique architecture, concurrency, and security requirements. We provide tailored milestone-based scopes with guaranteed deliverables and 100% IP handover from day one.
           </p>
 
-          {/* Core Guarantees Pill Bar */}
-          <div className="rise-3 mt-8 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-300">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-900/80 px-3.5 py-1.5 backdrop-blur">
+          {/* Core Guarantees Pill Bar - Clean responsive wrap */}
+          <div className="rise-3 mt-7 flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm text-slate-300">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-900/80 px-3.5 py-1.5 backdrop-blur shadow-sm">
               <Shield className="h-4 w-4 text-emerald-400" />
               100% Code &amp; IP Ownership
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-900/80 px-3.5 py-1.5 backdrop-blur">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-900/80 px-3.5 py-1.5 backdrop-blur shadow-sm">
               <Zap className="h-4 w-4 text-amber-400" />
               30/40/30 Milestone Billing
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-900/80 px-3.5 py-1.5 backdrop-blur">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-900/80 px-3.5 py-1.5 backdrop-blur shadow-sm">
               <Clock className="h-4 w-4 text-brand-400" />
-              30–90 Day Post-Launch SLA Warranty
+              30–90 Day Post-Launch SLA
             </span>
           </div>
 
-          {/* Interactive Controls Bar */}
-          <div className="rise-3 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            {/* Billing Model Selector */}
-            <div className="flex rounded-2xl border border-white/10 bg-ink-900/80 p-1 backdrop-blur shadow-lg">
+          {/* Mobile-Optimized Engagement Model Selector Bar */}
+          <div className="rise-3 mt-9 max-w-xl mx-auto w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 rounded-2xl border border-white/15 bg-ink-900/95 shadow-2xl backdrop-blur-xl">
               <button
+                type="button"
                 onClick={() => setBillingModel('project')}
-                className={`rounded-xl px-5 py-2.5 text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                className={`group flex items-center justify-center gap-2.5 rounded-xl px-4 py-3.5 sm:py-3 text-xs sm:text-sm font-bold transition-all duration-300 ${
                   billingModel === 'project'
-                    ? 'bg-gradient-to-r from-brand-500 to-brand-blue text-white shadow-md shadow-brand-500/25'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-gradient-to-r from-brand-500 to-brand-blue text-white shadow-lg shadow-brand-500/30 scale-[1.01]'
+                    : 'text-slate-300 hover:text-white hover:bg-white/5'
                 }`}
               >
-                Fixed-Scope Projects (Turnkey)
+                <Rocket className="h-4 w-4 shrink-0 text-white" />
+                <span className="truncate">Turnkey Milestone Projects</span>
               </button>
-              <button
-                onClick={() => setBillingModel('retainer')}
-                className={`rounded-xl px-5 py-2.5 text-xs sm:text-sm font-semibold transition-all duration-200 ${
-                  billingModel === 'retainer'
-                    ? 'bg-gradient-to-r from-brand-500 to-brand-blue text-white shadow-md shadow-brand-500/25'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Monthly Engineering Retainers
-              </button>
-            </div>
 
-            {/* Currency Selector (INR vs USD) */}
-            <div className="flex items-center rounded-2xl border border-white/10 bg-ink-900/80 p-1 backdrop-blur">
               <button
-                onClick={() => setCurrency('INR')}
-                className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all ${
-                  currency === 'INR'
-                    ? 'bg-brand-500 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white'
+                type="button"
+                onClick={() => setBillingModel('retainer')}
+                className={`group flex items-center justify-center gap-2.5 rounded-xl px-4 py-3.5 sm:py-3 text-xs sm:text-sm font-bold transition-all duration-300 ${
+                  billingModel === 'retainer'
+                    ? 'bg-gradient-to-r from-brand-500 to-brand-blue text-white shadow-lg shadow-brand-500/30 scale-[1.01]'
+                    : 'text-slate-300 hover:text-white hover:bg-white/5'
                 }`}
               >
-                ₹ INR
-              </button>
-              <button
-                onClick={() => setCurrency('USD')}
-                className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all ${
-                  currency === 'USD'
-                    ? 'bg-brand-500 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                $ USD
+                <Zap className="h-4 w-4 shrink-0 text-white" />
+                <span className="truncate">Dedicated Engineering Squads</span>
               </button>
             </div>
+            <p className="mt-2.5 text-center text-[11px] sm:text-xs text-slate-400">
+              {billingModel === 'project'
+                ? '⚡ Fixed milestone roadmap with guaranteed delivery and zero cost overruns.'
+                : '⚡ Embed vetted senior full-stack developers or autonomous sprint squads directly into your repo.'}
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Pricing Cards Section */}
-      <section className="section py-16 sm:py-20 relative">
+      {/* Engagement Packages Section (No Price Rates - Fully Contact & Custom Scoping Focused) */}
+      <section className="section py-16 sm:py-24 relative">
         <div className="container-x">
           {billingModel === 'project' ? (
-            /* Fixed-Scope Turnkey Project Plans */
+            /* Fixed-Scope Turnkey Project Packages */
             <div>
-              <div className="text-center max-w-2xl mx-auto mb-12">
-                <h2 className="text-2xl font-bold sm:text-3xl text-white">
-                  Turnkey Product Delivery Packages
+              <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+                <span className="inline-block rounded-full bg-brand-500/10 border border-brand-500/20 px-3.5 py-1 text-xs font-semibold text-brand-300 mb-3">
+                  TURNKEY PRODUCT SCOPES
+                </span>
+                <h2 className="text-2xl font-bold sm:text-4xl text-white">
+                  Engineering Delivery Tiers
                 </h2>
                 <p className="mt-2 text-sm text-slate-400">
-                  Fixed pricing with clearly defined milestone outcomes. You review and approve deliverables before releasing milestone payments.
+                  Every scope includes transparent milestones, private staging previews, comprehensive testing, and complete IP transfer.
                 </p>
               </div>
 
@@ -139,10 +152,10 @@ export default function Pricing() {
                   return (
                     <div
                       key={plan.id}
-                      className={`relative flex flex-col justify-between rounded-3xl border p-7 sm:p-8 backdrop-blur transition-all duration-300 ${
+                      className={`relative flex flex-col justify-between rounded-3xl border p-6 sm:p-8 backdrop-blur transition-all duration-300 ${
                         isPopular
-                          ? 'border-brand-500/60 bg-gradient-to-b from-ink-850 via-ink-900 to-ink-950 shadow-[0_0_40px_rgba(14,165,233,0.22)] lg:-translate-y-2'
-                          : 'border-white/10 bg-ink-900/70 hover:border-white/20 hover:bg-ink-900'
+                          ? 'border-brand-500/70 bg-gradient-to-b from-ink-850 via-ink-900 to-ink-950 shadow-[0_0_40px_rgba(14,165,233,0.22)] lg:-translate-y-2'
+                          : 'border-white/10 bg-ink-900/75 hover:border-white/20 hover:bg-ink-900'
                       }`}
                     >
                       {/* Popular Badge */}
@@ -170,20 +183,24 @@ export default function Pricing() {
                           {plan.tagline}
                         </p>
 
-                        {/* Price Display */}
-                        <div className="mt-6 border-y border-white/10 py-5">
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-                              {currency === 'INR' ? plan.inrPrice : plan.usdPrice}
+                        {/* Attractive Custom Milestone Pricing Banner (No Hardcoded Price) */}
+                        <div className="mt-6 rounded-2xl border border-brand-500/30 bg-gradient-to-br from-brand-500/10 via-ink-900/60 to-ink-950/80 p-4 sm:p-5">
+                          <div className="flex items-center gap-2">
+                            <span className="h-2 w-2 rounded-full bg-brand-400 animate-ping" />
+                            <span className="text-xs font-bold uppercase tracking-wider text-brand-300">
+                              {plan.scopeBadge || 'Custom Milestone Scope'}
                             </span>
                           </div>
-                          <p className="mt-1 text-xs text-brand-300/80 font-medium">
-                            {currency === 'INR' ? plan.inrSub : plan.usdSub}
+                          <div className="mt-2 text-xl sm:text-2xl font-black text-white tracking-tight">
+                            Tailored Project Scope
+                          </div>
+                          <p className="mt-1 text-xs text-slate-300 font-medium">
+                            {plan.scopeDetail || 'Fixed milestone contract · Zero surprise costs'}
                           </p>
 
-                          <div className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-white/5 border border-white/10 px-2.5 py-1 text-xs text-slate-300">
+                          <div className="mt-3.5 inline-flex items-center gap-1.5 rounded-lg bg-black/40 border border-white/10 px-2.5 py-1 text-xs text-brand-300">
                             <Clock className="h-3.5 w-3.5 text-brand-400" />
-                            <span>{plan.timeline}</span>
+                            <span>Estimated: {plan.timeline}</span>
                           </div>
                         </div>
 
@@ -203,17 +220,30 @@ export default function Pricing() {
                         </div>
                       </div>
 
-                      {/* Card CTA */}
-                      <div className="mt-8 pt-6 border-t border-white/10">
+                      {/* Card CTAs - Contact Oriented */}
+                      <div className="mt-8 pt-6 border-t border-white/10 space-y-2.5">
                         <Button
-                          to="/contact"
+                          to={`/contact?service=${encodeURIComponent(plan.name)}`}
                           variant={isPopular ? 'primary' : 'secondary'}
-                          className="w-full justify-center group"
+                          className="w-full justify-center group shadow-md py-3.5"
                         >
                           <span>{plan.cta}</span>
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </Button>
-                        <p className="mt-2.5 text-center text-[11px] text-slate-500">
+
+                        <a
+                          href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20would%20like%20to%20discuss%20the%20${encodeURIComponent(
+                            plan.name
+                          )}%20scope%20and%20get%20an%20estimate.`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2.5 text-xs font-semibold text-slate-200 transition hover:bg-white/10 hover:text-white"
+                        >
+                          <WhatsAppIcon className="h-3.5 w-3.5 fill-[#25D366]" />
+                          <span>Chat on WhatsApp for Fast Quote</span>
+                        </a>
+
+                        <p className="mt-1 text-center text-[11px] text-slate-500">
                           Includes NDA &amp; 100% IP Handover
                         </p>
                       </div>
@@ -225,8 +255,11 @@ export default function Pricing() {
           ) : (
             /* Dedicated Engineering Retainers */
             <div>
-              <div className="text-center max-w-2xl mx-auto mb-12">
-                <h2 className="text-2xl font-bold sm:text-3xl text-white">
+              <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+                <span className="inline-block rounded-full bg-brand-500/10 border border-brand-500/20 px-3.5 py-1 text-xs font-semibold text-brand-300 mb-3">
+                  EMBEDDED TALENT &amp; SQUADS
+                </span>
+                <h2 className="text-2xl font-bold sm:text-4xl text-white">
                   Dedicated Engineering Retainers
                 </h2>
                 <p className="mt-2 text-sm text-slate-400">
@@ -240,10 +273,10 @@ export default function Pricing() {
                   return (
                     <div
                       key={plan.id}
-                      className={`relative flex flex-col justify-between rounded-3xl border p-7 sm:p-8 backdrop-blur transition-all duration-300 ${
+                      className={`relative flex flex-col justify-between rounded-3xl border p-6 sm:p-8 backdrop-blur transition-all duration-300 ${
                         isPopular
-                          ? 'border-brand-500/60 bg-gradient-to-b from-ink-850 via-ink-900 to-ink-950 shadow-[0_0_40px_rgba(14,165,233,0.22)] lg:-translate-y-2'
-                          : 'border-white/10 bg-ink-900/70 hover:border-white/20'
+                          ? 'border-brand-500/70 bg-gradient-to-b from-ink-850 via-ink-900 to-ink-950 shadow-[0_0_40px_rgba(14,165,233,0.22)] lg:-translate-y-2'
+                          : 'border-white/10 bg-ink-900/75 hover:border-white/20'
                       }`}
                     >
                       {isPopular && (
@@ -265,17 +298,16 @@ export default function Pricing() {
                           {plan.desc}
                         </p>
 
-                        <div className="mt-6 border-y border-white/10 py-5">
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-                              {currency === 'INR' ? plan.inrPrice : plan.usdPrice}
-                            </span>
-                            <span className="text-xs text-slate-400">
-                              {currency === 'INR' ? plan.inrPeriod : plan.usdPeriod}
-                            </span>
+                        {/* Retainer Scope Banner (No Hardcoded Price) */}
+                        <div className="mt-6 rounded-2xl border border-brand-500/30 bg-gradient-to-br from-brand-500/10 via-ink-900/60 to-ink-950/80 p-4 sm:p-5">
+                          <span className="text-xs font-bold uppercase tracking-wider text-brand-300">
+                            {plan.scopeBadge || 'Dedicated Monthly Engagement'}
+                          </span>
+                          <div className="mt-1 text-xl sm:text-2xl font-black text-white">
+                            Flexible Monthly Retainer
                           </div>
-                          <p className="mt-1 text-xs text-slate-500">
-                            Month-to-month · 2 weeks cancellation notice
+                          <p className="mt-1 text-xs text-slate-300">
+                            {plan.scopeDetail || 'Full dedication · 2 weeks cancellation notice'}
                           </p>
                         </div>
 
@@ -294,15 +326,27 @@ export default function Pricing() {
                         </div>
                       </div>
 
-                      <div className="mt-8 pt-6 border-t border-white/10">
+                      <div className="mt-8 pt-6 border-t border-white/10 space-y-2.5">
                         <Button
-                          to="/contact"
+                          to={`/contact?service=${encodeURIComponent(plan.name)}`}
                           variant={isPopular ? 'primary' : 'secondary'}
-                          className="w-full justify-center group"
+                          className="w-full justify-center group shadow-md py-3.5"
                         >
                           <span>Engage Dedicated Talent</span>
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </Button>
+
+                        <a
+                          href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(
+                            plan.name
+                          )}%20retainer.`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2.5 text-xs font-semibold text-slate-200 transition hover:bg-white/10 hover:text-white"
+                        >
+                          <WhatsAppIcon className="h-3.5 w-3.5 fill-[#25D366]" />
+                          <span>Chat on WhatsApp</span>
+                        </a>
                       </div>
                     </div>
                   );
@@ -313,11 +357,184 @@ export default function Pricing() {
         </div>
       </section>
 
-      
+      {/* Unique & Attractive Custom Project Scope Estimator Widget */}
+      <section className="section py-16 sm:py-24 bg-ink-900/60 border-y border-white/10 relative overflow-hidden">
+        <div className="pointer-events-none absolute -top-40 right-10 h-96 w-96 rounded-full bg-brand-500/10 blur-[120px]" />
+        <div className="pointer-events-none absolute -bottom-40 left-10 h-96 w-96 rounded-full bg-brand-blue/10 blur-[120px]" />
 
-    
+        <div className="container-x relative z-10 max-w-5xl">
+          <div className="text-center mb-12 sm:mb-16">
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-bold text-brand-300 mb-3">
+              <Calculator className="h-3.5 w-3.5 text-brand-400" />
+              INTERACTIVE SCOPE ESTIMATOR
+            </span>
+            <h2 className="text-3xl font-extrabold sm:text-4xl text-white">
+              Configure Your Custom Architecture Scope
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+              Select your product requirements below to see an instant architecture blueprint and connect directly with our solutions team for a milestone quote.
+            </p>
+          </div>
 
-      {/* Specialized Engineering Add-Ons */}
+          <div className="grid gap-8 lg:grid-cols-12 items-start">
+            {/* Left Controls (7 Cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              {/* Step 1: Select Platform */}
+              <div className="rounded-2xl border border-white/10 bg-ink-950/80 p-5 sm:p-6 shadow-xl backdrop-blur">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-bold uppercase tracking-wider text-brand-400">Step 1: Core Platform</span>
+                  <span className="text-[11px] text-slate-400 font-medium">Select primary build target</span>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {estimatorServices.map((srv) => (
+                    <button
+                      key={srv.id}
+                      type="button"
+                      onClick={() => setCalcService(srv.name)}
+                      className={`text-left p-3.5 rounded-xl border transition-all duration-200 ${
+                        calcService === srv.name
+                          ? 'border-brand-500 bg-brand-500/15 shadow-md shadow-brand-500/15'
+                          : 'border-white/10 bg-ink-900/60 hover:border-white/20'
+                      }`}
+                    >
+                      <div className="font-bold text-sm text-white">{srv.name}</div>
+                      <div className="text-xs text-slate-400 mt-1">{srv.desc}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Step 2: Select Stage */}
+              <div className="rounded-2xl border border-white/10 bg-ink-950/80 p-5 sm:p-6 shadow-xl backdrop-blur">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-bold uppercase tracking-wider text-brand-400">Step 2: Project Phase</span>
+                  <span className="text-[11px] text-slate-400 font-medium">Current codebase status</span>
+                </div>
+                <div className="grid gap-2.5 sm:grid-cols-3">
+                  {estimatorStages.map((stg) => (
+                    <button
+                      key={stg.id}
+                      type="button"
+                      onClick={() => setCalcStage(stg.name)}
+                      className={`text-left p-3 rounded-xl border transition-all duration-200 ${
+                        calcStage === stg.name
+                          ? 'border-brand-500 bg-brand-500/15 shadow-md shadow-brand-500/15'
+                          : 'border-white/10 bg-ink-900/60 hover:border-white/20'
+                      }`}
+                    >
+                      <div className="font-bold text-xs text-white leading-snug">{stg.name}</div>
+                      <span className="mt-1 inline-block text-[10px] text-brand-300 font-semibold">{stg.tag}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Step 3: Select Velocity */}
+              <div className="rounded-2xl border border-white/10 bg-ink-950/80 p-5 sm:p-6 shadow-xl backdrop-blur">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-bold uppercase tracking-wider text-brand-400">Step 3: Target Velocity</span>
+                  <span className="text-[11px] text-slate-400 font-medium">Desired delivery timeline</span>
+                </div>
+                <div className="grid gap-2.5 sm:grid-cols-3">
+                  {estimatorVelocities.map((vel) => (
+                    <button
+                      key={vel.id}
+                      type="button"
+                      onClick={() => setCalcSpeed(vel.name)}
+                      className={`text-left p-3 rounded-xl border transition-all duration-200 ${
+                        calcSpeed === vel.name
+                          ? 'border-brand-500 bg-brand-500/15 shadow-md shadow-brand-500/15'
+                          : 'border-white/10 bg-ink-900/60 hover:border-white/20'
+                      }`}
+                    >
+                      <div className="font-bold text-xs text-white">{vel.name}</div>
+                      <div className="text-[11px] text-slate-300 mt-1 font-medium">{vel.period}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Summary Card (5 Cols) */}
+            <div className="lg:col-span-5">
+              <div className="rounded-3xl border border-brand-500/40 bg-gradient-to-b from-ink-900 via-ink-950 to-ink-900 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                <BorderBeam duration={9} color="#38bdf8" rx={24} />
+
+                <div className="flex items-center gap-2 mb-4">
+                  <MessageSquare className="h-5 w-5 text-brand-400" />
+                  <h3 className="text-lg font-bold text-white">Your Custom Scope Blueprint</h3>
+                </div>
+
+                <div className="space-y-4 text-xs text-slate-300">
+                  <div className="rounded-xl border border-white/10 bg-black/40 p-3.5 space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Architecture:</span>
+                      <span className="font-bold text-white text-right">{calcService}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Starting Phase:</span>
+                      <span className="font-bold text-brand-300 text-right">{calcStage}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Delivery Velocity:</span>
+                      <span className="font-bold text-white text-right">{calcSpeed}</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 pt-1">
+                    <div className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                      Included Commitments:
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-300">
+                      <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span>100% Full IP &amp; Git Repository Ownership</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-300">
+                      <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span>30/40/30 Milestone Billing Schedule</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-300">
+                      <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span>Mutual NDA Signed Prior to Architecture Discovery</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-300">
+                      <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span>Dedicated Post-Launch Bug Warranty &amp; SLA</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Direct Action Buttons from Estimator */}
+                <div className="mt-8 pt-5 border-t border-white/10 space-y-3">
+                  <Button
+                    to={`/contact?service=${encodeURIComponent(calcService)}&notes=${encodeURIComponent(
+                      `Estimated scope: ${calcService} (${calcStage}) with ${calcSpeed} timeline.`
+                    )}`}
+                    className="w-full justify-center py-4 text-sm font-bold shadow-lg shadow-brand-500/30"
+                  >
+                    <span>Request Custom Scope Proposal</span>
+                    <ArrowRight className="h-4 w-4 ml-1.5" />
+                  </Button>
+
+                  <a
+                    href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20configured%20a%20scope%20on%20your%20website%3A%20${encodeURIComponent(
+                      `${calcService} | ${calcStage} | ${calcSpeed}`
+                    )}.%20Can%20we%20discuss%20a%20quote%3F`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-xs font-bold text-white shadow-md shadow-[#25D366]/20 transition hover:bg-[#20ba59]"
+                  >
+                    <WhatsAppIcon className="h-4 w-4 fill-white" />
+                    <span>Send Scope on WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Specialized Engineering Add-Ons (No Price Rates - Fully Scope Based) */}
       <section className="section bg-ink-900/40 border-y border-white/5 py-16 sm:py-20">
         <div className="container-x">
           <SectionHeading
@@ -339,19 +556,19 @@ export default function Pricing() {
                   <p className="mt-2 text-xs leading-relaxed text-slate-400">{addon.desc}</p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-lg font-extrabold text-white">
-                    {currency === 'INR' ? addon.inr : addon.usd}
+                  <span className="text-xs font-bold text-brand-300">
+                    {addon.scopeBadge || 'Milestone Sprint'}
                   </span>
                   <a
-                    href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(
+                    href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20am%20interested%20in%20adding%20the%20${encodeURIComponent(
                       addon.title
-                    )}%20add-on.`}
+                    )}%20add-on%20to%20my%20scope.`}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1"
+                    className="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1 group"
                   >
                     <span>Add to scope</span>
-                    <ArrowRight className="h-3 w-3" />
+                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                   </a>
                 </div>
               </div>
@@ -360,7 +577,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Milestone Billing Blueprint (How We Bill) */}
+      {/* Milestone Billing Blueprint (How We Scope & Bill) */}
       <section className="section py-16 sm:py-20">
         <div className="container-x">
           <SectionHeading
@@ -405,7 +622,7 @@ export default function Pricing() {
               COMMERCIAL TRANSPARENCY
             </span>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-white">
-              Frequently Asked <span className="text-gradient">Pricing Questions</span>
+              Frequently Asked <span className="text-gradient">Scoping &amp; Pricing Questions</span>
             </h2>
           </div>
 

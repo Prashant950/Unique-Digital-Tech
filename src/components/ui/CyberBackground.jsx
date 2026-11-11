@@ -1,12 +1,9 @@
 export default function CyberBackground({ className = '', variant = 'full' }) {
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
-      {/* High-tech dot grid pattern */}
-      <div className="absolute inset-0 bg-dot-grid opacity-70" />
-
-      {/* Cyber lines subtle matrix */}
+      {/* Cyber lines subtle matrix (Clean ambient, dot pattern removed) */}
       {variant === 'full' && (
-        <div className="absolute inset-0 bg-cyber-lines opacity-40" />
+        <div className="absolute inset-0 bg-cyber-lines opacity-25" />
       )}
 
       {/* Luminous Animated Aurora Glow Spheres */}

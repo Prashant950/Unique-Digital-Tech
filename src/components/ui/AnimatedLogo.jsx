@@ -1,11 +1,11 @@
-export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
+export default function AnimatedLogo({ className = 'h-14 w-auto' }) {
   return (
     <div className={`relative inline-flex items-center justify-center select-none ${className}`}>
       {/* 1. The 100% Exact User Logo Base Image */}
       <img
         src="/logo-exact.png"
         alt="Unique Digital Tech Logo"
-        className="h-full w-auto object-contain drop-shadow-[0_4px_16px_rgba(56,189,248,0.25)]"
+        className="h-full w-auto object-contain drop-shadow-[0_4px_20px_rgba(56,189,248,0.35)]"
       />
 
       {/* 2. Seamless Celestial Nakshatra Animation Layer
@@ -18,10 +18,10 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
         aria-hidden="true"
       >
         <defs>
-          {/* Intense Glow Filter for Celestial Stars / Nakshatras */}
+          {/* Intense Enhanced Glow Filter for Celestial Stars / Nakshatras */}
           <filter id="nakshatra-glow-cyan" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1" />
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur2" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur1" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur2" />
             <feMerge>
               <feMergeNode in="blur1" />
               <feMergeNode in="blur2" />
@@ -30,9 +30,11 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
           </filter>
 
           <filter id="nakshatra-glow-amber" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur1" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur1" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur2" />
             <feMerge>
               <feMergeNode in="blur1" />
+              <feMergeNode in="blur2" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
@@ -40,26 +42,26 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
           {/* Luminous stream gradient for traveling comet pulses */}
           <linearGradient id="stream-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
-            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.9" />
             <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
           </linearGradient>
 
           <linearGradient id="stream-blue" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#60a5fa" stopOpacity="0" />
-            <stop offset="70%" stopColor="#60a5fa" stopOpacity="0.75" />
-            <stop offset="100%" stopColor="#bae6fd" stopOpacity="0.95" />
+            <stop offset="60%" stopColor="#60a5fa" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#bae6fd" stopOpacity="1" />
           </linearGradient>
         </defs>
 
         {/* Coordinated Group centered at the orange nucleus (212, 154.5) */}
         <g transform="translate(212, 154.5)">
-          {/* Central Sun/Nucleus Gentle Radiant Pulse */}
-          <circle cx="0" cy="0" r="22" fill="#f59e0b" opacity="0.25">
-            <animate attributeName="r" values="21;28;21" dur="3.2s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.15;0.35;0.15" dur="3.2s" repeatCount="indefinite" />
+          {/* Central Sun/Nucleus Radiant Pulse - Enlarged & Enhanced */}
+          <circle cx="0" cy="0" r="28" fill="#f59e0b" opacity="0.3">
+            <animate attributeName="r" values="26;36;26" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.2;0.45;0.2" dur="3s" repeatCount="indefinite" />
           </circle>
-          <circle cx="0" cy="0" r="16" fill="#fbbf24" opacity="0.3">
-            <animate attributeName="opacity" values="0.2;0.5;0.2" dur="3.2s" repeatCount="indefinite" />
+          <circle cx="0" cy="0" r="20" fill="#fbbf24" opacity="0.4">
+            <animate attributeName="opacity" values="0.3;0.65;0.3" dur="3s" repeatCount="indefinite" />
           </circle>
 
           {/* ========================================================
@@ -75,10 +77,10 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
               ry="148"
               fill="none"
               stroke="url(#stream-cyan)"
-              strokeWidth="2.8"
-              strokeDasharray="45 320"
+              strokeWidth="4"
+              strokeDasharray="70 290"
               strokeLinecap="round"
-              opacity="0.85"
+              opacity="0.9"
             >
               <animate
                 attributeName="stroke-dashoffset"
@@ -88,19 +90,21 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
               />
             </ellipse>
 
-            {/* Revolving Nakshatra 1: Radiant Cyan Celestial Star */}
+            {/* Revolving Nakshatra 1: Radiant Cyan Celestial Star - ENLARGED */}
             <g>
               <animateMotion
                 dur="4.2s"
                 repeatCount="indefinite"
                 path="M 0,-148 A 62 148 0 1 0 0,148 A 62 148 0 1 0 0,-148"
               />
-              {/* Outer Glow Halo */}
-              <circle r="12" fill="#38bdf8" opacity="0.45" filter="url(#nakshatra-glow-cyan)" />
+              {/* Massive Outer Glow Halo */}
+              <circle r="22" fill="#38bdf8" opacity="0.6" filter="url(#nakshatra-glow-cyan)" />
+              {/* Secondary Intense Corona */}
+              <circle r="14" fill="#38bdf8" opacity="0.75" />
               {/* Luminous Planet Body */}
-              <circle r="6" fill="#38bdf8" />
+              <circle r="9" fill="#0284c7" />
               {/* Brilliant White Core */}
-              <circle r="3" fill="#ffffff" />
+              <circle r="4.5" fill="#ffffff" />
             </g>
           </g>
 
@@ -116,10 +120,10 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
               ry="148"
               fill="none"
               stroke="url(#stream-blue)"
-              strokeWidth="2.8"
-              strokeDasharray="45 320"
+              strokeWidth="4"
+              strokeDasharray="70 290"
               strokeLinecap="round"
-              opacity="0.8"
+              opacity="0.9"
             >
               <animate
                 attributeName="stroke-dashoffset"
@@ -129,16 +133,17 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
               />
             </ellipse>
 
-            {/* Revolving Nakshatra 2: Vivid Sky-Blue Celestial Star */}
+            {/* Revolving Nakshatra 2: Vivid Sky-Blue Celestial Star - ENLARGED */}
             <g>
               <animateMotion
                 dur="5.6s"
                 repeatCount="indefinite"
                 path="M 0,-148 A 62 148 0 1 0 0,148 A 62 148 0 1 0 0,-148"
               />
-              <circle r="11" fill="#60a5fa" opacity="0.5" filter="url(#nakshatra-glow-cyan)" />
-              <circle r="5.5" fill="#60a5fa" />
-              <circle r="2.8" fill="#ffffff" />
+              <circle r="20" fill="#60a5fa" opacity="0.6" filter="url(#nakshatra-glow-cyan)" />
+              <circle r="13" fill="#60a5fa" opacity="0.75" />
+              <circle r="8.5" fill="#2563eb" />
+              <circle r="4.2" fill="#ffffff" />
             </g>
           </g>
 
@@ -154,10 +159,10 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
               ry="148"
               fill="none"
               stroke="url(#stream-cyan)"
-              strokeWidth="2.8"
-              strokeDasharray="45 320"
+              strokeWidth="4"
+              strokeDasharray="70 290"
               strokeLinecap="round"
-              opacity="0.85"
+              opacity="0.9"
             >
               <animate
                 attributeName="stroke-dashoffset"
@@ -167,16 +172,17 @@ export default function AnimatedLogo({ className = 'h-12 w-auto' }) {
               />
             </ellipse>
 
-            {/* Revolving Nakshatra 3: Brilliant Golden / Amber Celestial Star */}
+            {/* Revolving Nakshatra 3: Brilliant Golden / Amber Celestial Star - ENLARGED */}
             <g>
               <animateMotion
                 dur="6.8s"
                 repeatCount="indefinite"
                 path="M 0,-148 A 62 148 0 1 0 0,148 A 62 148 0 1 0 0,-148"
               />
-              <circle r="11" fill="#f59e0b" opacity="0.55" filter="url(#nakshatra-glow-amber)" />
-              <circle r="5.5" fill="#fbbf24" />
-              <circle r="2.8" fill="#ffffff" />
+              <circle r="22" fill="#f59e0b" opacity="0.65" filter="url(#nakshatra-glow-amber)" />
+              <circle r="14" fill="#fbbf24" opacity="0.8" />
+              <circle r="8.5" fill="#d97706" />
+              <circle r="4.2" fill="#ffffff" />
             </g>
           </g>
         </g>

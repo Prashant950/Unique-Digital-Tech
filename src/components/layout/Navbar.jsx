@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
-import { navLinks, services } from '../../data/site';
+import { ChevronDown, Menu, X, ArrowRight, Phone, Mail, MessageSquare } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { navLinks, services, company } from '../../data/site';
 import Icon from '../ui/Icon';
 import Button from '../ui/Button';
 import AnimatedLogo from '../ui/AnimatedLogo';
+import WhatsAppIcon from '../ui/WhatsAppIcon';
 
 export function Logo({ size = 'default' }) {
   const isLarge = size === 'large';
   return (
     <Link to="/" className="flex items-center gap-3.5 group select-none" aria-label="Unique Digital Tech home">
       <div className="relative flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
-        <AnimatedLogo className={isLarge ? 'h-14 sm:h-16' : 'h-12 sm:h-13'} />
+        <AnimatedLogo className={isLarge ? 'h-16 sm:h-20' : 'h-14 sm:h-16'} />
       </div>
       <div className="flex flex-col leading-tight">
-        <span className={`${isLarge ? 'text-xl' : 'text-lg sm:text-xl'} font-black tracking-tight text-white`}>
+        <span className={`${isLarge ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'} font-black tracking-tight text-white`}>
           Unique<span className="text-brand-400"> Digital Tech</span>
         </span>
         <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 -mt-0.5">
@@ -34,15 +37,16 @@ const linkCls = ({ isActive }) =>
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [mobileServices, setMobileServices] = useState(false);
+  const [mobileServices, setMobileServices] = useState(false); // Collapsed by default, opens after clicking arrow
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
 
+  // Close drawer on route change
   useEffect(() => {
     setOpen(false);
-    setMobileServices(false);
   }, [pathname]);
 
+  // Handle header background blur on scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
@@ -50,8 +54,20 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
+  }, [open]);
+
+  // Close drawer on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    if (open) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [open]);
 
   return (
@@ -101,7 +117,7 @@ export default function Navbar() {
           )}
         </nav>
 
-        {/* Right side CTA button shifted closer to right side */}
+        {/* Right side CTA button */}
         <div className="hidden items-center gap-3 lg:flex lg:translate-x-1">
           <Button
             to="/contact"
@@ -112,74 +128,175 @@ export default function Navbar() {
           </Button>
         </div>
 
+        {/* Top Right Corner Menu Button - Toggles Drawer with Smooth Animation */}
         <button
-          className="grid h-11 w-11 place-items-center rounded-lg border border-white/10 text-white lg:hidden hover:bg-white/5 transition"
+          className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden hover:bg-white/10 hover:border-brand-500/30 transition-all duration-200 active:scale-95 shadow-md"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
         >
-          {open ? <X /> : <Menu />}
+          {open ? (
+            <X className="h-6 w-6 text-brand-300" />
+          ) : (
+            <Menu className="h-6 w-6 text-brand-300" />
+          )}
         </button>
       </div>
 
-      {open && (
-        <nav
-          className="mx-auto max-w-[1440px] px-5 sm:px-8 h-[calc(100vh-5rem)] overflow-y-auto pb-24 lg:hidden bg-ink-950/98 backdrop-blur-xl border-t border-white/5"
-          aria-label="Mobile"
-        >
-          <ul className="space-y-1 pt-3">
-            {navLinks.map((l) =>
-              l.dropdown ? (
-                <li key={l.label}>
-                  <button
-                    onClick={() => setMobileServices(!mobileServices)}
-                    className="flex w-full items-center justify-between rounded-lg px-3 py-3.5 text-lg font-medium text-white hover:bg-white/5"
-                  >
-                    {l.label}
-                    <ChevronDown className={`h-5 w-5 transition ${mobileServices ? 'rotate-180' : ''}`} />
-                  </button>
-                  {mobileServices && (
-                    <ul className="mb-2 ml-3 space-y-1 border-l border-white/10 pl-3">
-                      <li>
-                        <Link to="/services" className="block rounded-lg px-3 py-2.5 text-slate-300 hover:text-white">
-                          All services
-                        </Link>
-                      </li>
-                      {services.map((s) => (
-                        <li key={s.slug}>
-                          <Link
-                            to={`/services/${s.slug}`}
-                            className="block rounded-lg px-3 py-2.5 text-slate-300 hover:text-brand-300 hover:bg-white/5"
+      {/* Viewport-level React Portal: Smooth Right-to-Left Slide Drawer */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <>
+                {/* Backdrop Blur Overlay */}
+                <motion.div
+                  key="drawer-backdrop"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.24, ease: 'easeOut' }}
+                  onClick={() => setOpen(false)}
+                  className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-md lg:hidden"
+                  aria-hidden="true"
+                />
+
+                {/* Right Slide-in Drawer: Slides from Right (100%) to Left (0) */}
+                <motion.aside
+                  key="drawer-panel"
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+                  className="fixed inset-y-0 right-0 z-[9999] flex w-[88vw] max-w-sm sm:max-w-md flex-col bg-ink-950/98 border-l border-brand-500/30 shadow-[-15px_0_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl lg:hidden overflow-hidden"
+                  aria-label="Mobile Navigation"
+                >
+                  {/* Drawer Top Header with Animated Logo & Dedicated Close Button */}
+                  <div className="flex h-20 items-center justify-between px-5 border-b border-white/10 bg-ink-900/70">
+                    <Logo />
+                    <button
+                      onClick={() => setOpen(false)}
+                      className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 bg-white/5 text-slate-200 hover:text-white hover:bg-white/10 hover:border-brand-500/40 transition active:scale-95 shadow-md"
+                      aria-label="Close menu"
+                    >
+                      <X className="h-6 w-6 text-brand-300" />
+                    </button>
+                  </div>
+
+                  {/* Drawer Scrollable Navigation Body */}
+                  <div className="flex-1 overflow-y-auto px-5 py-5 space-y-4 custom-scrollbar">
+                    <ul className="space-y-2">
+                      {navLinks.map((l) =>
+                        l.dropdown ? (
+                          <li
+                            key={l.label}
+                            className="rounded-2xl border border-white/10 bg-ink-900/50 overflow-hidden transition-colors"
                           >
-                            {s.title}
-                          </Link>
-                        </li>
-                      ))}
+                            {/* Services Header Row with Arrow Toggle Button */}
+                            <div className="flex items-center justify-between px-4 py-3.5">
+                              <Link
+                                to="/services"
+                                onClick={() => setOpen(false)}
+                                className="flex items-center gap-2.5 text-base font-bold text-white hover:text-brand-300 transition"
+                              >
+                                <span className="h-2 w-2 rounded-full bg-brand-400 animate-pulse" />
+                                <span>{l.label}</span>
+                              </Link>
+
+                              {/* Arrow button that toggles all subservices in scroller */}
+                              <button
+                                type="button"
+                                onClick={() => setMobileServices(!mobileServices)}
+                                className="grid h-9 w-9 place-items-center rounded-xl border border-white/15 bg-white/5 text-brand-300 hover:bg-brand-500/20 hover:text-white transition active:scale-95 shadow-sm"
+                                aria-label="Toggle all subservices"
+                                aria-expanded={mobileServices}
+                              >
+                                <ChevronDown
+                                  className={`h-4 w-4 transition-transform duration-300 ${
+                                    mobileServices ? 'rotate-180 text-brand-400' : 'text-slate-300'
+                                  }`}
+                                />
+                              </button>
+                            </div>
+
+                            {/* Sub-services Scroller: Opens after clicking arrow */}
+                            <AnimatePresence>
+                              {mobileServices && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: 'auto', opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.25, ease: 'easeInOut' }}
+                                  className="overflow-hidden px-3 pb-3.5"
+                                >
+                                  <div className="max-h-64 overflow-y-auto space-y-1.5 p-2 rounded-xl bg-ink-950/90 border border-brand-500/20 shadow-inner custom-scrollbar">
+                                    <Link
+                                      to="/services"
+                                      onClick={() => setOpen(false)}
+                                      className="flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold text-brand-300 hover:bg-brand-500/20 border border-brand-500/30 transition mb-1 bg-brand-500/10"
+                                    >
+                                      <span>All 8 Engineering Services</span>
+                                      <ArrowRight className="h-3.5 w-3.5" />
+                                    </Link>
+
+                                    {services.map((s) => (
+                                      <Link
+                                        key={s.slug}
+                                        to={`/services/${s.slug}`}
+                                        onClick={() => setOpen(false)}
+                                        className="flex items-center gap-3 rounded-lg p-2 text-xs font-semibold text-slate-200 hover:bg-white/10 hover:text-brand-300 transition group"
+                                      >
+                                        <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-brand-500/10 text-brand-400 border border-brand-500/20 group-hover:scale-105 group-hover:bg-brand-500/20 transition-transform">
+                                          <Icon name={s.icon} className="h-3.5 w-3.5" />
+                                        </span>
+                                        <span className="truncate">{s.title}</span>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </li>
+                        ) : (
+                          <li key={l.label}>
+                            <NavLink
+                              to={l.to}
+                              end={l.to === '/'}
+                              onClick={() => setOpen(false)}
+                              className={({ isActive }) =>
+                                `flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold transition ${
+                                  isActive
+                                    ? 'bg-gradient-to-r from-brand-500/20 to-brand-blue/15 text-brand-300 border border-brand-500/30 font-bold'
+                                    : 'text-slate-200 hover:bg-white/5 hover:text-white border border-transparent'
+                                }`
+                              }
+                            >
+                              <span>{l.label}</span>
+                              <ArrowRight className="h-4 w-4 opacity-50" />
+                            </NavLink>
+                          </li>
+                        )
+                      )}
                     </ul>
-                  )}
-                </li>
-              ) : (
-                <li key={l.label}>
-                  <NavLink
-                    to={l.to}
-                    end={l.to === '/'}
-                    className={({ isActive }) =>
-                      `block rounded-lg px-3 py-3.5 text-lg font-medium transition ${
-                        isActive ? 'text-brand-400 bg-brand-500/10' : 'text-white hover:bg-white/5'
-                      }`
-                    }
-                  >
-                    {l.label}
-                  </NavLink>
-                </li>
-              )
+
+                    {/* Direct Action & Quick Links in Drawer Footer */}
+                    <div className="pt-4 border-t border-white/10 space-y-3">
+                      <Button
+                        to="/contact"
+                        onClick={() => setOpen(false)}
+                        className="w-full justify-center py-4 text-sm font-bold shadow-lg shadow-brand-500/25"
+                      >
+                        <span>Start Your Project</span>
+                        <ArrowRight className="h-4 w-4 ml-1.5" />
+                      </Button>
+                    </div>
+                  </div>
+                </motion.aside>
+              </>
             )}
-          </ul>
-          <Button to="/contact" className="mt-6 w-full">
-            Schedule Tech Consultation
-          </Button>
-        </nav>
-      )}
+          </AnimatePresence>,
+          document.body
+        )}
     </header>
   );
 }

@@ -23,12 +23,9 @@
       radial-gradient(45% 45% at 15% 35%, rgba(14, 165, 233, 0.12), transparent 70%);
   }
 
-  /* High-Tech Background Cyber Grids inspired by Originkit */
+  /* Dot pattern removed per request for ultra-clean, sleek cyber aesthetic */
   .bg-dot-grid {
-    background-image: radial-gradient(rgba(56, 189, 248, 0.15) 1.2px, transparent 1.2px);
-    background-size: 26px 26px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 35%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 35%, transparent 100%);
+    display: none;
   }
 
   .bg-cyber-lines {
@@ -178,3 +175,20 @@
 .rise { animation: rise .7s ease both; }
 .rise-2 { animation: rise .7s .12s ease both; }
 .rise-3 { animation: rise .7s .24s ease both; }
+
+/* Sleek Cyber Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.35);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.65);
+}

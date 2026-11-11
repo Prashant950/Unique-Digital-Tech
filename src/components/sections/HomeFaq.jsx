@@ -9,8 +9,6 @@ export default function HomeFaq() {
 
   return (
     <section className="section relative overflow-hidden bg-ink-900/40 border-t border-white/5 py-16 sm:py-24">
-      {/* Background subtle dot grid */}
-      <div className="absolute inset-0 bg-dot-grid opacity-40 pointer-events-none" />
 
       <div className="container-x max-w-4xl relative z-10">
         <div className="text-center mb-12">
