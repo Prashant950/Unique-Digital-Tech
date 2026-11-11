@@ -11,17 +11,120 @@
 
 @layer components {
   .container-x { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; }
-  .section { @apply py-12 sm:py-16; }
-  .card { @apply rounded-2xl border border-white/10 bg-ink-900/70 backdrop-blur; }
+  .section { @apply py-14 sm:py-20 relative; }
+  .card { @apply rounded-2xl border border-white/10 bg-ink-900/70 backdrop-blur-xl; }
   .card-hover { @apply transition duration-300 hover:-translate-y-1.5 hover:border-brand-500/50 hover:shadow-glow; }
   .text-gradient { @apply bg-gradient-to-r from-brand-400 via-sky-300 to-brand-blue bg-clip-text text-transparent; }
-  .field { @apply w-full rounded-xl border border-white/10 bg-ink-800 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30; }
+  .field { @apply w-full rounded-xl border border-white/10 bg-ink-800 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30 transition-all; }
   .bg-hero-glow {
     background:
-      radial-gradient(70% 55% at 50% 0%, rgba(14, 165, 233, 0.20), transparent 75%),
-      radial-gradient(50% 50% at 85% 25%, rgba(37, 99, 235, 0.14), transparent 70%),
-      radial-gradient(45% 45% at 15% 35%, rgba(14, 165, 233, 0.10), transparent 70%);
+      radial-gradient(70% 55% at 50% 0%, rgba(14, 165, 233, 0.22), transparent 75%),
+      radial-gradient(50% 50% at 85% 25%, rgba(37, 99, 235, 0.16), transparent 70%),
+      radial-gradient(45% 45% at 15% 35%, rgba(14, 165, 233, 0.12), transparent 70%);
   }
+
+  /* High-Tech Background Cyber Grids inspired by Originkit */
+  .bg-dot-grid {
+    background-image: radial-gradient(rgba(56, 189, 248, 0.15) 1.2px, transparent 1.2px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 35%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 35%, transparent 100%);
+  }
+
+  .bg-cyber-lines {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, #000 35%, transparent 95%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, #000 35%, transparent 95%);
+  }
+
+  /* OriginKit Shimmer Text */
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+      #ffffff 0%,
+      #38bdf8 25%,
+      #ffffff 50%,
+      #818cf8 75%,
+      #ffffff 100%
+    );
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: textShimmer 4s linear infinite;
+  }
+
+  /* Button Shimmer Sweep Effect */
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      60deg,
+      transparent 35%,
+      rgba(255, 255, 255, 0.25) 50%,
+      transparent 65%
+    );
+    transform: rotate(25deg) translateY(-120%);
+    animation: btnShimmerSweep 4.5s infinite ease-in-out;
+    pointer-events: none;
+  }
+
+  /* OriginKit Spotlight Card */
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(6, 13, 34, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      500px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+      rgba(56, 189, 248, 0.14),
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+  .spotlight-card:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 12px 35px -8px rgba(14, 165, 233, 0.25);
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes textShimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes btnShimmerSweep {
+  0%, 25% { transform: rotate(25deg) translateY(-140%); }
+  45%, 100% { transform: rotate(25deg) translateY(140%); }
+}
+
+@keyframes borderBeamDash {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -1080; }
 }
 
 @keyframes marqueeLeft {

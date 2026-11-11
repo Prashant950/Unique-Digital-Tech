@@ -13,6 +13,8 @@ import {
 import Button from '../components/ui/Button';
 import SectionHeading from '../components/ui/SectionHeading';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
+import BorderBeam from '../components/ui/BorderBeam';
+import CyberBackground from '../components/ui/CyberBackground';
 import {
   company,
   pricingPlans,
@@ -29,10 +31,8 @@ export default function Pricing() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-hero-glow relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-44 lg:pb-36 min-h-[78vh] sm:min-h-[84vh] lg:min-h-[90vh] flex flex-col justify-center border-b border-white/10">
-        {/* Glow Spheres */}
-        <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-96 w-[40rem] rounded-full bg-brand-500/15 blur-3xl" aria-hidden="true" />
-        <div className="pointer-events-none absolute top-1/3 -right-20 h-72 w-72 rounded-full bg-brand-blue/10 blur-3xl" aria-hidden="true" />
+      <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-44 lg:pb-36 min-h-[70vh] flex flex-col justify-center border-b border-white/10">
+        <CyberBackground />
 
         <div className="container-x relative text-center max-w-4xl">
           <div className="rise inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold text-brand-300 mb-5 shadow-sm backdrop-blur">
@@ -147,9 +147,12 @@ export default function Pricing() {
                     >
                       {/* Popular Badge */}
                       {isPopular && (
-                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-500 to-brand-blue px-4 py-1 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg shadow-brand-500/40">
-                          {plan.badge}
-                        </div>
+                        <>
+                          <BorderBeam duration={7} color="#38bdf8" rx={24} />
+                          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-500 to-brand-blue px-4 py-1 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg shadow-brand-500/40 z-20">
+                            {plan.badge}
+                          </div>
+                        </>
                       )}
 
                       <div>
@@ -244,9 +247,12 @@ export default function Pricing() {
                       }`}
                     >
                       {isPopular && (
-                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-500 to-brand-blue px-4 py-1 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg shadow-brand-500/40">
-                          Recommended
-                        </div>
+                        <>
+                          <BorderBeam duration={7} color="#38bdf8" rx={24} />
+                          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-500 to-brand-blue px-4 py-1 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg shadow-brand-500/40 z-20">
+                            Recommended
+                          </div>
+                        </>
                       )}
 
                       <div>

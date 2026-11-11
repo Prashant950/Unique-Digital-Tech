@@ -15,6 +15,8 @@ import {
 import PageHero from '../components/ui/PageHero';
 import Button from '../components/ui/Button';
 import SectionHeading from '../components/ui/SectionHeading';
+import BorderBeam from '../components/ui/BorderBeam';
+import confetti from 'canvas-confetti';
 import { company } from '../data/site';
 
 const serviceOptions = [
@@ -43,6 +45,15 @@ export default function Contact() {
       setLoading(false);
       setSent(true);
       setSubmittedData(d);
+      try {
+        confetti({
+          particleCount: 75,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
+      } catch (err) {
+        // ignore
+      }
     }, 600);
   };
 
@@ -169,7 +180,8 @@ export default function Contact() {
 
           {/* Right Column: Clean, Real-world Contact Form (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-ink-900/95 to-ink-950/95 p-8 sm:p-10 shadow-2xl backdrop-blur-xl relative">
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-ink-900/95 to-ink-950/95 p-8 sm:p-10 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+              <BorderBeam duration={8} color="#38bdf8" rx={24} />
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-white">Send us a message</h3>
                 <p className="text-sm text-slate-400 mt-1.5">

@@ -20,6 +20,7 @@ import MetricsStrip from '../components/sections/MetricsStrip';
 import TechStack from '../components/sections/TechStack';
 import CtaBanner from '../components/sections/CtaBanner';
 import Button from '../components/ui/Button';
+import SpotlightCard from '../components/ui/SpotlightCard';
 
 export default function About() {
   const principles = [
@@ -171,9 +172,10 @@ export default function About() {
             {principles.map((p, idx) => {
               const Icon = p.icon;
               return (
-                <div
+                <SpotlightCard
                   key={idx}
-                  className="card p-6 flex flex-col justify-between hover:border-brand-500/50 hover:bg-ink-850 transition-all duration-300 group"
+                  tilt={true}
+                  className="flex flex-col justify-between"
                 >
                   <div>
                     <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-500/10 text-brand-400 border border-brand-500/20 group-hover:scale-105 group-hover:bg-brand-500/20 transition-transform">
@@ -182,7 +184,7 @@ export default function About() {
                     <h3 className="text-base font-bold text-white mt-4">{p.title}</h3>
                     <p className="text-xs text-slate-400 leading-relaxed mt-2">{p.desc}</p>
                   </div>
-                </div>
+                </SpotlightCard>
               );
             })}
           </div>
@@ -200,14 +202,15 @@ export default function About() {
           <div className="mt-10 relative">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
               {milestones.map((m, idx) => (
-                <div
+                <SpotlightCard
                   key={idx}
-                  className="rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur transition-all duration-300 hover:border-brand-400/50 hover:-translate-y-1"
+                  tilt={true}
+                  className="p-5 flex flex-col justify-between"
                 >
                   <span className="text-2xl font-black text-brand-400 font-mono">{m.year}</span>
                   <h4 className="text-sm font-bold text-white mt-2">{m.title}</h4>
                   <p className="text-xs text-slate-400 mt-2 leading-relaxed">{m.desc}</p>
-                </div>
+                </SpotlightCard>
               ))}
             </div>
           </div>

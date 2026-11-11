@@ -62,6 +62,7 @@ export default function Navbar() {
           : 'border-white/10 bg-ink-950/90 shadow-lg shadow-black/25 backdrop-blur-lg'
       }`}
     >
+      <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-brand-500/30 to-transparent pointer-events-none" />
       <div className="mx-auto flex h-20 w-full max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
         <Logo />
 

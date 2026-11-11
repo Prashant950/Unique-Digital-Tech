@@ -26,6 +26,7 @@ import CtaBanner from '../components/sections/CtaBanner';
 import Button from '../components/ui/Button';
 import Icon from '../components/ui/Icon';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
+import SpotlightCard from '../components/ui/SpotlightCard';
 import { services, company } from '../data/site';
 
 export default function Services() {
@@ -148,9 +149,10 @@ export default function Services() {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredServices.map((s) => (
-              <div
+              <SpotlightCard
                 key={s.slug}
-                className="group relative flex flex-col justify-between rounded-3xl border border-white/10 bg-gradient-to-b from-ink-900/80 to-ink-950/80 p-6 sm:p-7 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-400/50 hover:bg-ink-900 hover:shadow-[0_12px_35px_rgba(14,165,233,0.18)]"
+                tilt={true}
+                className="flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -216,7 +218,7 @@ export default function Services() {
                     View Pricing
                   </Link>
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </div>
