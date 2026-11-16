@@ -74,15 +74,15 @@ export default function Pricing() {
   };
 
   // Interactive Scope Estimator State
-  const [calcService, setCalcService] = useState('Web Platform & SaaS');
+  const [calcService, setCalcService] = useState('Website Design & Development');
   const [calcStage, setCalcStage] = useState('Greenfield MVP (0 to 1)');
   const [calcSpeed, setCalcSpeed] = useState('Standard Sprint (4-6 Wks)');
 
   const estimatorServices = [
-    { id: 'web', name: 'Web Platform & SaaS', icon: 'Code2', desc: 'Next.js, React, Node.js, PostgreSQL' },
-    { id: 'mobile', name: 'iOS & Android Mobile App', icon: 'Layers', desc: 'React Native, Offline sync, Push alerts' },
-    { id: 'cloud', name: 'Cloud & DevOps Architecture', icon: 'Zap', desc: 'AWS ECS, Docker, CI/CD, Microservices' },
-    { id: 'crm', name: 'Custom ERP / CRM System', icon: 'FileCheck', desc: 'High concurrency, automated pipelines' },
+    { id: 'web', name: 'Website Design & Development', icon: 'Code2', desc: 'Next.js, React, WordPress, E-Commerce' },
+    { id: 'mobile', name: 'Mobile App Development', icon: 'Layers', desc: 'iOS & Android, React Native, Flutter' },
+    { id: 'crm', name: 'Custom CRM & ERP Solutions', icon: 'FileCheck', desc: 'Connected operations, automated pipelines' },
+    { id: 'cloud', name: 'Cloud Architecture & AWS DevOps', icon: 'Zap', desc: 'AWS ECS, Docker, CI/CD, Microservices' },
   ];
 
   const estimatorStages = [

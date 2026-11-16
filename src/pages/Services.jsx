@@ -78,14 +78,18 @@ export default function Services() {
     },
   };
 
-  const filterTabs = ['All', 'Web & SaaS', 'Mobile Apps', 'Automation & CRM', 'Cloud & Marketing'];
+  const filterTabs = ['All', 'Marketing & Ads', 'Web & Mobile', 'Automation & CRM', 'Design & Cloud'];
 
   const filteredServices = services.filter((s) => {
     if (selectedFilter === 'All') return true;
-    if (selectedFilter === 'Web & SaaS') return s.slug.includes('website') || s.slug.includes('crm');
-    if (selectedFilter === 'Mobile Apps') return s.slug.includes('mobile');
-    if (selectedFilter === 'Automation & CRM') return s.slug.includes('whatsapp') || s.slug.includes('crm');
-    if (selectedFilter === 'Cloud & Marketing') return s.slug.includes('cloud') || s.slug.includes('marketing') || s.slug.includes('seo') || s.slug.includes('meta');
+    if (selectedFilter === 'Marketing & Ads')
+      return s.slug.includes('marketing') || s.slug.includes('advertising');
+    if (selectedFilter === 'Web & Mobile')
+      return s.slug.includes('website') || s.slug.includes('mobile');
+    if (selectedFilter === 'Automation & CRM')
+      return s.slug.includes('whatsapp') || s.slug.includes('crm');
+    if (selectedFilter === 'Design & Cloud')
+      return s.slug.includes('graphic') || s.slug.includes('cloud');
     return true;
   });
 
@@ -209,22 +213,27 @@ export default function Services() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-500/10 text-brand-400 border border-brand-500/20 group-hover:scale-110 group-hover:bg-brand-500/20 transition-all duration-300">
-                      <Icon name={s.icon} className="h-6 w-6" />
-                    </span>
+                    {/* Glowing Cyber Emblem Icon */}
+                    <div className="relative group/icon">
+                      <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-brand-500/40 via-cyan-400/30 to-brand-blue/40 opacity-40 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500" />
+                      <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0e214d] via-[#091536] to-[#04091a] border border-brand-400/35 shadow-[0_0_20px_rgba(14,165,233,0.22)] group-hover:scale-110 group-hover:border-brand-400/70 group-hover:shadow-[0_0_30px_rgba(56,189,248,0.45)] transition-all duration-300">
+                        <Icon name={s.icon} className="h-7 w-7 text-brand-300 group-hover:text-white drop-shadow-[0_0_10px_rgba(56,189,248,0.6)] transition-all duration-300" />
+                      </div>
+                    </div>
 
                     {s.metrics && s.metrics[0] ? (
-                      <span className="rounded-full bg-brand-500/10 border border-brand-500/20 px-2.5 py-0.5 text-[10px] font-bold text-brand-300">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-300 bg-brand-500/10 border border-brand-500/30 px-3 py-1 rounded-full shadow-sm shadow-brand-500/10 backdrop-blur">
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
                         {s.metrics[0].value} {s.metrics[0].label.split(' ')[0]}
                       </span>
                     ) : (
-                      <span className="text-[11px] font-mono text-slate-500 uppercase tracking-widest">
+                      <span className="text-[11px] font-mono text-brand-400/80 uppercase tracking-widest bg-white/5 border border-white/10 px-3 py-1 rounded-full">
                         Production-Grade
                       </span>
                     )}
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mt-4 group-hover:text-brand-300 transition-colors">
+                  <h3 className="text-xl font-bold text-white mt-5 group-hover:text-brand-300 transition-colors">
                     {s.title}
                   </h3>
 
@@ -238,50 +247,47 @@ export default function Services() {
                     {s.description || s.short}
                   </p>
 
-                  {/* Key Capabilities */}
-                  <div className="mt-4 border-t border-white/5 pt-4 space-y-2">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
-                      Included Deliverables:
-                    </p>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
-                      {s.capabilities.slice(0, 3).map((cap, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                          <span className="line-clamp-2 leading-tight">{cap}</span>
+                  {/* Complete Sub-Services & Capabilities List */}
+                  <div className="mt-5 border-t border-white/10 pt-4 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-brand-300 flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
+                        <span>Included Services:</span>
+                      </p>
+                      <span className="text-[10px] font-semibold text-slate-400 bg-white/5 px-2 py-0.5 rounded-md border border-white/10">
+                        {s.capabilities.length} Offerings
+                      </span>
+                    </div>
+                    <ul className="space-y-2 text-xs text-slate-300">
+                      {s.capabilities.map((cap, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5">
+                          <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <span className="leading-snug text-slate-200 font-medium">{cap}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-
-                  {/* Tech stack pills */}
-                  <div className="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-white/5">
-                    {s.tools.slice(0, 5).map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-md border border-white/10 bg-ink-800/80 px-2 py-0.5 text-[10px] font-medium text-slate-300"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
-                {/* Card Footer Actions */}
-                <div className="mt-6 pt-4 border-t border-white/5 space-y-2.5">
+                {/* Attractive Card Footer Action Buttons */}
+                <div className="mt-7 pt-5 border-t border-white/10 space-y-2.5">
+                  {/* Primary Button: View Architecture Blueprint */}
                   <Link
                     to={`/services/${s.slug}`}
-                    className="flex w-full items-center justify-between rounded-xl bg-white/5 border border-white/10 px-3.5 py-2.5 text-xs font-bold text-brand-300 hover:bg-brand-500/15 hover:border-brand-500/30 transition group/btn"
+                    className="group/btn relative flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-sky-500 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand-500/25 hover:shadow-brand-500/50 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
                   >
-                    <span>View Architecture Blueprint</span>
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
+                    <span>View Architecture</span>
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
                   </Link>
 
-                  <div className="flex items-center justify-between text-xs pt-1">
+                  {/* Dual Action Buttons: Request Scope & WhatsApp */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <Link
                       to={`/contact?service=${encodeURIComponent(s.title)}`}
-                      className="text-slate-400 hover:text-white transition font-medium"
+                      className="group/scope relative flex items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-slate-200 hover:text-white hover:bg-brand-500/15 hover:border-brand-400/50 shadow-sm hover:shadow-brand-500/15 transition-all duration-300"
                     >
-                      Request Scope →
+                      <span>Request Scope</span>
+                      <ArrowRight className="h-3 w-3 text-brand-400 transition-transform group-hover/scope:translate-x-0.5" />
                     </Link>
 
                     <a
@@ -290,10 +296,10 @@ export default function Services() {
                       )}%20services.`}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#25D366] hover:brightness-110 transition"
+                      className="group/wa relative flex items-center justify-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400/60 hover:text-white shadow-sm shadow-emerald-500/10 transition-all duration-300"
                     >
-                      <WhatsAppIcon className="h-3 w-3 fill-[#25D366]" />
-                      <span>Chat on WhatsApp</span>
+                      <WhatsAppIcon className="h-3.5 w-3.5 fill-[#25D366] transition-transform group-hover/wa:scale-110" />
+                      <span>WhatsApp</span>
                     </a>
                   </div>
                 </div>
@@ -334,9 +340,14 @@ export default function Services() {
                   </ul>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/5">
-                  <Button to={m.link} variant="secondary" className="w-full text-xs justify-center">
-                    {m.cta}
+                <div className="mt-6 pt-4 border-t border-white/10">
+                  <Button
+                    to={m.link}
+                    variant="secondary"
+                    className="w-full text-xs justify-center font-bold hover:border-brand-400/50 hover:bg-brand-500/15 shadow-sm hover:shadow-brand-500/20 group/btn"
+                  >
+                    <span>{m.cta}</span>
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
                   </Button>
                 </div>
               </div>

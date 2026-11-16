@@ -205,21 +205,23 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 4: Direct Tech Hub & Location (3 Cols) */}
+          {/* Col 4: Direct Support & Communication (3 Cols) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4 flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-              Direct Tech Hub
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+              Direct Support &amp; Connect
             </h4>
 
             <div className="rounded-2xl border border-white/10 bg-ink-900/60 p-4 space-y-3.5 text-xs text-slate-300">
+              {/* Location commented out for now:
               <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 shrink-0 text-amber-400 mt-0.5" />
+                <MapPin className="h-4 w-4 shrink-0 text-cyan-400 mt-0.5" />
                 <div>
                   <span className="font-bold text-white block">Engineering Headquarters</span>
                   <span>Sector 62, Electronic City, Noida, Delhi NCR, UP 201309, India</span>
                 </div>
               </div>
+              */}
 
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 shrink-0 text-brand-400" />
@@ -237,6 +239,21 @@ export default function Footer() {
                   <span className="text-[10px] text-slate-400 block uppercase font-semibold">Technical Inquiries</span>
                   <a href={`mailto:${company.email}`} className="font-bold text-white hover:text-brand-300 transition">
                     {company.email}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 pt-1 border-t border-white/5">
+                <WhatsAppIcon className="h-4 w-4 shrink-0 fill-[#25D366]" />
+                <div>
+                  <span className="text-[10px] text-slate-400 block uppercase font-semibold">Instant Messaging</span>
+                  <a
+                    href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20have%20an%20inquiry.`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-bold text-[#25D366] hover:underline transition"
+                  >
+                    Chat on WhatsApp →
                   </a>
                 </div>
               </div>

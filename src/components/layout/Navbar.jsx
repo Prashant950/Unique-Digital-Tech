@@ -38,12 +38,14 @@ const linkCls = ({ isActive }) =>
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [mobileServices, setMobileServices] = useState(false); // Collapsed by default, opens after clicking arrow
+  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
 
-  // Close drawer on route change
+  // Close drawer and desktop dropdown on route change
   useEffect(() => {
     setOpen(false);
+    setDesktopServicesOpen(false);
   }, [pathname]);
 
   // Handle header background blur on scroll
@@ -59,16 +61,17 @@ export default function Navbar() {
     document.body.style.overflow = open ? 'hidden' : '';
   }, [open]);
 
-  // Close drawer on Escape key press
+  // Close drawer and desktop dropdown on Escape key press
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') {
+        setOpen(false);
+        setDesktopServicesOpen(false);
+      }
     };
-    if (open) {
-      window.addEventListener('keydown', handleKeyDown);
-    }
+    window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [open]);
+  }, []);
 
   return (
     <header
@@ -85,29 +88,70 @@ export default function Navbar() {
         <nav className="hidden items-center gap-7 lg:gap-8 lg:flex" aria-label="Primary">
           {navLinks.map((l) =>
             l.dropdown ? (
-              <div key={l.label} className="group relative">
-                <NavLink to={l.to} className={(s) => `${linkCls(s)} inline-flex items-center gap-1`}>
+              <div
+                key={l.label}
+                className="relative"
+                onMouseEnter={() => setDesktopServicesOpen(true)}
+                onMouseLeave={() => setDesktopServicesOpen(false)}
+              >
+                <NavLink
+                  to={l.to}
+                  onClick={() => setDesktopServicesOpen(false)}
+                  className={(s) => `${linkCls(s)} inline-flex items-center gap-1`}
+                >
                   {l.label}
-                  <ChevronDown className="h-4 w-4 transition duration-200 group-hover:rotate-180" />
+                  <ChevronDown
+                    className={`h-4 w-4 transition duration-200 ${
+                      desktopServicesOpen ? 'rotate-180 text-brand-400' : ''
+                    }`}
+                  />
                 </NavLink>
-                <div className="invisible absolute left-1/2 top-full w-[34rem] -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <div className="card grid grid-cols-2 gap-1 p-3 shadow-2xl border-white/10 bg-ink-950/95 backdrop-blur-xl">
-                    {services.map((s) => (
-                      <Link
-                        key={s.slug}
-                        to={`/services/${s.slug}`}
-                        className="group/item flex items-start gap-3 rounded-xl p-3 transition hover:bg-white/5"
-                      >
-                        <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-500/10 text-brand-400 border border-brand-500/20 transition group-hover/item:bg-brand-500/20 group-hover/item:scale-105">
-                          <Icon name={s.icon} className="h-5 w-5" />
-                        </span>
-                        <span className="text-sm font-semibold text-white transition group-hover/item:text-brand-300">
-                          {s.title}
-                        </span>
-                      </Link>
-                    ))}
+
+                {/* Non-Transparent Rich Frosted Cyber Dropdown (Auto-closes on click) */}
+                {desktopServicesOpen && (
+                  <div className="absolute left-1/2 top-full w-[40rem] -translate-x-1/2 pt-3 z-50 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="relative rounded-2xl border border-brand-500/35 bg-[#07112c] p-4 shadow-[0_25px_70px_rgba(0,0,0,0.95)] ring-1 ring-white/10 overflow-hidden">
+                      {/* Ambient cyber radial glow inside dropdown */}
+                      <div className="pointer-events-none absolute -top-12 -right-12 h-44 w-44 rounded-full bg-brand-500/15 blur-[60px]" />
+                      <div className="pointer-events-none absolute -bottom-12 -left-12 h-44 w-44 rounded-full bg-brand-blue/15 blur-[60px]" />
+
+                      <div className="relative z-10 grid grid-cols-2 gap-2">
+                        {services.map((s) => (
+                          <Link
+                            key={s.slug}
+                            to={`/services/${s.slug}`}
+                            onClick={() => setDesktopServicesOpen(false)}
+                            className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-all duration-200 hover:bg-brand-500/15 hover:border-brand-500/30 border border-white/5 bg-white/[0.02]"
+                          >
+                            <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-500/10 text-brand-400 border border-brand-500/20 transition group-hover/item:bg-brand-500/25 group-hover/item:scale-105 group-hover/item:border-brand-400/40">
+                              <Icon name={s.icon} className="h-4 w-4" />
+                            </span>
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-xs font-bold text-white transition group-hover/item:text-brand-300 leading-snug">
+                                {s.title}
+                              </span>
+                              <span className="text-[10px] text-slate-400 line-clamp-1 mt-0.5">
+                                {s.tagline}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+
+                      <div className="relative z-10 mt-3 pt-3 border-t border-white/10 flex items-center justify-between px-2 text-[11px]">
+                       
+                        <Link
+                          to="/services"
+                          onClick={() => setDesktopServicesOpen(false)}
+                          className="font-bold text-brand-300 hover:text-brand-400 transition inline-flex items-center gap-1 group/all"
+                        >
+                          <span>Explore All Services</span>
+                          <ArrowRight className="h-3 w-3 transition-transform group-hover/all:translate-x-0.5" />
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             ) : (
               <NavLink key={l.label} to={l.to} end={l.to === '/'} className={linkCls}>

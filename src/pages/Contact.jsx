@@ -25,13 +25,15 @@ import { company } from '../data/site';
 import { useToast } from '../components/ui/Toast';
 
 const serviceOptions = [
-  'Website Development (Next.js / React)',
-  'Mobile App Development (iOS & Android)',
-  'Custom CRM / ERP & Enterprise Platform',
-  'WhatsApp Cloud API & Automations',
-  'Cloud Infrastructure & AWS DevOps',
-  'Technical SEO & Growth Architecture',
-  'Architecture Consultation & Code Audit',
+  'Digital Marketing & AI Search Optimization',
+  'Paid Advertising & Lead Generation',
+  'Website Design & Development',
+  'Graphic Design & Video Editing',
+  'Mobile App Development',
+  'WhatsApp Cloud API & Business Automation',
+  'Custom CRM & ERP Solutions',
+  'Cloud Architecture & AWS DevOps',
+  'Full-Lifecycle Architecture & Consultation',
 ];
 
 export default function Contact() {
@@ -271,10 +273,12 @@ export default function Contact() {
       q: 'Will you sign a Non-Disclosure Agreement (NDA) before our call?',
       a: 'Yes. We respect your intellectual property and trade secrets. You can request our standard bilateral mutual NDA or provide your team’s custom NDA, and our directors will execute it prior to your technical discovery call.',
     },
+    /*
     {
       q: 'Can we visit your engineering hub in Noida / Delhi NCR in person?',
       a: 'Absolutely. We welcome founders and enterprise teams at our development hub in Sector 62, Noida (Delhi NCR). Please schedule a prior appointment via phone or email so our lead solutions architect can be available to host you.',
     },
+    */
   ];
 
   const contactSchema = {
@@ -341,15 +345,17 @@ export default function Contact() {
             <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
             100% NDA Protection
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-white hover:scale-105">
-            <Building2 className="h-3.5 w-3.5 text-amber-400" />
+          {/* Physical Location Hub Pill - Commented out for now
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-500/10 hover:text-white hover:scale-105">
+            <Building2 className="h-3.5 w-3.5 text-cyan-400" />
             Noida / New Delhi Tech Hub
           </span>
+          */}
         </div>
       </PageHero>
 
       {/* Main Contact Grid & Form */}
-      <section className="section py-16 sm:py-24">
+      <section className="section py-10 sm:py-16">
         <div className="container-x grid gap-12 lg:grid-cols-12 items-start">
           {/* Left Column: Direct Contact Details & Info (5 Cols) */}
           <div className="space-y-6 lg:col-span-5">
@@ -400,9 +406,28 @@ export default function Contact() {
                 </div>
               </a>
 
-              {/* Physical Location Card */}
+              {/* WhatsApp Instant Scoping Card */}
+              {/* <a
+                href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20am%20interested%20in%20discussing%20a%20project.`}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur transition-all duration-300 hover:border-[#25D366]/50 hover:bg-ink-900 hover:shadow-glow"
+              >
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 group-hover:scale-105 transition-transform">
+                  <WhatsAppIcon className="h-5 w-5 fill-[#25D366]" />
+                </span>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">WhatsApp Business</p>
+                  <p className="text-base font-bold text-white group-hover:text-[#25D366] transition-colors mt-0.5">
+                    Chat with Lead Architect →
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">Instant project scoping &amp; quick discovery</p>
+                </div>
+              </a> */}
+
+              {/* Physical Location Card - Commented out for now
               <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-ink-900/80 p-5 backdrop-blur">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
                   <MapPin className="h-5 w-5" />
                 </span>
                 <div>
@@ -411,6 +436,7 @@ export default function Contact() {
                   <p className="text-xs text-slate-400 mt-1">Delhi NCR, Uttar Pradesh 201309, India</p>
                 </div>
               </div>
+              */}
             </div>
 
             {/* Confidentiality & Assurance Box */}
@@ -647,7 +673,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Interactive Google Map & Office Location Section */}
+      {/* Interactive Google Map & Office Location Section - Commented out for now
       <section className="section bg-ink-900/50 border-y border-white/5 py-16 sm:py-20">
         <div className="container-x">
           <SectionHeading
@@ -656,7 +682,6 @@ export default function Contact() {
           />
 
           <div className="mt-8 grid gap-8 lg:grid-cols-12 items-center">
-            {/* Embedded Google Map (8 Cols) */}
             <div className="lg:col-span-8 overflow-hidden rounded-3xl border border-white/10 bg-ink-950 shadow-2xl relative">
               <iframe
                 src="https://maps.google.com/maps?q=Sector%2062%2C%20Noida%2C%20Uttar%20Pradesh%20201309%2C%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"
@@ -675,7 +700,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Office Highlights & Hours (4 Cols) */}
             <div className="lg:col-span-4 space-y-4">
               <div className="card p-5 border-white/10">
                 <h4 className="text-sm font-bold text-white flex items-center gap-2">
@@ -739,6 +763,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
+      */}
 
       {/* 3-Step Discovery Roadmap */}
       <section className="section py-16 sm:py-20">

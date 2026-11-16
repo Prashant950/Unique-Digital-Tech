@@ -12,6 +12,10 @@ import {
   KeyRound,
   Users,
   RefreshCw,
+  Palette,
+  Video,
+  Code2,
+  Sparkles,
 } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 
@@ -31,6 +35,10 @@ const map = {
   key: KeyRound,
   users: Users,
   cycle: RefreshCw,
+  palette: Palette,
+  video: Video,
+  code: Code2,
+  sparkles: Sparkles,
 };
 
 export default function Icon({ name, className = 'h-6 w-6' }) {
