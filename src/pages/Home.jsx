@@ -8,12 +8,6 @@ import {
   Users,
   ArrowRight,
   Sparkles,
-  TrendingUp,
-  Search,
-  Share2,
-  Palette,
-  Globe,
-  Smartphone,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import SectionHeading from '../components/ui/SectionHeading';
@@ -29,52 +23,10 @@ import CyberBackground from '../components/ui/CyberBackground';
 import SectionReveal from '../components/ui/SectionReveal';
 import SpotlightCard from '../components/ui/SpotlightCard';
 import SEO from '../components/ui/SEO';
-import { valueCards, whyUs, homeFaqs } from '../data/site';
-
-const homeFeaturedServices = [
-  {
-    title: 'Digital Marketing',
-    icon: TrendingUp,
-    color: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
-    desc: "We're promoting an organization that centers on developing your business effectively with web-based advertising administrations. Regardless of whether you need to build changes, traffic to your site, or both, we can assist you with structuring an Internet advertising effort that can assist you with arriving at your objectives.",
-    link: '/services/digital-marketing-ai-search',
-  },
-  {
-    title: 'SEO',
-    icon: Search,
-    color: 'text-brand-400 bg-brand-500/10 border-brand-500/20',
-    desc: 'We understand that every business is unique. That’s why our SEO services in your country customize a digital strategy specific to your business needs. We help you with Keyword & Market Research, Website SEO Audits, On-page & Off SEO Services, Link Building Services, Content Marketing Services, Google Penalty Recovery, Infographics & Interactive Content, reporting & Analysis.',
-    link: '/services/digital-marketing-ai-search',
-  },
-  {
-    title: 'SMO',
-    icon: Share2,
-    color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
-    desc: 'Build a strong presence on each of the social media platforms will prove to be very helpful for your business. Our social media marketing and SMO Marketing Services included: Facebook Marketing, LinkedIn Marketing, Twitter Marketing, YouTube Marketing, Pinterest Marketing, Google+ and much more.',
-    link: '/services/digital-marketing-ai-search',
-  },
-  {
-    title: 'Graphic Designing',
-    icon: Palette,
-    color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
-    desc: 'We have a highly competent and qualified team of creative graphic professionals. Our creative team prides itself on dedicated, meticulous, passionate work that goes into each and every design that we craft. Here is an overview of work we do on a regular basis: Business Cards, Company Brochures, Digital Newsletters, Logo Design, Office Signage and much more.',
-    link: '/services/graphic-design-video-editing',
-  },
-  {
-    title: 'Web Development',
-    icon: Globe,
-    color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
-    desc: 'Being a conspicuous organization, our web structuring professionals consistently think of fresh, engaging and clean plans for your website. Each website composition venture we have conveyed so far includes new-gen developments and the guarantee of higher business versatility.',
-    link: '/services/website-design-development',
-  },
-  {
-    title: 'Mobile Application',
-    icon: Smartphone,
-    color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
-    desc: 'Your fantasy merits in excess of a spot in your creative mind. What about a place in the Apple App Store, and Google Play Store? Our versatile application engineers can fabricate the portable application to your requirement, in your spending limit and according to your timetable.',
-    link: '/services/mobile-app-development',
-  },
-];
+import Icon from '../components/ui/Icon';
+import WhatsAppIcon from '../components/ui/WhatsAppIcon';
+import ServiceEmblem from '../components/ui/ServiceEmblem';
+import { valueCards, whyUs, homeFaqs, services, company } from '../data/site';
 
 export default function Home() {
   const homeSchema = {
@@ -314,65 +266,112 @@ export default function Home() {
                 Our <span className="text-gradient">Services</span>
               </h2>
               <p className="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed">
-                Comprehensive 360-degree digital solutions engineered to elevate your brand, drive qualified traffic, and accelerate business growth.
+                Marketing. Software. Cloud. One Digital Partner.
               </p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {homeFeaturedServices.map((service, idx) => {
-                const IconComponent = service.icon;
-                return (
-                  <SpotlightCard
-                    key={idx}
-                    tilt={true}
-                    className="flex flex-col justify-between p-6 sm:p-7 rounded-3xl border border-white/10 bg-gradient-to-b from-[#0b1638]/90 via-[#07112c]/90 to-[#040a1c]/90 hover:border-brand-500/40 transition-all duration-300"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between">
-                        {/* Glowing Cyber Emblem Icon */}
-                        <div className="relative group/icon">
-                          <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-brand-500/40 via-cyan-400/30 to-brand-blue/40 opacity-40 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500" />
-                          <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0e214d] via-[#091536] to-[#04091a] border border-brand-400/35 shadow-[0_0_20px_rgba(14,165,233,0.22)] group-hover:scale-110 group-hover:border-brand-400/70 group-hover:shadow-[0_0_30px_rgba(56,189,248,0.45)] transition-all duration-300">
-                            <IconComponent className="h-7 w-7 text-brand-300 group-hover:text-white drop-shadow-[0_0_10px_rgba(56,189,248,0.6)] transition-all duration-300" />
-                          </div>
-                        </div>
+              {services
+                .filter(
+                  (s) =>
+                    s.slug !== 'custom-crm-erp-solutions' &&
+                    s.slug !== 'cloud-architecture-aws-devops'
+                )
+                .map((s) => (
+                <SpotlightCard
+                  key={s.slug}
+                  tilt={true}
+                  className="flex flex-col justify-between p-6 sm:p-7 rounded-3xl border border-white/10 bg-gradient-to-b from-ink-900/90 to-ink-950/90 hover:border-brand-500/40 transition-all duration-300"
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      {/* Authentic Themed Glowing Emblem Icon */}
+                      <ServiceEmblem service={s} />
 
-                        {/* Enhanced Practice Badge */}
-                        
-                      </div>
+                      {s.metrics && s.metrics[0] ? (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-300 bg-brand-500/10 border border-brand-500/30 px-3 py-1 rounded-full shadow-sm shadow-brand-500/10 backdrop-blur">
+                          <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
+                          {s.metrics[0].value} {s.metrics[0].label.split(' ')[0]}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] font-mono text-brand-400/80 uppercase tracking-widest bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+                          Production-Grade
+                        </span>
+                      )}
+                    </div>
 
-                      <h3 className="text-xl font-bold text-white mt-5 group-hover:text-brand-300 transition-colors">
-                        {service.title}
-                      </h3>
+                    <h3 className="text-xl font-bold text-white mt-5 group-hover:text-brand-300 transition-colors">
+                      {s.title}
+                    </h3>
 
-                      <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-300">
-                        {service.desc}
+                    {s.tagline && (
+                      <p className="mt-1 text-xs font-semibold text-brand-300/90 line-clamp-1">
+                        {s.tagline}
                       </p>
-                    </div>
+                    )}
 
-                    {/* Attractive Action Buttons Pair */}
-                    <div className="mt-7 pt-5 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {/* Primary Button: Explore Practice */}
+                    <p className="mt-2 text-xs leading-relaxed text-slate-400 line-clamp-3">
+                      {s.description || s.short}
+                    </p>
+
+                    {/* Included Services: 5 Points List */}
+                    <div className="mt-5 border-t border-white/10 pt-4 space-y-2.5">
+                      <div className="flex items-center justify-between">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-brand-300 flex items-center gap-1.5">
+                          <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
+                          <span>Included Services:</span>
+                        </p>
+                        <span className="text-[10px] font-semibold text-slate-400 bg-white/5 px-2 py-0.5 rounded-md border border-white/10">
+                          {Math.min(5, s.capabilities.length)} Offerings
+                        </span>
+                      </div>
+                      <ul className="space-y-2 text-xs text-slate-300">
+                        {s.capabilities.slice(0, 5).map((cap, idx) => (
+                          <li key={idx} className="flex items-start gap-2.5">
+                            <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                            <span className="leading-snug text-slate-200 font-medium">{cap}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Attractive Card Footer Action Buttons */}
+                  <div className="mt-7 pt-5 border-t border-white/10 space-y-2.5">
+                    {/* Primary Button: Explore Practice */}
+                    <Link
+                      to={`/services/${s.slug}`}
+                      className="group/btn relative flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-sky-500 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand-500/25 hover:shadow-brand-500/50 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
+                    >
+                      <span>Explore Practice</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                    </Link>
+
+                    {/* Dual Action Buttons: Request Scope & WhatsApp */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <Link
-                        to={service.link}
-                        className="group/btn relative flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-sky-500 px-3.5 py-2.5 text-xs font-bold text-white shadow-md shadow-brand-500/25 hover:shadow-brand-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                        to={`/contact?service=${encodeURIComponent(s.title)}`}
+                        className="group/scope relative flex items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-slate-200 hover:text-white hover:bg-brand-500/15 hover:border-brand-400/50 shadow-sm hover:shadow-brand-500/15 transition-all duration-300"
                       >
-                        <span>Explore More</span>
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                        <span>Request Scope</span>
+                        <ArrowRight className="h-3 w-3 text-brand-400 transition-transform group-hover/scope:translate-x-0.5" />
                       </Link>
 
-                      {/* Secondary Button: Get Started */}
-                      <Link
-                        to={`/contact?service=${encodeURIComponent(service.title)}`}
-                        className="group/btn relative flex items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 px-3.5 py-2.5 text-xs font-bold text-slate-200 hover:text-white hover:bg-brand-500/15 hover:border-brand-400/50 shadow-sm hover:shadow-brand-500/15 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                      <a
+                        href={`https://wa.me/${company.whatsapp}?text=Hi%20Unique%20Digital%20Tech%2C%20I%20am%20interested%20in%20your%20${encodeURIComponent(
+                          s.title
+                        )}%20services.`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group/wa relative flex items-center justify-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400/60 hover:text-white shadow-sm shadow-emerald-500/10 transition-all duration-300"
                       >
-                        <span>Get Started</span>
-                        <Sparkles className="h-3 w-3 text-brand-400 opacity-80 group-hover/btn:opacity-100 group-hover/btn:rotate-12 transition-all" />
-                      </Link>
+                        <WhatsAppIcon variant="real" className="h-4 w-4 shrink-0 transition-transform group-hover/wa:scale-110" />
+                        <span>WhatsApp</span>
+                      </a>
                     </div>
-                  </SpotlightCard>
-                );
-              })}
+                  </div>
+                </SpotlightCard>
+              ))}
             </div>
 
             {/* Bottom link to all services */}
@@ -381,7 +380,7 @@ export default function Home() {
                 to="/services"
                 className="inline-flex items-center gap-2 rounded-2xl border border-brand-500/30 bg-[#0e1d44]/70 px-6 py-3.5 text-xs sm:text-sm font-bold text-brand-300 shadow-lg shadow-brand-500/15 hover:border-brand-400/60 hover:bg-brand-500/20 hover:text-white transition-all duration-300"
               >
-                <span>View All 8 Engineering &amp; Marketing Practices</span>
+                <span>View All 8 Engineering &amp; Marketing</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

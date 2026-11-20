@@ -9,18 +9,28 @@ import Button from '../ui/Button';
 import AnimatedLogo from '../ui/AnimatedLogo';
 import WhatsAppIcon from '../ui/WhatsAppIcon';
 
-export function Logo({ size = 'default' }) {
+export function Logo({ size = 'default', className = '' }) {
   const isLarge = size === 'large';
   return (
-    <Link to="/" className="flex items-center gap-3.5 group select-none" aria-label="Unique Digital Tech home">
+    <Link
+      to="/"
+      className={`flex items-center gap-2 sm:gap-3 group select-none min-w-0 ${className}`}
+      aria-label="Unique Digital Tech home"
+    >
       <div className="relative flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
-        <AnimatedLogo className={isLarge ? 'h-16 sm:h-20' : 'h-14 sm:h-16'} />
+        <AnimatedLogo className={isLarge ? 'h-14 sm:h-16 lg:h-20' : 'h-10 sm:h-12 lg:h-14'} />
       </div>
-      <div className="flex flex-col leading-tight">
-        <span className={`${isLarge ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'} font-black tracking-tight text-white`}>
+      <div className="flex flex-col leading-tight min-w-0">
+        <span
+          className={`${
+            isLarge
+              ? 'text-lg sm:text-xl lg:text-2xl'
+              : 'text-[14px] sm:text-lg lg:text-xl'
+          } font-black tracking-tight text-white whitespace-nowrap`}
+        >
           Unique<span className="text-brand-400"> Digital Tech</span>
         </span>
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 -mt-0.5">
+        <span className="text-[8.5px] sm:text-[10px] font-semibold uppercase tracking-wider sm:tracking-widest text-slate-400 -mt-0.5 whitespace-nowrap">
           Software &amp; Cloud Agency
         </span>
       </div>
@@ -82,7 +92,7 @@ export default function Navbar() {
       }`}
     >
       <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-brand-500/30 to-transparent pointer-events-none" />
-      <div className="mx-auto flex h-20 w-full max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto flex h-20 w-full max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:px-12">
         <Logo />
 
         <nav className="hidden items-center gap-7 lg:gap-8 lg:flex" aria-label="Primary">
@@ -174,15 +184,15 @@ export default function Navbar() {
 
         {/* Top Right Corner Menu Button - Toggles Drawer with Smooth Animation */}
         <button
-          className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden hover:bg-white/10 hover:border-brand-500/30 transition-all duration-200 active:scale-95 shadow-md"
+          className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden hover:bg-white/10 hover:border-brand-500/30 transition-all duration-200 active:scale-95 shadow-md shrink-0 ml-2"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
         >
           {open ? (
-            <X className="h-6 w-6 text-brand-300" />
+            <X className="h-5 w-5 sm:h-6 sm:w-6 text-brand-300" />
           ) : (
-            <Menu className="h-6 w-6 text-brand-300" />
+            <Menu className="h-5 w-5 sm:h-6 sm:w-6 text-brand-300" />
           )}
         </button>
       </div>
@@ -216,14 +226,14 @@ export default function Navbar() {
                   aria-label="Mobile Navigation"
                 >
                   {/* Drawer Top Header with Animated Logo & Dedicated Close Button */}
-                  <div className="flex h-20 items-center justify-between px-5 border-b border-white/10 bg-ink-900/70">
+                  <div className="flex h-20 items-center justify-between px-4 sm:px-5 border-b border-white/10 bg-ink-900/70">
                     <Logo />
                     <button
                       onClick={() => setOpen(false)}
-                      className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 bg-white/5 text-slate-200 hover:text-white hover:bg-white/10 hover:border-brand-500/40 transition active:scale-95 shadow-md"
+                      className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-xl border border-white/15 bg-white/5 text-slate-200 hover:text-white hover:bg-white/10 hover:border-brand-500/40 transition active:scale-95 shadow-md shrink-0 ml-2"
                       aria-label="Close menu"
                     >
-                      <X className="h-6 w-6 text-brand-300" />
+                      <X className="h-5 w-5 sm:h-6 sm:w-6 text-brand-300" />
                     </button>
                   </div>
 

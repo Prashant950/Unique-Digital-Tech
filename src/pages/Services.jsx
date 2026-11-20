@@ -26,6 +26,7 @@ import CtaBanner from '../components/sections/CtaBanner';
 import Button from '../components/ui/Button';
 import Icon from '../components/ui/Icon';
 import WhatsAppIcon from '../components/ui/WhatsAppIcon';
+import ServiceEmblem from '../components/ui/ServiceEmblem';
 import SpotlightCard from '../components/ui/SpotlightCard';
 import SEO from '../components/ui/SEO';
 import { services, company } from '../data/site';
@@ -213,13 +214,8 @@ export default function Services() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    {/* Glowing Cyber Emblem Icon */}
-                    <div className="relative group/icon">
-                      <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-brand-500/40 via-cyan-400/30 to-brand-blue/40 opacity-40 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500" />
-                      <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0e214d] via-[#091536] to-[#04091a] border border-brand-400/35 shadow-[0_0_20px_rgba(14,165,233,0.22)] group-hover:scale-110 group-hover:border-brand-400/70 group-hover:shadow-[0_0_30px_rgba(56,189,248,0.45)] transition-all duration-300">
-                        <Icon name={s.icon} className="h-7 w-7 text-brand-300 group-hover:text-white drop-shadow-[0_0_10px_rgba(56,189,248,0.6)] transition-all duration-300" />
-                      </div>
-                    </div>
+                    {/* Authentic Themed Glowing Emblem Icon */}
+                    <ServiceEmblem service={s} />
 
                     {s.metrics && s.metrics[0] ? (
                       <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-300 bg-brand-500/10 border border-brand-500/30 px-3 py-1 rounded-full shadow-sm shadow-brand-500/10 backdrop-blur">
@@ -298,7 +294,7 @@ export default function Services() {
                       rel="noreferrer"
                       className="group/wa relative flex items-center justify-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400/60 hover:text-white shadow-sm shadow-emerald-500/10 transition-all duration-300"
                     >
-                      <WhatsAppIcon className="h-3.5 w-3.5 fill-[#25D366] transition-transform group-hover/wa:scale-110" />
+                      <WhatsAppIcon variant="real" className="h-4 w-4 shrink-0 transition-transform group-hover/wa:scale-110" />
                       <span>WhatsApp</span>
                     </a>
                   </div>
