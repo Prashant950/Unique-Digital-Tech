@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   Mail,
@@ -23,18 +23,113 @@ import confetti from 'canvas-confetti';
 import SEO from '../components/ui/SEO';
 import { company } from '../data/site';
 import { useToast } from '../components/ui/Toast';
+import Icon from '../components/ui/Icon';
+import WhatsAppIcon from '../components/ui/WhatsAppIcon';
 
-const serviceOptions = [
-  'Digital Marketing & AI Search Optimization',
-  'Paid Advertising & Lead Generation',
-  'Website Design & Development',
-  'Graphic Design & Video Editing',
-  'Mobile App Development',
-  'WhatsApp Cloud API & Business Automation',
-  'Custom CRM & ERP Solutions',
-  'Cloud Architecture & AWS DevOps',
-  'Full-Lifecycle Architecture & Consultation',
+const serviceOptionsData = [
+  {
+    name: 'Digital Marketing & AI Search Optimization',
+    category: 'SEO & Organic Growth',
+    icon: 'trend',
+    iconColor: 'text-emerald-400',
+    iconBg: 'bg-emerald-950/80 border-emerald-500/40 text-emerald-400',
+    dotColor: 'bg-emerald-400',
+    desc: 'Technical SEO audits, backlink authority & AI search engine tuning',
+    emoji: '📈',
+    shortLabel: 'Digital Marketing',
+  },
+  {
+    name: 'Paid Advertising & Lead Generation',
+    category: 'Targeted ROI Ad Campaigns',
+    icon: 'target',
+    iconColor: 'text-rose-400',
+    iconBg: 'bg-rose-950/80 border-rose-500/40 text-rose-400',
+    dotColor: 'bg-rose-400',
+    desc: 'Google & Meta high-conversion lead generation campaigns with low CPL',
+    emoji: '🎯',
+    shortLabel: 'Paid Advertising',
+  },
+  {
+    name: 'Website Design & Development',
+    category: 'React & Next.js Platforms',
+    icon: 'globe',
+    iconColor: 'text-cyan-400',
+    iconBg: 'bg-cyan-950/80 border-cyan-400/40 text-cyan-400',
+    dotColor: 'bg-cyan-400',
+    desc: 'High-speed, scalable web applications with sub-second page loads',
+    emoji: '🌐',
+    shortLabel: 'Web Development',
+  },
+  {
+    name: 'Graphic Design & Video Editing',
+    category: 'Visual Brand Identity & Motion',
+    icon: 'palette',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-950/80 border-purple-500/40 text-purple-400',
+    dotColor: 'bg-purple-400',
+    desc: 'Logos, brochures, social creative & high-retention video reels',
+    emoji: '🎨',
+    shortLabel: 'Graphic & Video',
+  },
+  {
+    name: 'Mobile App Development',
+    category: 'iOS & Android Native & Cross',
+    icon: 'phone',
+    iconColor: 'text-blue-400',
+    iconBg: 'bg-blue-950/80 border-blue-500/40 text-blue-400',
+    dotColor: 'bg-blue-400',
+    desc: 'Cross-platform mobile apps published to Apple App Store & Google Play',
+    emoji: '📱',
+    shortLabel: 'Mobile Apps',
+  },
+  {
+    name: 'WhatsApp Cloud API & Business Automation',
+    category: 'Official Meta WhatsApp Business API',
+    isWhatsApp: true,
+    icon: 'whatsapp',
+    iconColor: 'text-[#25D366]',
+    iconBg: 'bg-[#075e54]/80 border-[#25D366]/40 text-[#25D366]',
+    dotColor: 'bg-[#25D366]',
+    desc: 'Automated CRM messaging, OTP workflows, verified green tick bots',
+    emoji: '💬',
+    shortLabel: 'WhatsApp API',
+  },
+  {
+    name: 'Custom CRM & ERP Solutions',
+    category: 'Internal Systems & Workflows',
+    icon: 'database',
+    iconColor: 'text-amber-400',
+    iconBg: 'bg-amber-950/80 border-amber-500/40 text-amber-400',
+    dotColor: 'bg-amber-400',
+    desc: 'Centralized lead pipelines, billing modules, role-based admin portals',
+    emoji: '🗄️',
+    shortLabel: 'CRM & ERP',
+  },
+  {
+    name: 'Cloud Architecture & AWS DevOps',
+    category: 'Cloud Infrastructure & CI/CD',
+    icon: 'cloud',
+    iconColor: 'text-sky-400',
+    iconBg: 'bg-sky-950/80 border-sky-400/40 text-sky-400',
+    dotColor: 'bg-sky-400',
+    desc: 'Auto-scaling AWS setups, Docker containerization, 99.9% uptime SLA',
+    emoji: '☁️',
+    shortLabel: 'Cloud & DevOps',
+  },
+  {
+    name: 'Full-Lifecycle Architecture & Consultation',
+    category: 'End-to-End Enterprise Advisory',
+    icon: 'sparkles',
+    iconColor: 'text-brand-300',
+    iconBg: 'bg-brand-950/80 border-brand-500/40 text-brand-400',
+    dotColor: 'bg-brand-400',
+    desc: 'Turnkey architectural blueprint, tech-stack evaluation & roadmap',
+    emoji: '⚡',
+    shortLabel: 'Consultation',
+  },
 ];
+
+const serviceOptions = serviceOptionsData.map((s) => s.name);
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
@@ -44,6 +139,8 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
   const [activeFaq, setActiveFaq] = useState(0);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -56,6 +153,23 @@ export default function Contact() {
 
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+
+  // Close custom service dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
+
+  const selectedServiceObj = serviceOptionsData.find((s) => s.name === formData.service);
 
   // Auto-fill service/notes from URL parameters (e.g. from Pricing page)
   useEffect(() => {
@@ -597,35 +711,183 @@ export default function Contact() {
                     </label>
                   </div>
 
-                  <label className="block">
-                    <span className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
-                      <span>
-                        Service Interested In <span className="text-brand-400">*</span>
+                  {/* Custom Rich Glassmorphic Service Selector */}
+                  <div className="block" ref={dropdownRef}>
+                    <div className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
+                      <span className="flex items-center gap-1.5">
+                        <span>Service Interested In</span>
+                        <span className="text-brand-400">*</span>
                       </span>
                       {errors.service && touched.service && (
                         <span className="text-xs text-rose-400 font-normal flex items-center gap-1">
                           <AlertCircle className="h-3 w-3" /> {errors.service}
                         </span>
                       )}
-                    </span>
-                    <select
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      required
-                      className={`field py-3.5 transition-all ${
-                        errors.service && touched.service
-                          ? 'border-rose-500/80 bg-rose-950/20 text-white focus:border-rose-500 focus:ring-rose-500/30'
-                          : ''
-                      }`}
-                    >
-                      <option value="" disabled>Select the service you need</option>
-                      {serviceOptions.map((s) => (
-                        <option key={s} value={s} className="bg-ink-950 text-white">{s}</option>
-                      ))}
-                    </select>
-                  </label>
+                    </div>
+
+                    {/* Trigger Input Box */}
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setDropdownOpen(!dropdownOpen);
+                          setTouched((prev) => ({ ...prev, service: true }));
+                        }}
+                        className={`relative flex w-full items-center justify-between rounded-xl border bg-ink-950/90 px-3.5 py-3 text-left transition-all duration-200 backdrop-blur-xl ${
+                          errors.service && touched.service
+                            ? 'border-rose-500/80 bg-rose-950/20 text-white ring-2 ring-rose-500/20'
+                            : dropdownOpen
+                            ? 'border-brand-400 bg-ink-900 shadow-[0_0_25px_rgba(56,189,248,0.25)] ring-2 ring-brand-500/25 text-white'
+                            : 'border-white/10 hover:border-brand-500/40 hover:bg-white/[0.04] text-white'
+                        }`}
+                        aria-expanded={dropdownOpen}
+                        aria-haspopup="listbox"
+                      >
+                        {selectedServiceObj ? (
+                          <div className="flex items-center gap-3 min-w-0 pr-2">
+                            <span
+                              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${selectedServiceObj.iconBg} border shadow-sm`}
+                            >
+                              {selectedServiceObj.isWhatsApp ? (
+                                <WhatsAppIcon variant="real" className="h-5 w-5" />
+                              ) : (
+                                <Icon
+                                  name={selectedServiceObj.icon}
+                                  className={`h-4.5 w-4.5 ${selectedServiceObj.iconColor}`}
+                                />
+                              )}
+                            </span>
+                            <div className="flex flex-col min-w-0">
+                              <span className="font-bold text-white text-xs sm:text-sm truncate">
+                                {selectedServiceObj.name}
+                              </span>
+                              <span className="text-[10.5px] text-brand-300 font-medium truncate">
+                                {selectedServiceObj.category}
+                              </span>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2.5 text-slate-400 py-1">
+                            <Sparkles className="h-4 w-4 text-brand-400" />
+                            <span className="text-xs sm:text-sm">Select the service you need...</span>
+                          </div>
+                        )}
+
+                        <div className="flex items-center gap-2 shrink-0 ml-2">
+                          {selectedServiceObj && (
+                            <span className="hidden sm:inline-flex items-center rounded-full bg-brand-500/15 border border-brand-500/30 px-2 py-0.5 text-[10px] font-semibold text-brand-300">
+                              Selected
+                            </span>
+                          )}
+                          <span
+                            className={`grid h-7 w-7 place-items-center rounded-lg border border-white/10 bg-white/5 transition-transform duration-200 ${
+                              dropdownOpen ? 'rotate-180 border-brand-500/40 text-brand-400' : 'text-slate-400'
+                            }`}
+                          >
+                            <ChevronDown className="h-4 w-4" />
+                          </span>
+                        </div>
+                      </button>
+
+                      {/* Custom Rich Animated Popover Menu */}
+                      {dropdownOpen && (
+                        <div className="absolute left-0 right-0 top-full mt-2 z-50 rounded-2xl border border-brand-500/40 bg-[#07112c]/98 p-2 shadow-[0_20px_70px_rgba(0,0,0,0.95)] backdrop-blur-2xl ring-1 ring-white/10 animate-in fade-in zoom-in-95 duration-150 max-h-80 overflow-y-auto custom-scrollbar">
+                          <div className="px-2.5 py-2 text-[10.5px] font-bold uppercase tracking-wider text-slate-400 border-b border-white/10 mb-1 flex items-center justify-between">
+                            <span className="flex items-center gap-1.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
+                              <span>Choose Your Solution</span>
+                            </span>
+                            <span className="text-[10px] text-brand-400 font-medium font-mono">9 Available</span>
+                          </div>
+
+                          <div className="grid gap-1">
+                            {serviceOptionsData.map((s) => {
+                              const isSelected = formData.service === s.name;
+                              return (
+                                <button
+                                  key={s.name}
+                                  type="button"
+                                  onClick={() => {
+                                    setFormData((prev) => ({ ...prev, service: s.name }));
+                                    setErrors((prev) => ({ ...prev, service: '' }));
+                                    setDropdownOpen(false);
+                                  }}
+                                  className={`group/opt flex items-center justify-between gap-3 w-full rounded-xl p-2 sm:p-2.5 text-left transition-all duration-200 ${
+                                    isSelected
+                                      ? 'bg-brand-500/20 border border-brand-400/60 shadow-[0_0_15px_rgba(56,189,248,0.25)]'
+                                      : 'border border-white/5 bg-white/[0.02] hover:bg-brand-500/10 hover:border-brand-500/30'
+                                  }`}
+                                >
+                                  <div className="flex items-center gap-3 min-w-0">
+                                    <span
+                                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${s.iconBg} border transition-transform duration-200 group-hover/opt:scale-105`}
+                                    >
+                                      {s.isWhatsApp ? (
+                                        <WhatsAppIcon variant="real" className="h-5 w-5" />
+                                      ) : (
+                                        <Icon name={s.icon} className={`h-4.5 w-4.5 ${s.iconColor}`} />
+                                      )}
+                                    </span>
+                                    <div className="flex flex-col min-w-0">
+                                      <span
+                                        className={`text-xs sm:text-sm font-bold truncate ${
+                                          isSelected ? 'text-white' : 'text-slate-200 group-hover/opt:text-white'
+                                        }`}
+                                      >
+                                        {s.name}
+                                      </span>
+                                      <span className="text-[10px] text-slate-400 truncate group-hover/opt:text-slate-300">
+                                        {s.desc}
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <div className="shrink-0 ml-2">
+                                    {isSelected ? (
+                                      <CheckCircle2 className="h-4 w-4 text-brand-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+                                    ) : (
+                                      <span className="h-2 w-2 rounded-full bg-white/10 group-hover/opt:bg-brand-400/50 transition-colors" />
+                                    )}
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Quick-Select Interactive Chips for Fast Tap on Web & Mobile */}
+                    <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+                        <Sparkles className="h-3 w-3 text-brand-400" />
+                        <span>Quick Select:</span>
+                      </span>
+                      {serviceOptionsData.slice(0, 5).map((p) => {
+                        const isSelected = formData.service === p.name;
+                        return (
+                          <button
+                            key={p.name}
+                            type="button"
+                            onClick={() => {
+                              setFormData((prev) => ({ ...prev, service: p.name }));
+                              setErrors((prev) => ({ ...prev, service: '' }));
+                              setTouched((prev) => ({ ...prev, service: true }));
+                            }}
+                            className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all duration-200 ${
+                              isSelected
+                                ? 'bg-brand-500/25 border border-brand-400 text-brand-200 shadow-sm shadow-brand-500/30'
+                                : 'bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:border-brand-500/30 hover:text-white'
+                            }`}
+                          >
+                            <span>{p.emoji}</span>
+                            <span>{p.shortLabel}</span>
+                            {isSelected && <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
 
                   <label className="block">
                     <span className="mb-2 flex items-center justify-between text-sm font-semibold text-slate-200">
@@ -660,12 +922,8 @@ export default function Contact() {
                     className="w-full justify-center text-base py-4 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 group mt-2"
                   >
                     <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    <span>{loading ? 'Submitting & Saving...' : 'Send Message & Save Scope'}</span>
+                    <span>{loading ? 'Submitting & Saving...' : 'Send Message'}</span>
                   </Button>
-
-                  <p className="text-xs text-center text-slate-400 pt-2 flex items-center justify-center gap-1.5">
-                    <span>🔒 Saved securely to db.json with 100% NDA &amp; commercial confidentiality.</span>
-                  </p>
                 </form>
               )}
             </div>

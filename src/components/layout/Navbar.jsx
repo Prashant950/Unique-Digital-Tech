@@ -14,7 +14,7 @@ export function Logo({ size = 'default', className = '' }) {
   return (
     <Link
       to="/"
-      className={`flex items-center gap-2 sm:gap-3 group select-none min-w-0 ${className}`}
+      className={`flex items-center ${isLarge ? 'gap-3 sm:gap-4' : 'gap-2.5 sm:gap-3'} group select-none min-w-0 ${className}`}
       aria-label="Unique Digital Tech home"
     >
       <div className="relative flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
@@ -24,15 +24,44 @@ export function Logo({ size = 'default', className = '' }) {
         <span
           className={`${
             isLarge
-              ? 'text-lg sm:text-xl lg:text-2xl'
+              ? 'text-xl sm:text-2xl lg:text-3xl'
               : 'text-[14px] sm:text-lg lg:text-xl'
           } font-black tracking-tight text-white whitespace-nowrap`}
         >
           Unique<span className="text-brand-400"> Digital Tech</span>
         </span>
-        <span className="text-[8.5px] sm:text-[10px] font-semibold uppercase tracking-wider sm:tracking-widest text-slate-400 -mt-0.5 whitespace-nowrap">
-          Software &amp; Cloud Agency
-        </span>
+
+        {/* Structured 2-Tier Modern Tagline: Line 1 = Services, Line 2 = ONE DIGITAL PARTNER */}
+        {isLarge ? (
+          <div className="mt-1 flex flex-col leading-tight min-w-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-[13px] font-semibold tracking-wider text-slate-300 uppercase whitespace-nowrap">
+              <span>Marketing</span>
+              <span className="text-brand-400 font-bold drop-shadow-[0_0_8px_rgba(56,189,248,0.7)] leading-none">•</span>
+              <span>Software</span>
+              <span className="text-brand-400 font-bold drop-shadow-[0_0_8px_rgba(56,189,248,0.7)] leading-none">•</span>
+              <span>Cloud</span>
+            </div>
+            <span className="mt-0.5 text-[9.5px] sm:text-[11px] lg:text-[12.5px] font-extrabold tracking-wider text-brand-300 uppercase whitespace-nowrap">
+              One Digital Partner
+            </span>
+          </div>
+        ) : (
+          <div className="mt-0.5 flex flex-col leading-tight min-w-0">
+            {/* Line 1: Marketing • Software • Cloud */}
+            <div className="flex items-center gap-1 text-[7.5px] sm:text-[8.5px] lg:text-[9.5px] font-semibold tracking-wider text-slate-300 uppercase whitespace-nowrap">
+              <span>Marketing</span>
+              <span className="text-brand-400 font-bold drop-shadow-[0_0_6px_rgba(56,189,248,0.6)] leading-none">•</span>
+              <span>Software</span>
+              <span className="text-brand-400 font-bold drop-shadow-[0_0_6px_rgba(56,189,248,0.6)] leading-none">•</span>
+              <span>Cloud</span>
+            </div>
+
+            {/* Line 2: ONE DIGITAL PARTNER (On its own line, vibrant & attractive) */}
+            <span className="text-[7.5px] sm:text-[8.5px] lg:text-[9.5px] font-extrabold tracking-wider text-brand-300 uppercase whitespace-nowrap mt-0.5">
+              One Digital Partner
+            </span>
+          </div>
+        )}
       </div>
     </Link>
   );
